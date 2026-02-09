@@ -4,18 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMAD Method Dashboard</title>
+    <title>BMAD Method - Comprehensive Documentation</title>
+    <meta name="description"
+        content="AI-driven development framework with specialized agents, guided workflows, and intelligent planning">
     <style>
         :root {
-            --bg-color: #f1f5f9;
-            --text-color: #0f172a;
-            --border-color: #cbd5e1;
-
-            --phase-1-color: #2563eb;
-            --phase-2-color: #7c3aed;
-            --phase-3-color: #d97706;
-            --phase-4-color: #059669;
-            --other-color: #475569;
+            --primary-blue: #2563eb;
+            --primary-purple: #7c3aed;
+            --primary-orange: #d97706;
+            --primary-green: #059669;
+            --dark-bg: #0f172a;
+            --dark-surface: #1e293b;
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --text-dark: #0f172a;
+            --text-light: #94a3b8;
+            --border-color: #e2e8f0;
+            --accent-cyan: #0891b2;
+            --accent-pink: #db2777;
         }
 
         * {
@@ -25,61 +31,215 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.3;
-            padding: 1rem;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .header-area {
-            display: flex;
-            flex-wrap: wrap;
-            /* Allow wrapping on smaller screens */
-            justify-content: center;
-            align-items: flex-start;
-            /* Align to top */
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .alert-box {
-            background: #eff6ff;
-            color: #1e40af;
-            padding: 0.75rem 1rem;
-            text-align: left;
-            /* Better readability */
-            border-radius: 6px;
-            font-size: 0.9rem;
-            border: 1px solid #bfdbfe;
-            flex-grow: 1;
-            max-width: 600px;
-        }
-
-        .help-box {
-            background: #f0fdf4;
-            color: #166534;
-            padding: 0.75rem 1rem;
-            text-align: left;
-            /* Better readability */
-            border-radius: 6px;
-            font-size: 0.9rem;
-            border: 1px solid #bbf7d0;
+        .logo {
+            font-size: 1.5rem;
             font-weight: 700;
+            color: white;
+            text-decoration: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* MAIN DASHBOARD GRID */
-        .phases-area {
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .nav-menu a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-purple);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem 2rem;
+        }
+
+        /* Content Sections */
+        .section {
+            background: var(--light-surface);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-purple);
+            border-bottom: 3px solid var(--primary-purple);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--primary-blue);
+        }
+
+        .section h4 {
+            font-size: 1.25rem;
+            margin: 1rem 0 0.5rem;
+            color: var(--primary-orange);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-blue);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+            color: var(--primary-purple);
+        }
+
+        /* Installation Steps */
+        .install-steps {
+            background: var(--dark-bg);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .install-steps code {
+            background: var(--dark-surface);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            display: block;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: #bae6fd;
+            overflow-x: auto;
+        }
+
+        /* MAIN DASHBOARD GRID - Phases */
+        .phases-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 0.75rem;
-            margin-bottom: 1rem;
+            margin: 2rem 0;
         }
 
-        .phase-column {
+        .phase-card {
             background: #fff;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
@@ -100,28 +260,20 @@
             flex-shrink: 0;
         }
 
-        .p1 {
-            background: var(--phase-1-color);
+        .phase-1 {
+            background: var(--primary-blue);
         }
 
-        .p2 {
-            background: var(--phase-2-color);
+        .phase-2 {
+            background: var(--primary-purple);
         }
 
-        .p3 {
-            background: var(--phase-3-color);
+        .phase-3 {
+            background: var(--primary-orange);
         }
 
-        .p4 {
-            background: var(--phase-4-color);
-        }
-
-        .p-term {
-            background: #334155;
-        }
-
-        .p-extra {
-            background: #64748b;
+        .phase-4 {
+            background: var(--primary-green);
         }
 
         .phase-content {
@@ -131,7 +283,7 @@
         }
 
         /* COMPACT ITEM */
-        .item {
+        .workflow-item {
             border: 1px solid #e2e8f0;
             border-radius: 6px;
             margin-bottom: 0.5rem;
@@ -139,11 +291,11 @@
             background: #f8fafc;
         }
 
-        .item:last-child {
+        .workflow-item:last-child {
             margin-bottom: 0;
         }
 
-        .item.mandatory {
+        .workflow-item.required {
             border-left: 3px solid #ef4444;
             background: #fff;
         }
@@ -159,29 +311,6 @@
             font-weight: 700;
             font-size: 0.9rem;
             color: #334155;
-        }
-
-        .badge {
-            font-size: 0.6rem;
-            padding: 1px 4px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .badge-req {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .badge-opt {
-            background: #f1f5f9;
-            color: #64748b;
-        }
-
-        .badge-term {
-            background: #1e293b;
-            color: #cbd5e1;
         }
 
         .cmd {
@@ -213,7 +342,6 @@
             font-size: 0.7rem;
             font-weight: 600;
             color: #059669;
-            /* Green for success/file */
             background-color: #ecfdf5;
             padding: 2px 5px;
             border-radius: 4px;
@@ -221,7 +349,6 @@
             display: inline-block;
         }
 
-        /* File Requirement Badge */
         .file-badge-req {
             font-size: 0.6rem;
             background-color: #ef4444;
@@ -259,58 +386,112 @@
             margin-right: 4px;
         }
 
-        /* EXTRAS */
-        .extras-section {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.75rem;
-            padding-bottom: 1rem;
-            flex-grow: 1;
-            /* Push footer to bottom */
-        }
-
-        .extras-column {
-            background: #fff;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .extras-header {
-            background: #475569;
-            padding: 0.6rem;
-            color: white;
-            font-weight: 700;
-            text-align: center;
+        .badge-req {
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 0.6rem;
+            padding: 1px 4px;
+            border-radius: 3px;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-weight: 700;
         }
 
-        .eh-tech {
-            background: #0891b2;
+        .badge-opt {
+            background: #f1f5f9;
+            color: #64748b;
+            font-size: 0.6rem;
+            padding: 1px 4px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
         }
 
-        /* Cyan */
-        .eh-tea {
-            background: #db2777;
+        /* Agents Grid */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
-        /* Pink */
-        .eh-term {
-            background: #1e293b;
-        }
-
-        /* Dark Blue for Terminal */
-
-        /* FOOTER SIGNATURE */
-        .footer {
+        .agent-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
             text-align: center;
-            padding: 1rem 0;
-            margin-top: 1rem;
-            color: #94a3b8;
-            font-size: 0.8rem;
-            border-top: 1px dashed #cbd5e1;
+            transition: transform 0.3s;
+        }
+
+        .agent-card:hover {
+            transform: scale(1.05);
+        }
+
+        .agent-card h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Commands Table */
+        .commands-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .commands-table th,
+        .commands-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .commands-table th {
+            background: var(--dark-surface);
+            color: white;
+            font-weight: 600;
+        }
+
+        .commands-table code {
+            background: #f1f5f9;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+            border-color: #2563eb;
+            color: #1e40af;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            border-color: #f59e0b;
+            color: #92400e;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            border-color: #059669;
+            color: #166534;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
         }
 
         .heart {
@@ -320,400 +501,1284 @@
         }
 
         @keyframes pulse {
-            0% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
 
             50% {
                 transform: scale(1.2);
             }
-
-            100% {
-                transform: scale(1);
-            }
         }
 
+        /* Responsive */
         @media (max-width: 1200px) {
-
-            .phases-area,
-            .extras-section {
+            .phases-container {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-
-            .phases-area,
-            .extras-section {
-                grid-template-columns: 1fr;
-                /* Single column on mobile */
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .header-area {
+            .nav-menu {
                 flex-direction: column;
-                /* Stack header items */
-                align-items: stretch;
+                gap: 0.5rem;
             }
 
-            .alert-box,
-            .help-box {
-                max-width: 100%;
-                /* Full width */
+            .phases-container,
+            .features-grid {
+                grid-template-columns: 1fr;
             }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: var(--dark-bg);
+            color: #bae6fd;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        /* Links */
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-required {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-optional {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .badge-recommended {
+            background: #d1fae5;
+            color: #065f46;
         }
     </style>
 </head>
 
 <body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="#" class="logo">BMAD METHOD</a>
+            <ul class="nav-menu">
+                <li><a href="#overview">Genel Bakış</a></li>
+                <li><a href="#installation">Kurulum</a></li>
+                <li><a href="#phases">Fazlar</a></li>
+                <li><a href="#workflows">İş Akışları</a></li>
+                <li><a href="#agents">Ajanlar</a></li>
+                <li><a href="#commands">Komutlar</a></li>
+                <li><a href="#examples">Örnekler</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="header-area">
-        <div class="alert-box">
-            <div>⚠️ <strong>DİKKAT:</strong> Her workflow ("/bmad-") için mutlaka <strong>Yeni Chat</strong> açın.</div>
-            <div
-                style="font-size: 0.8rem; margin-top: 6px; border-top: 1px solid #93c5fd; padding-top: 4px; font-weight: 500;">
-                <strong>Neden?</strong> Eski konuşma geçmişi (veya cache) yeni workflow'u karıştırabilir. Temiz bir
-                başlangıç, komutların hatasız çalışmasını ve modelin doğru odaklanmasını sağlar.
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>BMAD Method</h1>
+        <p>Breakthrough Method of Agile AI Driven Development - Uzman AI ajanları, rehberli iş akışları ve akıllı
+            planlama ile yazılım geliştirme framework'ü</p>
+        <div class="hero-buttons">
+            <a href="#installation" class="btn btn-primary">Hemen Başla</a>
+            <a href="https://docs.bmad-method.org/" target="_blank" class="btn btn-secondary">Dökümantasyon</a>
+            <a href="https://github.com/bmad-code-org/BMAD-METHOD" target="_blank" class="btn btn-secondary">GitHub</a>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Overview Section -->
+        <section id="overview" class="section">
+            <h2>🎯 Genel Bakış</h2>
+
+            <p>BMAD Method, yazılım geliştirme sürecinizin tamamında size yardımcı olan AI-destekli bir geliştirme
+                framework'üdür. Fikir aşamasından planlamaya, oradan da AI ajanları ile uygulamaya kadar tüm süreci
+                kapsar.</p>
+
+            <div class="alert alert-info">
+                <strong>💡 Temel Felsefe:</strong> Geleneksel AI araçları sizin yerinize düşünür ve ortalama sonuçlar
+                üretir. BMAD ajanları ise uzman işbirlikçiler gibi davranarak, yapılandırılmış bir süreç boyunca sizi
+                yönlendirir ve AI ile ortaklıkta en iyi düşüncenizi ortaya çıkarır.
             </div>
-        </div>
-        <div class="help-box">
-            <code style="background:#dcfce7; padding:2px 4px; border-radius:4px;">/bmad-help</code> komutunu kullanarak
-            durumu kontrol edin.
-        </div>
+
+            <h3>✨ Neden BMAD?</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🤖 AI Akıllı Yardım</h4>
+                    <p>Beta'da yeni! AI destekli yardım, başlangıçtan sona kadar size rehberlik eder. Sadece
+                        <code>/bmad-help</code> yazın.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>📊 Ölçek-Domain Uyarlanabilir</h4>
+                    <p>Proje karmaşıklığına, alanına ve türüne göre planlama derinliğini otomatik olarak ayarlar.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Yapılandırılmış İş Akışları</h4>
+                    <p>Analiz, planlama, mimari ve uygulama boyunca agile en iyi uygulamalarına dayalı 50+ workflow.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>👥 Uzmanlaşmış Ajanlar</h4>
+                    <p>PM, Mimar, Geliştirici, UX, Scrum Master ve daha fazlası - 21+ alan uzmanı ajan.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎉 Party Mode</h4>
+                    <p>Birden fazla ajan personasını tek bir oturumda bir araya getirerek projenizi planlayın,
+                        sorunları çözün veya tartışın.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Tam Yaşam Döngüsü</h4>
+                    <p>Beyin fırtınasından deployment'a kadar, BMAD her adımda yanınızda.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ 100% Ücretsiz ve Açık Kaynak</strong><br>
+                Ödeme duvarı yok. Gizli içerik yok. Gizli Discord yok. Herkesin güçlenmesine inanıyoruz, sadece
+                ödeyebilenlerin değil.
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="installation" class="section">
+            <h2>🚀 Kurulum</h2>
+
+            <h3>Gereksinimler</h3>
+            <ul>
+                <li><strong>Node.js v20+</strong> - Kurulum için gerekli</li>
+                <li><strong>Git</strong> - Versiyon kontrolü için önerilir</li>
+                <li><strong>AI-destekli IDE</strong> - Claude Code, Cursor, Windsurf veya benzeri</li>
+                <li><strong>Bir proje fikri</strong> - Öğrenmek için basit bir fikir bile yeterli</li>
+            </ul>
+
+            <h3>Hızlı Kurulum</h3>
+            <div class="install-steps">
+                <p><strong>1. Proje dizininde terminali açın ve çalıştırın:</strong></p>
+                <code>npx bmad-method install</code>
+
+                <p style="margin-top: 1rem;"><strong>2. Modül seçimi yapıldığında "BMad Method" seçin.</strong></p>
+                <p style="margin-top: 0.5rem;">Kurulum iki klasör oluşturur:</p>
+                <ul style="color: #cbd5e1; margin-left: 2rem;">
+                    <li><code>_bmad/</code> - ajanlar, workflow'lar, görevler ve yapılandırma</li>
+                    <li><code>_bmad-output/</code> - artifact'lerinizin kaydedileceği yer</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>3. AI IDE'nizi proje klasöründe açın ve yardım workflow'unu
+                        çalıştırın:</strong></p>
+                <code>/bmad-help</code>
+            </div>
+
+            <h3>Etkileşimsiz Kurulum</h3>
+            <p>CI/CD pipeline'ları veya otomatik deployment'lar için komut satırı bayrakları kullanın:</p>
+            <div class="install-steps">
+                <code>npx bmad-method install --directory /path/to/project --modules bmm --tools claude-code --yes</code>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ ÖNEMLİ: Her Workflow İçin Yeni Chat!</strong><br>
+                Her workflow için her zaman yeni bir chat başlatın. Bu, bağlam sınırlamalarının sorunlara yol açmasını
+                önler. Eski konuşma geçmişi veya önbellek, yeni workflow'u karıştırabilir.
+            </div>
+
+            <h3>Desteklenen AI Araçları</h3>
+            <ul>
+                <li><strong>Claude Code</strong> - Anthropic'in CLI aracı (önerilen)</li>
+                <li><strong>Cursor</strong> - AI-öncelikli kod editörü</li>
+                <li><strong>Windsurf</strong> - Codeium'un AI IDE'si</li>
+                <li><strong>Kiro</strong> - Amazon'un AI destekli IDE'si</li>
+                <li><strong>Roo Code</strong> - VS Code uzantısı</li>
+            </ul>
+        </section>
+
+        <!-- Phases Section -->
+        <section id="phases" class="section">
+            <h2>📋 BMAD Fazları</h2>
+
+            <div class="alert alert-warning" style="text-align: center;">
+                ⚠️ <strong>DİKKAT:</strong> Her workflow için mutlaka <strong>Yeni Chat</strong> açın.
+            </div>
+
+            <div class="phases-container">
+                <!-- PHASE 1: ANALYSIS -->
+                <div class="phase-card">
+                    <div class="phase-header phase-1">1. Analiz</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Brainstorming</span><span
+                                    class="badge-opt">OPT</span></div>
+                            <code class="cmd">/bmad-brainstorming</code>
+                            <div class="meta"><span>Mary (BA)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">brainstorming.md</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Yeni chat açıp komutu
+                                yazın.
+                                Yaratıcı fikirler için.</div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Research</span><span
+                                    class="badge-opt">OPT</span></div>
+                            <code class="cmd">/bmad-bmm-research</code>
+                            <div class="meta"><span>Mary (BA)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">research.md</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Genel pazar/teknik
+                                araştırma
+                                raporu.</div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Product Brief</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-bmm-create-product-brief</code>
+                            <div class="meta"><span>Mary (BA)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">product-brief.md</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Proje özet dokümanı
+                                oluşturur.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 2: PLANNING -->
+                <div class="phase-card">
+                    <div class="phase-header phase-2">2. Planlama</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Create PRD</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-create-prd</code>
+                            <div class="meta"><span>John (PM)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">PRD.md</span><span class="file-badge-req">REQ</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Gereksinimleri belirler.
+                                <strong>Temel taş.</strong>
+                            </div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Validate PRD</span><span
+                                    class="badge-opt">OPT</span></div>
+                            <code class="cmd">/bmad-bmm-validate-prd</code>
+                            <div class="meta"><span>John (PM)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">validation-report.md</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>PRD'yi kontrol ettirin.
+                            </div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">UX Design</span><span
+                                    class="badge-opt">OPT</span></div>
+                            <code class="cmd">/bmad-bmm-create-ux-design</code>
+                            <div class="meta"><span>Sally (UX)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">ux-spec.md</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Arayüz/Tasarım spekleri.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 3: SOLUTIONING -->
+                <div class="phase-card">
+                    <div class="phase-header phase-3">3. Çözümleme</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Architecture</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-create-architecture</code>
+                            <div class="meta"><span>Winston (Arc)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">architecture.md</span><span class="file-badge-req">REQ</span>
+                                </div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Teknik mimari ve stack
+                                seçimi.
+                            </div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Epics & Stories</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                            <div class="meta"><span>John (PM)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">epics/*.md</span><span class="file-badge-req">REQ</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>İşleri küçük parçalara
+                                böler.</div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Readiness</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-check-implementation-readiness</code>
+                            <div class="meta"><span>Winston (Arc)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">readiness-report.md</span><span
+                                        class="file-badge-req">REQ</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Başlamadan önce son
+                                kontrol.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 4: IMPLEMENTATION -->
+                <div class="phase-card">
+                    <div class="phase-header phase-4">4. Uygulama</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Sprint Plan</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-sprint-planning</code>
+                            <div class="meta"><span>Bob (SM)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">sprint-status.yaml</span><span
+                                        class="file-badge-req">REQ</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Sprint'i başlat.</div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Create Story</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-create-story</code>
+                            <div class="meta"><span>Bob (SM)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">story-[slug].md</span><span class="file-badge-req">REQ</span>
+                                </div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Tek bir story seçimi.</div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Dev Story</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-dev-story</code>
+                            <div class="meta"><span>Amelia (Dev)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Code
+                                        Files</span><span class="file-badge-req">REQ</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Kodu yaz ve test et.</div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Code Review</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-bmm-code-review</code>
+                            <div class="meta"><span>Amelia (Dev)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Review
+                                        Report</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Kod kalitesini doğrular.
+                            </div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">QA Auto</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-bmm-qa-automate</code>
+                            <div class="meta"><span>Quinn (QA)</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">tests/*.spec.ts</span></div>
+                            </div>
+                            <div class="usage-row"><span class="usage-label">Kullanım:</span>Otomatik test üretimi.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflows Section -->
+        <section id="workflows" class="section">
+            <h2>🔄 İş Akışları</h2>
+
+            <h3>Quick Flow vs Full BMad Method</h3>
+            <p>BMAD, proje karmaşıklığınıza göre iki ana yol sunar:</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>⚡ Quick Flow</h4>
+                    <p><strong>Ne zaman kullanılır:</strong></p>
+                    <ul style="text-align: left;">
+                        <li>Hata düzeltmeleri</li>
+                        <li>Küçük özellikler</li>
+                        <li>Refactoring</li>
+                        <li>Prototipleme</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Workflow:</strong></p>
+                    <ol style="text-align: left;">
+                        <li><code>/quick-spec</code> - Teknik spec oluştur</li>
+                        <li><code>/quick-dev</code> - Story'leri uygula</li>
+                        <li><code>/code-review</code> - Kaliteyi doğrula</li>
+                    </ol>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🏢 Full BMad Method</h4>
+                    <p><strong>Ne zaman kullanılır:</strong></p>
+                    <ul style="text-align: left;">
+                        <li>Yeni ürünler</li>
+                        <li>Platformlar</li>
+                        <li>Karmaşık özellikler</li>
+                        <li>Enterprise sistemler</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Workflow:</strong></p>
+                    <ol style="text-align: left;">
+                        <li>Faz 1-3: Planlama ve Çözümleme</li>
+                        <li><code>/sprint-planning</code></li>
+                        <li>Her story için: <code>/create-story</code> → <code>/dev-story</code></li>
+                        <li><code>/code-review</code></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 İpucu:</strong> Quick Flow'da başladıysanız ve kapsam beklenenden büyükse,
+                <code>quick-dev</code> bunu tespit eder ve yükseltme önerir. İşinizi kaybetmeden istediğiniz zaman tam
+                PRD workflow'una geçebilirsiniz.
+            </div>
+
+            <h3>Bağlam Yönetimi</h3>
+            <p>Her doküman bir sonraki faz için bağlam oluşturur:</p>
+            <ul>
+                <li><strong>PRD</strong> → Mimarya hangi kısıtlamaların önemli olduğunu söyler</li>
+                <li><strong>Architecture</strong> → Geliştirici ajana hangi kalıpları takip edeceğini söyler</li>
+                <li><strong>Story dosyaları</strong> → Uygulama için odaklanmış, eksiksiz bağlam sağlar</li>
+            </ul>
+
+            <div class="workflow-item">
+                <strong>Document Project</strong>
+                <code>/bmad-bmm-document-project</code>
+                <p>Yerleşik projeler için <code>project-context.md</code> oluşturur veya günceller. Faz 4'ten hemen
+                    önce çalıştırın.</p>
+            </div>
+        </section>
+
+        <!-- Agents Section -->
+        <section id="agents" class="section">
+            <h2>👥 BMAD Ajanları</h2>
+
+            <p>BMAD, her biri belirli bir alanda uzmanlaşmış 21+ AI ajanı içerir. İşte ana ajanlar:</p>
+
+            <div class="agents-grid">
+                <div class="agent-card">
+                    <h4>Mary - Business Analyst</h4>
+                    <p>Brainstorming, araştırma ve gereksinim toplama</p>
+                    <code>/bmad-agent-bmm-ba</code>
+                </div>
+
+                <div class="agent-card">
+                    <h4>John - Product Manager</h4>
+                    <p>PRD oluşturma, epic ve story yönetimi</p>
+                    <code>/bmad-agent-bmm-pm</code>
+                </div>
+
+                <div class="agent-card">
+                    <h4>Winston - Architect</h4>
+                    <p>Teknik mimari ve sistem tasarımı</p>
+                    <code>/bmad-agent-bmm-architect</code>
+                </div>
+
+                <div class="agent-card">
+                    <h4>Bob - Scrum Master</h4>
+                    <p>Sprint planlama ve yönetimi</p>
+                    <code>/bmad-agent-bmm-sm</code>
+                </div>
+
+                <div class="agent-card">
+                    <h4>Amelia - Developer</h4>
+                    <p>Kod yazma ve uygulama</p>
+                    <code>/bmad-agent-bmm-dev</code>
+                </div>
+
+                <div class="agent-card">
+                    <h4>Quinn - QA Engineer</h4>
+                    <p>Test otomasyonu ve kalite kontrolü</p>
+                    <code>/bmad-agent-bmm-qa</code>
+                </div>
+
+                <div class="agent-card">
+                    <h4>Sally - UX Designer</h4>
+                    <p>Kullanıcı deneyimi tasarımı</p>
+                    <code>/bmad-agent-bmm-ux-designer</code>
+                </div>
+
+                <div class="agent-card">
+                    <h4>Paige - Tech Writer</h4>
+                    <p>Dökümantasyon ve teknik yazım</p>
+                    <code>/bmad-agent-bmm-tech-writer</code>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>🎉 Party Mode:</strong> Birden fazla ajan personasını tek bir oturumda bir araya getirin!
+                Projenizi planlamak, sorunları çözmek veya tartışmak için birden fazla bakış açısı ile maksimum eğlence.
+            </div>
+        </section>
+
+        <!-- Commands Section -->
+        <section id="commands" class="section">
+            <h2>⌨️ Komutlar Referansı</h2>
+
+            <h3>Ana Workflow Komutları</h3>
+            <div class="phases-container">
+                <!-- Core Commands -->
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #0891b2;">Temel Komutlar</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Help</span><span
+                                    class="badge-req">ÖNEMLİ</span></div>
+                            <code class="cmd">/bmad-help</code>
+                            <div class="usage-row"><span class="usage-label">Ne yapar:</span>AI destekli yardım - ne
+                                yapacağınızı söyler</div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Brainstorming</span></div>
+                            <code class="cmd">/bmad-brainstorming</code>
+                            <div class="meta"><span>Faz 1</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">brainstorming.md</span></div>
+                            </div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Research</span></div>
+                            <code class="cmd">/bmad-bmm-research</code>
+                            <div class="meta"><span>Faz 1</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">research.md</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Planning Commands -->
+                <div class="phase-card">
+                    <div class="phase-header phase-2">Planlama</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Create PRD</span><span
+                                    class="badge-req">REQ</span></div>
+                            <code class="cmd">/bmad-bmm-create-prd</code>
+                            <div class="meta"><span>Faz 2</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">PRD.md</span></div>
+                            </div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Architecture</span><span
+                                    class="badge-req">REQ</span></div>
+                            <code class="cmd">/bmad-bmm-create-architecture</code>
+                            <div class="meta"><span>Faz 3</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">architecture.md</span></div>
+                            </div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Epics & Stories</span><span
+                                    class="badge-req">REQ</span></div>
+                            <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                            <div class="meta"><span>Faz 3</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">epics/*.md</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Implementation Commands -->
+                <div class="phase-card">
+                    <div class="phase-header phase-4">Uygulama</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Sprint Planning</span><span
+                                    class="badge-req">REQ</span></div>
+                            <code class="cmd">/bmad-bmm-sprint-planning</code>
+                            <div class="meta"><span>Faz 4</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">sprint-status.yaml</span></div>
+                            </div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Dev Story</span><span
+                                    class="badge-req">REQ</span></div>
+                            <code class="cmd">/bmad-bmm-dev-story</code>
+                            <div class="meta"><span>Faz 4</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Code
+                                        Files</span></div>
+                            </div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Code Review</span></div>
+                            <code class="cmd">/bmad-bmm-code-review</code>
+                            <div class="meta"><span>Faz 4</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">review.md</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Flow & Tools -->
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #d97706;">Quick Flow & Araçlar</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Quick Spec</span><span
+                                    class="badge-opt">HIZLI</span></div>
+                            <code class="cmd">/bmad-bmm-quick-spec</code>
+                            <div class="meta"><span>Quick Flow</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">tech-spec.md</span></div>
+                            </div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Quick Dev</span><span
+                                    class="badge-opt">HIZLI</span></div>
+                            <code class="cmd">/bmad-bmm-quick-dev</code>
+                            <div class="meta"><span>Quick Flow</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Code
+                                        Files</span></div>
+                            </div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">QA Automate</span></div>
+                            <code class="cmd">/bmad-bmm-qa-automate</code>
+                            <div class="meta"><span>Test</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">tests/*.spec.ts</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Terminal Komutları</h3>
+            <div class="install-steps">
+                <code>npx bmad-method install</code>
+                <p style="color: #cbd5e1;">BMAD'i projeye kurar</p>
+
+                <code>npx bmad-method update</code>
+                <p style="color: #cbd5e1;">BMAD araçlarını günceller</p>
+
+                <code>npx bmad-method status</code>
+                <p style="color: #cbd5e1;">Kurulum durumunu kontrol eder</p>
+
+                <code>npx bmad-method list:expansions</code>
+                <p style="color: #cbd5e1;">Ek modülleri listeler</p>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="section">
+            <h2>💡 Gerçek Proje Örnekleri</h2>
+            <p>BMAD ile gerçek dünya projelerini nasıl yöneteceğinizi adım adım öğrenin. Her örnek tam prompt'lar ve
+                komut sırasını içerir.</p>
+
+            <!-- EXAMPLE 1: QUICK FLOW -->
+            <h3 style="margin-top: 2rem;">📱 Örnek 1: Kullanıcı Profil Fotoğrafı Özelliği (Quick Flow)</h3>
+            <div class="alert alert-info">
+                <strong>Senaryo:</strong> Next.js ile yazılmış bir SaaS uygulamanız var. Kullanıcıların profil fotoğrafı
+                yükleyebilmesini istiyorsunuz.
+            </div>
+
+            <div class="phases-container" style="grid-template-columns: repeat(3, 1fr);">
+                <!-- Step 1 -->
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #0891b2;">1️⃣ Quick Spec</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Yeni Chat Aç</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-quick-spec</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Kullanıcıların profil
+                                fotoğrafı yükleyebilmesi, kırpabilmesi ve görüntüleyebilmesi için özellik ekle. AWS
+                                S3'te depolansın. Next.js App Router kullanıyoruz."</div>
+                            <div class="meta">
+                                <span>Süre: ~5 dk</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">tech-spec.md</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #059669;">2️⃣ Quick Dev</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Yeni Chat Aç</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-quick-dev</code>
+                            <div class="usage-row"><span class="usage-label">Not:</span>tech-spec.md dosyasını chate
+                                referans verin (@tech-spec.md)</div>
+                            <div class="meta">
+                                <span>Süre: ~20 dk</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Kod +
+                                        Testler</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #8b5cf6;">3️⃣ Code Review</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Aynı Chat'te</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-bmm-code-review</code>
+                            <div class="usage-row"><span class="usage-label">Kontrol:</span>Güvenlik, performans, best
+                                practices</div>
+                            <div class="meta">
+                                <span>Süre: ~5 dk</span>
+                                <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                        class="file-out">review-report.md</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXAMPLE 2: FULL BMAD METHOD -->
+            <h3 style="margin-top: 3rem;">🚀 Örnek 2: AI-Destekli Görev Yönetim SaaS (Full BMAD Method)</h3>
+            <div class="alert alert-info">
+                <strong>Senaryo:</strong> Sıfırdan AI önerileri olan bir görev yönetim uygulaması oluşturmak
+                istiyorsunuz. Bireysel kullanıcılar + takımlar için.
+            </div>
+
+            <!-- PHASE 1: ANALYSIS -->
+            <h4 style="margin-top: 1.5rem; color: var(--primary-blue);">📊 Faz 1: Analiz (Opsiyonel ama önerilen)</h4>
+            <div class="phases-container" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="phase-card">
+                    <div class="phase-header phase-1">Brainstorming</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 1</span></div>
+                            <code class="cmd">/bmad-brainstorming</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"AI destekli görev yönetim
+                                uygulaması için benzersiz özellikler brainstorm edelim. Hedef: Asana'dan farklılaşmak"
+                            </div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">brainstorming.md</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-1">Research</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 2</span></div>
+                            <code class="cmd">/bmad-bmm-research</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Görev yönetimi pazar
+                                araştırması: Rakipler (Asana, ClickUp, Monday), teknoloji trendleri, AI kullanım
+                                senaryoları"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">research.md</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-1">Product Brief</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 3</span></div>
+                            <code class="cmd">/bmad-bmm-create-product-brief</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"brainstorming.md ve
+                                research.md'yi kullanarak product brief oluştur. Free tier + Pro tier ($15/ay) pricing
+                                modeli"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">product-brief.md</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 2: PLANNING -->
+            <h4 style="margin-top: 1.5rem; color: var(--primary-purple);">📋 Faz 2: Planlama (Zorunlu)</h4>
+            <div class="phases-container" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="phase-card">
+                    <div class="phase-header phase-2">Create PRD</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Chat 4</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-create-prd</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Product brief'i kullanarak
+                                detaylı PRD oluştur. Kullanıcı personaları: Solo Freelancer, Startup Takımı, SMB
+                                Yöneticisi"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">PRD.md</span><span class="file-badge-req">REQ</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-2">Validate PRD</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 5</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-bmm-validate-prd</code>
+                            <div class="usage-row"><span class="usage-label">Kontrol:</span>Eksik gereksinimler,
+                                çelişkiler, belirsizlikler</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">validation-report.md</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-2">UX Design</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 6</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-bmm-create-ux-design</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Modern, minimalist tasarım.
+                                Sidebar navigation, kanban board görünümü, dashboard. Figma wireframe spekleri"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">ux-spec.md</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 3: SOLUTIONING -->
+            <h4 style="margin-top: 1.5rem; color: var(--primary-orange);">🏗️ Faz 3: Çözümleme (Zorunlu)</h4>
+            <div class="phases-container" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="phase-card">
+                    <div class="phase-header phase-3">Architecture</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Chat 7</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-create-architecture</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Next.js 14 App Router,
+                                PostgreSQL (Supabase), Prisma ORM, OpenAI API, Vercel deployment. Modular monolith
+                                pattern"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">architecture.md</span><span class="file-badge-req">REQ</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-3">Epics & Stories</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Chat 8</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                            <div class="usage-row"><span class="usage-label">Not:</span>PRD ve Architecture'ı referans
+                                verin</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">8-12
+                                    epic/*.md</span><span class="file-badge-req">REQ</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-3">Readiness Check</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Chat 9</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-check-implementation-readiness</code>
+                            <div class="usage-row"><span class="usage-label">Kontrol:</span>PRD-Architecture-Stories
+                                uyumu, eksikler, riskler</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">readiness-report.md</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 4: IMPLEMENTATION -->
+            <h4 style="margin-top: 1.5rem; color: var(--primary-green);">⚙️ Faz 4: Uygulama (Sprint Döngüsü)</h4>
+            <div class="workflow-item"
+                style="background: #f0fdf4; border-left: 4px solid #10b981; padding: 1.5rem; margin: 1rem 0;">
+                <div class="item-header"><span class="item-title">Sprint Başlangıcı</span><span
+                        class="badge-req">ZORUNLU</span></div>
+                <code class="cmd">/bmad-bmm-sprint-planning</code>
+                <div class="usage-row"><span class="usage-label">Chat 10 Prompt:</span>"İlk sprint için 5 story seç.
+                    Öncelik: Auth, User Profile, Task CRUD, Basic Dashboard"</div>
+                <div class="meta" style="margin-top: 0.5rem;">
+                    <span>Sprint 1</span>
+                    <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                            class="file-out">sprint-status.yaml</span></div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>🔁 Her Story İçin Tekrar:</strong> Aşağıdaki döngüyü her story için tekrarlayın
+            </div>
+
+            <div class="phases-container" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="phase-card">
+                    <div class="phase-header phase-4">Create Story</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Yeni Chat</span></div>
+                            <code class="cmd">/bmad-bmm-create-story</code>
+                            <div class="usage-row"><span class="usage-label">Seç:</span>Sprint'ten bir story seçin (örn:
+                                "user-authentication")</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">story-[slug].md</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-4">Dev Story</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Yeni Chat</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <code class="cmd">/bmad-bmm-dev-story</code>
+                            <div class="usage-row"><span class="usage-label">Not:</span>story-*.md dosyasını referans
+                                verin</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Kod
+                                    dosyaları</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-4">Code Review</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Aynı Chat</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-bmm-code-review</code>
+                            <div class="usage-row"><span class="usage-label">İncele:</span>Security, performance,
+                                maintainability</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-4">QA Auto</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Yeni Chat</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-bmm-qa-automate</code>
+                            <div class="usage-row"><span class="usage-label">Test:</span>Unit + Integration tests</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">*.test.ts</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXAMPLE 3: EXISTING PROJECT -->
+            <h3 style="margin-top: 3rem;">🔧 Örnek 3: Mevcut Projeye Ödeme Sistemi Ekleme</h3>
+            <div class="alert alert-info">
+                <strong>Senaryo:</strong> Var olan Next.js SaaS uygulamanıza Stripe ile ödeme sistemi entegre
+                edeceksiniz.
+            </div>
+
+            <div class="phases-container" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #0891b2;">1. Document</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 1</span></div>
+                            <code class="cmd">/bmad-bmm-document-project</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Mevcut projemizi dokümante
+                                et. Özellikle auth ve user modelleri önemli"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">project-context.md</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-2">2. PRD</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 2</span></div>
+                            <code class="cmd">/bmad-bmm-create-prd</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Stripe subscription sistemi:
+                                Free, Pro ($15), Team ($49) planları. Webhook handling, trial period"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">PRD.md</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-3">3. Architecture</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 3</span></div>
+                            <code class="cmd">/bmad-bmm-create-architecture</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Stripe entegrasyonu mevcut
+                                mimariye nasıl eklenir? Webhook endpoint, subscription state management"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">architecture.md</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-4">4. Implement</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Quick Dev</span></div>
+                            <code class="cmd">/bmad-bmm-quick-dev</code>
+                            <div class="usage-row"><span class="usage-label">Not:</span>PRD + Architecture'ı referans
+                                ver</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">Code</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI HELP EXAMPLES -->
+            <h3 style="margin-top: 3rem;">❓ Örnek /bmad-help Promptları</h3>
+            <div class="phases-container" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="workflow-item" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem;">
+                    <div class="item-header"><span class="item-title">Başlangıç Sorusu</span></div>
+                    <code class="cmd">/bmad-help</code>
+                    <div class="usage-row"><span class="usage-label">Prompt:</span>"AI destekli fitness tracking app
+                        yapmak istiyorum. Nerede başlamalıyım? Kullanıcı sayısı 100K+ hedefliyoruz"</div>
+                </div>
+
+                <div class="workflow-item" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem;">
+                    <div class="item-header"><span class="item-title">Faz Arası Belirsizlik</span></div>
+                    <code class="cmd">/bmad-help</code>
+                    <div class="usage-row"><span class="usage-label">Prompt:</span>"Architecture'ı bitirdim ama
+                        Epic/Stories oluşturmadan önce UX Design yapsam mı? Yoksa sonra mı?"</div>
+                </div>
+
+                <div class="workflow-item" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem;">
+                    <div class="item-header"><span class="item-title">Hata Durumu</span></div>
+                    <code class="cmd">/bmad-help</code>
+                    <div class="usage-row"><span class="usage-label">Prompt:</span>"PRD ve Architecture tutarsız
+                        görünüyor. Validation report kritik sorunlar buldu. Ne yapmalıyım?"</div>
+                </div>
+
+                <div class="workflow-item" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem;">
+                    <div class="item-header"><span class="item-title">Scale Kararı</span></div>
+                    <code class="cmd">/bmad-help</code>
+                    <div class="usage-row"><span class="usage-label">Prompt:</span>"Quick Flow ile başladım ama proje
+                        büyüdü. Full BMAD Method'a nasıl geçiş yaparım? Kaybetmeden?"</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="section">
+            <h2>✅ En İyi Uygulamalar</h2>
+
+            <div class="phases-container" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #ef4444;">⚠️ Kritik Kurallar</div>
+                    <div class="phase-content">
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Yeni Chat</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <div class="usage-row"><span class="usage-label">Kural:</span>Her workflow için mutlaka yeni
+                                chat açın. Context sorunlarını önler.</div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Talimatları Takip Et</span><span
+                                    class="badge-req">ZORUNLU</span></div>
+                            <div class="usage-row"><span class="usage-label">Kural:</span>Workflow talimatlarını
+                                dikkatlice
+                                okuyun ve takip edin.</div>
+                        </div>
+                        <div class="workflow-item required">
+                            <div class="item-header"><span class="item-title">Context Koruma</span><span
+                                    class="badge-req">ÖNEMLİ</span></div>
+                            <div class="usage-row"><span class="usage-label">Kural:</span>Oluşturulan dokümanları
+                                atlamayın.
+                                Her doküman bir sonraki faz için bağlam sağlar.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #059669;">🎯 Öneriler</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Doğru Yol Seç</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <div class="usage-row"><span class="usage-label">İpucu:</span>Küçük değişiklikler → Quick
+                                Flow
+                                | Büyük projeler → Full Method</div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Yardım İste</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <code class="cmd">/bmad-help</code>
+                            <div class="usage-row"><span class="usage-label">İpucu:</span>Emin değilseniz yardım
+                                isteyin.
+                                AI size yol gösterir.</div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Incremental İlerle</span><span
+                                    class="badge-opt">ÖNERİ</span></div>
+                            <div class="usage-row"><span class="usage-label">İpucu:</span>Her seferinde bir story. Küçük
+                                adımlar, büyük başarı.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header" style="background: #8b5cf6;">🛠️ Bakım</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Güncellemeleri Takip Et</span></div>
+                            <code class="cmd">npx bmad-method update</code>
+                            <div class="usage-row"><span class="usage-label">Ne zaman:</span>Haftada bir veya yeni
+                                özellik
+                                duyurularında</div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Durum Kontrolü</span></div>
+                            <code class="cmd">npx bmad-method status</code>
+                            <div class="usage-row"><span class="usage-label">Ne zaman:</span>Kurulumdan sonra veya sorun
+                                yaşadığınızda</div>
+                        </div>
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Artifact Yedekle</span></div>
+                            <div class="usage-row"><span class="usage-label">İpucu:</span>_bmad-output/ klasörünü Git'e
+                                commit edin.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="section">
+            <h2>🔗 Kaynaklar ve Topluluk</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>📖 Resmi Dökümantasyon</h4>
+                    <p><a href="https://docs.bmad-method.org/" target="_blank">docs.bmad-method.org</a></p>
+                    <p>Kapsamlı rehberler, tutorial'lar ve referanslar</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>💻 GitHub Deposu</h4>
+                    <p><a href="https://github.com/bmad-code-org/BMAD-METHOD"
+                            target="_blank">github.com/bmad-code-org/BMAD-METHOD</a></p>
+                    <p>Kaynak kodu, issue'lar ve katkılar</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>💬 Discord Topluluğu</h4>
+                    <p><a href="https://discord.gg/gk8jAdXWmj" target="_blank">Discord'a Katıl</a></p>
+                    <p>BMAD kullanıcılarıyla sohbet edin, soru sorun, fikir paylaşın</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎥 YouTube Kanalı</h4>
+                    <p><a href="https://www.youtube.com/@BMadCode" target="_blank">@BMadCode</a></p>
+                    <p>Video tutorial'lar ve walkthrough'lar</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section">
+            <h2>❓ Sık Sorulan Sorular</h2>
+
+            <h3>BMAD ücretsiz mi?</h3>
+            <p>Evet! 100% ücretsiz ve açık kaynak. Ödeme duvarı yok, gizli içerik yok.</p>
+
+            <h3>Hangi programlama dillerini destekliyor?</h3>
+            <p>BMAD dil agnostiktir. Herhangi bir programlama dili ve framework ile çalışabilir. Ajanlar AI IDE'niz
+                tarafından desteklenen herhangi bir dille kod yazabilir.</p>
+
+            <h3>Mevcut bir projeyle kullanabilir miyim?</h3>
+            <p>Kesinlikle! <code>/bmad-bmm-document-project</code> ile mevcut projenizi dokümante edin, sonra Quick
+                Flow veya Full Method ile yeni özellikler ekleyin.</p>
+
+            <h3>Quick Flow ve Full BMad Method arasındaki fark nedir?</h3>
+            <p>Quick Flow küçük değişiklikler için 3 komutlu hızlı bir yoldur. Full BMad Method, kapsamlı planlama ve
+                dokümantasyon gerektiren büyük projeler içindir.</p>
+
+            <h3>Neden her workflow için yeni chat açmalıyım?</h3>
+            <p>AI'lar context window sınırlamalarına sahiptir. Eski konuşma geçmişi yeni workflow'u karıştırabilir ve
+                hatalara yol açabilir. Yeni chat, temiz bir başlangıç sağlar.</p>
+
+            <h3>Party Mode nedir?</h3>
+            <p>Party Mode, birden fazla ajan personasını tek bir oturumda bir araya getirir. Projenizi farklı bakış
+                açılarından planlayabilir, tartışabilir ve çözümler bulabilirsiniz.</p>
+
+            <h3>Test Architect (TEA) modülü nedir?</h3>
+            <p>TEA, gelişmiş test stratejisi için opsiyonel bir modüldür. Başlangıç seviyesindeki test otomasyonu için
+                Quinn (yerleşik QA ajanı) yeterlidir.</p>
+        </section>
+
     </div>
 
-    <!-- MAIN PHASES -->
-    <div class="phases-area">
-
-        <!-- PHASE 1: ANALYSIS -->
-        <div class="phase-column">
-            <div class="phase-header p1">1. Analiz</div>
-            <div class="phase-content">
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Brainstorming</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad-brainstorming</code>
-                    <div class="meta"><span>Mary (BA)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">brainstorming.md</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Yeni chat açıp komutu yazın.
-                        Yaratıcı fikirler için.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Competitor Analysis</span><span
-                            class="badge badge-opt">EKSTRA</span></div>
-                    <code class="cmd">create-competitor-analysis</code>
-                    <div class="meta"><span>Mary (BA)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">competitor-analysis.md</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Rakip analizi raporu oluşturur.
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">General Research</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad-bmm-research</code>
-                    <div class="meta"><span>Mary (BA)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">research.md</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Genel pazar/teknik araştırma
-                        raporu.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Research Prompt</span><span
-                            class="badge badge-opt">EKSTRA</span></div>
-                    <code class="cmd">research-prompt {topic}</code>
-                    <div class="meta"><span>Mary (BA)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Prompt
-                                Text</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Belirli konu için derin araştırma
-                        promptu üretir.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Product Brief</span><span
-                            class="badge badge-opt">ÖNERİ</span></div>
-                    <code class="cmd">/bmad-bmm-create-product-brief</code>
-                    <div class="meta"><span>Mary (BA)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">product-brief.md</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Proje özet dokümanı oluşturur.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PHASE 2: PLANNING -->
-        <div class="phase-column">
-            <div class="phase-header p2">2. Planlama<br><span
-                    style="font-size:0.7rem; font-weight:400; text-transform:none; opacity:0.9;">(Tamamlanması
-                    Gerekiyor)</span></div>
-            <div class="phase-content">
-                <div class="item mandatory">
-                    <div class="item-header"><span class="item-title">Create PRD</span><span
-                            class="badge badge-req">ZORUNLU</span></div>
-                    <code class="cmd">/bmad-bmm-create-prd</code>
-                    <div class="meta"><span>John (PM)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">PRD.md</span><span class="file-badge-req">REQ</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Gereksinimleri belirler.
-                        <strong>Temel taş.</strong>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Validate PRD</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad-bmm-validate-prd</code>
-                    <div class="meta"><span>John (PM)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">validation-report.md</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>PRD'yi kontrol ettirin.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Edit PRD</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad-bmm-edit-prd</code>
-                    <div class="meta"><span>John (PM)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">PRD.md
-                                (Güncel)</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>PRD üzerinde değişiklik yapın.
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Doc Out</span><span
-                            class="badge badge-opt">EKSTRA</span></div>
-                    <code class="cmd">doc-out</code>
-                    <div class="meta"><span>Genel</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">File
-                                Export</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Devam eden dokümanı dışa aktarır.
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">UX Design</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad-bmm-create-ux-design</code>
-                    <div class="meta"><span>Sally (UX)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">ux-spec.md</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Arayüz/Tasarım spekleri.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PHASE 3: SOLUTIONING -->
-        <div class="phase-column">
-            <div class="phase-header p3">3. Çözümleme<br><span
-                    style="font-size:0.7rem; font-weight:400; text-transform:none; opacity:0.9;">(Tamamlanması
-                    Gerekiyor)</span></div>
-            <div class="phase-content">
-                <div class="item mandatory">
-                    <div class="item-header"><span class="item-title">Architecture</span><span
-                            class="badge badge-req">ZORUNLU</span></div>
-                    <code class="cmd">/bmad-bmm-create-architecture</code>
-                    <div class="meta"><span>Winston (Arc)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">architecture.md</span><span class="file-badge-req">REQ</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Teknik mimari ve stack seçimi.
-                    </div>
-                </div>
-                <div class="item mandatory">
-                    <div class="item-header"><span class="item-title">Epics & Stories</span><span
-                            class="badge badge-req">ZORUNLU</span></div>
-                    <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
-                    <div class="meta"><span>John (PM)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">epics/*.md</span><span class="file-badge-req">REQ</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>İşleri küçük parçalara böler.</div>
-                </div>
-                <div class="item mandatory">
-                    <div class="item-header"><span class="item-title">Readiness</span><span
-                            class="badge badge-req">ZORUNLU</span></div>
-                    <code class="cmd">/bmad-bmm-check-implementation-readiness</code>
-                    <div class="meta"><span>Winston (Arc)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">readiness-report.md</span><span class="file-badge-req">REQ</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Başlamadan önce son kontrol.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PHASE 4: IMPLEMENTATION -->
-        <div class="phase-column">
-            <div class="phase-header p4">4. Uygulama<br><span
-                    style="font-size:0.7rem; font-weight:400; text-transform:none; opacity:0.9;">(Tamamlanması
-                    Gerekiyor)</span></div>
-            <div class="phase-content">
-                <div class="item mandatory">
-                    <div class="item-header"><span class="item-title">Sprint Plan</span><span
-                            class="badge badge-req">ZORUNLU</span></div>
-                    <code class="cmd">/bmad-bmm-sprint-planning</code>
-                    <div class="meta"><span>Bob (SM)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">sprint-status.yaml</span><span class="file-badge-req">REQ</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Sprint'i başlat.</div>
-                </div>
-                <div class="item mandatory">
-                    <div class="item-header"><span class="item-title">Create Story</span><span
-                            class="badge badge-req">ZORUNLU</span></div>
-                    <code class="cmd">/bmad-bmm-create-story</code>
-                    <div class="meta"><span>Bob (SM)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">story-[slug].md</span><span class="file-badge-req">REQ</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Tek bir story seçimi.</div>
-                </div>
-                <div class="item mandatory">
-                    <div class="item-header"><span class="item-title">Dev Story</span><span
-                            class="badge badge-req">ZORUNLU</span></div>
-                    <code class="cmd">/bmad-bmm-dev-story</code>
-                    <div class="meta"><span>Amelia (Dev)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Code
-                                Files</span><span class="file-badge-req">REQ</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Kodu yaz ve test et.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Story Done</span><span
-                            class="badge badge-opt">EKSTRA</span></div>
-                    <code class="cmd">story-done</code>
-                    <div class="meta"><span>Amelia (Dev)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Status
-                                Update</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Story tamamlandığında workflow
-                        içinde yazılır.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">QA Auto</span><span
-                            class="badge badge-opt">ÖNERİ</span></div>
-                    <code class="cmd">/bmad-bmm-qa-automate</code>
-                    <div class="meta"><span>Quinn (QA)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">tests/*.spec.ts</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Otomatik test üretimi.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- EXTRAS SECTION -->
-    <div class="extras-section">
-
-        <!-- Terminal Management Tools (New Column) -->
-        <div class="extras-column">
-            <div class="extras-header eh-term">Terminal / Yönetim</div>
-            <div class="phase-content">
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Update</span><span
-                            class="badge badge-term">TERM</span></div>
-                    <code class="cmd">npx bmad-method update</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>BMAD araçlarını günceller.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Status</span><span
-                            class="badge badge-term">TERM</span></div>
-                    <code class="cmd">npx bmad-method status</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Kurulum durumunu kontrol eder.
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">List Expansions</span><span
-                            class="badge badge-term">TERM</span></div>
-                    <code class="cmd">npx bmad-method list:expansions</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Ek paketleri listeler.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Workflow Status</span><span
-                            class="badge badge-term">CHAT</span></div>
-                    <code class="cmd">workflow-status</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Workflow içinde durumu sor.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Custom / Anytime Tools -->
-        <div class="extras-column">
-            <div class="extras-header">Araçlar (Anytime)</div>
-            <div class="phase-content">
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Doc Project</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad-bmm-document-project</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Mevcut projeyi dokümante et.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Generate Context</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad-bmm-generate-project-context</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Context'i yenile.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Quick Spec</span><span
-                            class="badge badge-opt">HIZLI</span></div>
-                    <code class="cmd">/bmad-bmm-quick-spec</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Hızlı planlama.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tech Writer -->
-        <div class="extras-column">
-            <div class="extras-header eh-tech">Tech Writer (Paige)</div>
-            <div class="phase-content">
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Write Doc</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">WD</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Doküman yaz.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Mermaid Gen</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">MG</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Diyagram oluştur.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TEA Module -->
-        <div class="extras-column">
-            <div class="extras-header eh-tea">TEA (Test Arch)</div>
-            <div class="phase-content">
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Framework Setup</span><span
-                            class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad_tea_framework</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Test altyapısı kur.</div>
-                </div>
-                <div class="item">
-                    <div class="item-header"><span class="item-title">Teach Me Testing</span><span
-                            class="badge badge-opt">EĞİTİM</span></div>
-                    <code class="cmd">/bmad_tea_teach-me-testing</code>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Test eğitimi al.</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- SIGNATURE -->
-    <div class="footer">
-        Created for developers. <span class="heart">❤</span> Loved by Metehan Soner
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Created with <span class="heart">❤️</span> by the BMAD Community</p>
+        <p style="margin-top: 1rem;">Loved by Metehan Soner | Updated: 2026</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://docs.bmad-method.org/" style="color: #cbd5e1; margin: 0 1rem;">Docs</a>
+            <a href="https://github.com/bmad-code-org/BMAD-METHOD" style="color: #cbd5e1; margin: 0 1rem;">GitHub</a>
+            <a href="https://discord.gg/gk8jAdXWmj" style="color: #cbd5e1; margin: 0 1rem;">Discord</a>
+            <a href="https://www.youtube.com/@BMadCode" style="color: #cbd5e1; margin: 0 1rem;">YouTube</a>
+        </p>
+    </footer>
 
 </body>
 
