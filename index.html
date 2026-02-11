@@ -334,16 +334,56 @@
             color: #334155;
         }
 
+        .cmd-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.4rem;
+        }
+
         .cmd {
-            display: block;
+            flex: 1;
             background: #1e293b;
             color: #bae6fd;
             padding: 4px 6px;
             border-radius: 4px;
             font-family: monospace;
             font-size: 0.8rem;
-            margin-bottom: 0.4rem;
             word-break: break-all;
+        }
+
+        .copy-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            padding: 4px;
+            background: #334155;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-icon:hover {
+            background: #475569;
+            transform: scale(1.1);
+        }
+
+        .copy-icon.copied {
+            background: #059669;
+        }
+
+        .copy-icon svg {
+            width: 12px;
+            height: 12px;
+            fill: #bae6fd;
+        }
+
+        .copy-icon.copied svg {
+            fill: white;
         }
 
         /* FILE OUTPUT STYLE */
@@ -643,6 +683,27 @@
             color: #065f46;
         }
     </style>
+    <script>
+        function copyCommand(button, command) {
+            // Clipboard'a kopyala
+            navigator.clipboard.writeText(command).then(function () {
+                // Görsel feedback
+                button.classList.add('copied');
+                const originalHTML = button.innerHTML;
+
+                // Checkmark ikonu göster
+                button.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>';
+
+                // 2 saniye sonra eski haline döndür
+                setTimeout(function () {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(function (err) {
+                console.error('Kopyalama hatası:', err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -797,7 +858,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">10. Brainstorm Project</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-brainstorming</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-brainstorming</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-brainstorming')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Mary (BA)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">brainstorming.md</span></div>
@@ -808,7 +874,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">20. Market Research</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-market-research</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-market-research</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-market-research')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Mary (BA)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">market-research.md</span></div>
@@ -819,7 +890,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">21. Domain Research</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-domain-research</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-domain-research</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-domain-research')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Mary (BA)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">domain-research.md</span></div>
@@ -830,7 +906,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">22. Technical Research</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-technical-research</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-technical-research</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-technical-research')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Mary (BA)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">technical-research.md</span></div>
@@ -841,7 +922,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">30. Create Brief</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-create-product-brief</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-product-brief</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-product-brief')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Mary (BA)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">product-brief.md</span></div>
@@ -859,7 +945,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">10. Create PRD</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-create-prd</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-prd</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-prd')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>John (PM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">PRD.md</span><span class="file-badge-req">REQ</span></div>
@@ -870,7 +961,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">20. Validate PRD</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-validate-prd</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-validate-prd</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-validate-prd')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>John (PM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">validation-report.md</span></div>
@@ -881,7 +977,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">25. Edit PRD</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-edit-prd</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-edit-prd</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-edit-prd')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>John (PM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">PRD.md
                                         (Güncel)</span></div>
@@ -892,7 +993,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">30. Create UX</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-bmm-create-ux-design</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-ux-design</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-ux-design')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Sally (UX)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">ux-spec.md</span></div>
@@ -910,7 +1016,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">10. Create Architecture</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-create-architecture</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-architecture</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-architecture')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Winston (Arc)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">architecture.md</span><span class="file-badge-req">REQ</span>
@@ -922,7 +1033,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">30. Create Epics & Stories</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-epics-and-stories')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>John (PM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">epics/*.md</span><span class="file-badge-req">REQ</span></div>
@@ -933,7 +1049,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">70. Implementation Readiness</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-check-implementation-readiness</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-check-implementation-readiness</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-check-implementation-readiness')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Winston (Arc)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">readiness-report.md</span><span
@@ -952,7 +1073,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">10. Sprint Planning</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-sprint-planning</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-sprint-planning</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-sprint-planning')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Bob (SM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">sprint-status.yaml</span><span
@@ -964,7 +1090,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">20. Sprint Status</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-sprint-status</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-sprint-status</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-sprint-status')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Bob (SM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Status
                                         Report</span></div>
@@ -975,7 +1106,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">30. Create Story</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-create-story</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-story</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-story')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Bob (SM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">story-[slug].md</span><span class="file-badge-req">REQ</span>
@@ -987,7 +1123,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">35. Validate Story</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-validate-story</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-validate-story</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-validate-story')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Bob (SM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">Validation</span></div>
@@ -998,7 +1139,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">40. Dev Story</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-dev-story</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-dev-story</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-dev-story')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Amelia (Dev)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Code
                                         Files</span><span class="file-badge-req">REQ</span></div>
@@ -1009,7 +1155,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">45. QA Automation Test</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-bmm-qa-automate</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-qa-automate</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-qa-automate')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Quinn (QA)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">tests/*.spec.ts</span></div>
@@ -1020,7 +1171,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">50. Code Review</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-bmm-code-review</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-code-review</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-code-review')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Amelia (Dev)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Review
                                         Report</span></div>
@@ -1031,7 +1187,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">60. Retrospective</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-retrospective</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-retrospective</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-retrospective')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Bob (SM)</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">retrospective.md</span></div>
@@ -1185,13 +1346,23 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Help</span><span
                                     class="badge-req">ÖNEMLİ</span></div>
-                            <code class="cmd">/bmad-help</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-help</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-help')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Ne yapar:</span>AI destekli yardım - ne
                                 yapacağınızı söyler</div>
                         </div>
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Brainstorming</span></div>
-                            <code class="cmd">/bmad-brainstorming</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-brainstorming</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-brainstorming')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Faz 1</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">brainstorming.md</span></div>
@@ -1199,7 +1370,12 @@
                         </div>
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Research</span></div>
-                            <code class="cmd">/bmad-bmm-research</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-research</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-research')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Faz 1</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">research.md</span></div>
@@ -1215,7 +1391,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Create PRD</span><span
                                     class="badge-req">REQ</span></div>
-                            <code class="cmd">/bmad-bmm-create-prd</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-prd</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-prd')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Faz 2</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">PRD.md</span></div>
@@ -1224,7 +1405,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Architecture</span><span
                                     class="badge-req">REQ</span></div>
-                            <code class="cmd">/bmad-bmm-create-architecture</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-architecture</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-architecture')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Faz 3</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">architecture.md</span></div>
@@ -1233,7 +1419,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Epics & Stories</span><span
                                     class="badge-req">REQ</span></div>
-                            <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-epics-and-stories')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Faz 3</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">epics/*.md</span></div>
@@ -1249,7 +1440,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Sprint Planning</span><span
                                     class="badge-req">REQ</span></div>
-                            <code class="cmd">/bmad-bmm-sprint-planning</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-sprint-planning</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-sprint-planning')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Faz 4</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">sprint-status.yaml</span></div>
@@ -1258,7 +1454,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Dev Story</span><span
                                     class="badge-req">REQ</span></div>
-                            <code class="cmd">/bmad-bmm-dev-story</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-dev-story</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-dev-story')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Faz 4</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Code
                                         Files</span></div>
@@ -1266,7 +1467,12 @@
                         </div>
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Code Review</span></div>
-                            <code class="cmd">/bmad-bmm-code-review</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-code-review</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-code-review')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Faz 4</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">review.md</span></div>
@@ -1282,7 +1488,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Quick Spec</span><span
                                     class="badge-opt">HIZLI</span></div>
-                            <code class="cmd">/bmad-bmm-quick-spec</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-quick-spec</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-quick-spec')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Quick Flow</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">tech-spec.md</span></div>
@@ -1291,7 +1502,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Quick Dev</span><span
                                     class="badge-opt">HIZLI</span></div>
-                            <code class="cmd">/bmad-bmm-quick-dev</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-quick-dev</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-quick-dev')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Quick Flow</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Code
                                         Files</span></div>
@@ -1299,7 +1515,12 @@
                         </div>
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">QA Automate</span></div>
-                            <code class="cmd">/bmad-bmm-qa-automate</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-qa-automate</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-qa-automate')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="meta"><span>Test</span>
                                 <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                         class="file-out">tests/*.spec.ts</span></div>
@@ -1346,7 +1567,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Yeni Chat Aç</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-quick-spec</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-quick-spec</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-quick-spec')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Kullanıcıların profil
                                 fotoğrafı yükleyebilmesi, kırpabilmesi ve görüntüleyebilmesi için özellik ekle. AWS
                                 S3'te depolansın. Next.js App Router kullanıyoruz."</div>
@@ -1366,7 +1592,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Yeni Chat Aç</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-quick-dev</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-quick-dev</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-quick-dev')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Not:</span>tech-spec.md dosyasını chate
                                 referans verin (@tech-spec.md)</div>
                             <div class="meta">
@@ -1385,7 +1616,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Aynı Chat'te</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-bmm-code-review</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-code-review</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-code-review')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Kontrol:</span>Güvenlik, performans, best
                                 practices</div>
                             <div class="meta">
@@ -1413,7 +1649,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 1</span></div>
-                            <code class="cmd">/bmad-brainstorming</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-brainstorming</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-brainstorming')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Test management tool için
                                 benzersiz özellikler brainstorm edelim. Hedef: TestRail ve Zephyr'dan farklılaşmak. AI
                                 ile test case önerileri, flaky test detection"
@@ -1429,7 +1670,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 2</span></div>
-                            <code class="cmd">/bmad-bmm-market-research</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-market-research</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-market-research')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Test management SaaS pazarı:
                                 TestRail, Zephyr, PractiTest, qTest rakip analizi. Pricing modelleri, pazar payları,
                                 müşteri şikayetleri"</div>
@@ -1444,7 +1690,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 3</span></div>
-                            <code class="cmd">/bmad-bmm-domain-research</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-domain-research</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-domain-research')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Test management domain
                                 modelleri: Test case hierarchy, test suites, test runs, test plans. IEEE 829 standartı,
                                 defect lifecycle, traceability matrix"</div>
@@ -1459,7 +1710,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 4</span></div>
-                            <code class="cmd">/bmad-bmm-technical-research</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-technical-research</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-technical-research')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Test management için teknik
                                 stack araştırması: PostgreSQL hierarchical data modeling, real-time WebSocket
                                 connections, file storage (AWS S3 vs Cloudflare R2), API design patterns"</div>
@@ -1474,7 +1730,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 5</span></div>
-                            <code class="cmd">/bmad-bmm-create-product-brief</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-product-brief</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-product-brief')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Brainstorming,
                                 market-research, domain-research ve technical-research'ü kullanarak product brief
                                 oluştur. Starter (Free), Team
@@ -1495,7 +1756,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Chat 6</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-create-prd</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-prd</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-prd')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Product brief'i kullanarak
                                 detaylı PRD oluştur. Kullanıcı personaları: QA Lead, Test Engineer, Manual Tester,
                                 Test Automation Engineer"</div>
@@ -1511,7 +1777,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 7</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-bmm-validate-prd</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-validate-prd</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-validate-prd')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Kontrol:</span>Eksik gereksinimler,
                                 çelişkiler, belirsizlikler</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
@@ -1526,7 +1797,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 8</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-edit-prd</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-edit-prd</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-edit-prd')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Validation raporundaki
                                 eksiklikleri PRD'ye ekle. Test case reusability ve test data management özelliklerini
                                 detaylandır"</div>
@@ -1542,7 +1818,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 9</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-bmm-create-ux-design</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-ux-design</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-ux-design')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Test management UI tasarımı.
                                 Sol sidebar: Project/Suite/Case hierarchy. Ana panel: Test case grid view + Kanban
                                 board. Dashboard: Test execution metrics, pass/fail charts"</div>
@@ -1562,7 +1843,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Chat 10</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-create-architecture</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-architecture</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-architecture')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Next.js 14 App Router,
                                 PostgreSQL, Prisma ORM. Hierarchical test case storage (Projects → Test Suites → Test
                                 Cases). Real-time test execution tracking, S3 için screenshot/video storage"</div>
@@ -1578,7 +1864,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Chat 11</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-epics-and-stories')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Epics: 1) User Auth & RBAC
                                 2) Project & Test Suite Management 3) Test Case CRUD 4) Test Run Execution 5) Reporting
                                 & Dashboard 6) Jira/GitHub Integration"</div>
@@ -1594,7 +1885,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Chat 12</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-check-implementation-readiness</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-check-implementation-readiness</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-check-implementation-readiness')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Kontrol:</span>PRD, UX, Architecture,
                                 Stories
                                 hizalı mı? Test coverage, performance requirements net mi?</div>
@@ -1611,7 +1907,12 @@
                 style="background: #f0fdf4; border-left: 4px solid #10b981; padding: 1.5rem; margin: 1rem 0;">
                 <div class="item-header"><span class="item-title">Sprint Başlangıcı</span><span
                         class="badge-req">ZORUNLU</span></div>
-                <code class="cmd">/bmad-bmm-sprint-planning</code>
+                <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-sprint-planning</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-sprint-planning')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                 <div class="usage-row"><span class="usage-label">Chat 13 Prompt:</span>"İlk sprint için 5 story seç.
                     Öncelik: Auth & User Roles, Project Creation, Test Suite CRUD, Test Case Creation, Basic Test Run"
                 </div>
@@ -1632,7 +1933,12 @@
                     <div class="phase-content">
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Yeni Chat</span></div>
-                            <code class="cmd">/bmad-bmm-create-story</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-story</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-story')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Seç:</span>Sprint'ten bir story seçin (örn:
                                 "test-case-creation")</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
@@ -1647,7 +1953,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Aynı Chat</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-validate-story</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-validate-story</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-validate-story')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Kontrol:</span>Story hazır mı? Eksikler
                                 var mı?</div>
                         </div>
@@ -1660,7 +1971,12 @@
                         <div class="workflow-item required">
                             <div class="item-header"><span class="item-title">Yeni Chat</span><span
                                     class="badge-req">ZORUNLU</span></div>
-                            <code class="cmd">/bmad-bmm-dev-story</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-dev-story</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-dev-story')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Not:</span>story-*.md dosyasını referans
                                 verin</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Kod
@@ -1675,7 +1991,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Aynı Chat</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-bmm-code-review</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-code-review</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-code-review')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">İncele:</span>Security, performance,
                                 maintainability</div>
                         </div>
@@ -1688,7 +2009,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Yeni Chat</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-bmm-qa-automate</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-qa-automate</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-qa-automate')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Test:</span>Unit + Integration tests</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                     class="file-out">*.test.ts</span></div>
@@ -1705,7 +2031,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Herhangi bir Chat</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-sprint-status</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-sprint-status</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-sprint-status')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Kullanım:</span>Sprint ilerlemesini
                                 kontrol et. Hangi story'ler kaldı? Sonraki adım ne?</div>
                         </div>
@@ -1718,7 +2049,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Epic Tamamlandığında</span><span
                                     class="badge-opt">OPT</span></div>
-                            <code class="cmd">/bmad-bmm-retrospective</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-retrospective</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-retrospective')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Kullanım:</span>Epic bittiğinde öğrenilen
                                 dersleri dokümante edin. Ne iyi gitti? Neler iyileştirilebilir?</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
@@ -1741,7 +2077,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 1</span></div>
-                            <code class="cmd">/bmad-bmm-document-project</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-document-project</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-document-project')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Mevcut projemizi dokümante
                                 et. Özellikle auth ve user modelleri önemli"</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
@@ -1755,7 +2096,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 2</span></div>
-                            <code class="cmd">/bmad-bmm-create-prd</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-prd</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-prd')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Stripe subscription sistemi:
                                 Free, Pro ($15), Team ($49) planları. Webhook handling, trial period"</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
@@ -1769,7 +2115,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 3</span></div>
-                            <code class="cmd">/bmad-bmm-create-architecture</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-create-architecture</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-create-architecture')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Stripe entegrasyonu mevcut
                                 mimariye nasıl eklenir? Webhook endpoint, subscription state management"</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
@@ -1783,7 +2134,12 @@
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Quick Dev</span></div>
-                            <code class="cmd">/bmad-bmm-quick-dev</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-bmm-quick-dev</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-bmm-quick-dev')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">Not:</span>PRD + Architecture'ı referans
                                 ver</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
@@ -1798,28 +2154,48 @@
             <div class="phases-container" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="workflow-item" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem;">
                     <div class="item-header"><span class="item-title">Başlangıç Sorusu</span></div>
-                    <code class="cmd">/bmad-help</code>
+                    <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-help</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-help')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                     <div class="usage-row"><span class="usage-label">Prompt:</span>"AI destekli fitness tracking app
                         yapmak istiyorum. Nerede başlamalıyım? Kullanıcı sayısı 100K+ hedefliyoruz"</div>
                 </div>
 
                 <div class="workflow-item" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem;">
                     <div class="item-header"><span class="item-title">Faz Arası Belirsizlik</span></div>
-                    <code class="cmd">/bmad-help</code>
+                    <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-help</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-help')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                     <div class="usage-row"><span class="usage-label">Prompt:</span>"Architecture'ı bitirdim ama
                         Epic/Stories oluşturmadan önce UX Design yapsam mı? Yoksa sonra mı?"</div>
                 </div>
 
                 <div class="workflow-item" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem;">
                     <div class="item-header"><span class="item-title">Hata Durumu</span></div>
-                    <code class="cmd">/bmad-help</code>
+                    <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-help</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-help')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                     <div class="usage-row"><span class="usage-label">Prompt:</span>"PRD ve Architecture tutarsız
                         görünüyor. Validation report kritik sorunlar buldu. Ne yapmalıyım?"</div>
                 </div>
 
                 <div class="workflow-item" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem;">
                     <div class="item-header"><span class="item-title">Scale Kararı</span></div>
-                    <code class="cmd">/bmad-help</code>
+                    <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-help</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-help')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                     <div class="usage-row"><span class="usage-label">Prompt:</span>"Quick Flow ile başladım ama proje
                         büyüdü. Full BMAD Method'a nasıl geçiş yaparım? Kaybetmeden?"</div>
                 </div>
@@ -1870,7 +2246,12 @@
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Yardım İste</span><span
                                     class="badge-opt">ÖNERİ</span></div>
-                            <code class="cmd">/bmad-help</code>
+                            <div class="cmd-wrapper">
+                                <code class="cmd">/bmad-help</code>
+                                <button class="copy-icon" onclick="copyCommand(this, '/bmad-help')" title="Kopyala">
+                                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
                             <div class="usage-row"><span class="usage-label">İpucu:</span>Emin değilseniz yardım
                                 isteyin.
                                 AI size yol gösterir.</div>
@@ -1902,7 +2283,8 @@
                                 MD'leri referans verin - güncel brainstorming.md otomatik kullanılır</div>
                             <div class="usage-row"
                                 style="margin-top: 0.5rem; padding: 0.5rem; background: #dcfce7; border-radius: 4px;">
-                                <strong>✅ Diğer MD'ler bozulmaz!</strong> Her agent en güncel dosyaları kullanır.</div>
+                                <strong>✅ Diğer MD'ler bozulmaz!</strong> Her agent en güncel dosyaları kullanır.
+                            </div>
                         </div>
                     </div>
                 </div>
