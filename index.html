@@ -1407,7 +1407,7 @@
 
             <!-- PHASE 1: ANALYSIS -->
             <h4 style="margin-top: 1.5rem; color: var(--primary-blue);">📊 Faz 1: Analiz (Opsiyonel ama önerilen)</h4>
-            <div class="phases-container" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="phases-container" style="grid-template-columns: repeat(5, 1fr);">
                 <div class="phase-card">
                     <div class="phase-header phase-1">Brainstorming</div>
                     <div class="phase-content">
@@ -1455,14 +1455,29 @@
                 </div>
 
                 <div class="phase-card">
-                    <div class="phase-header phase-1">Product Brief</div>
+                    <div class="phase-header phase-1">Technical Research</div>
                     <div class="phase-content">
                         <div class="workflow-item">
                             <div class="item-header"><span class="item-title">Chat 4</span></div>
+                            <code class="cmd">/bmad-bmm-technical-research</code>
+                            <div class="usage-row"><span class="usage-label">Prompt:</span>"Test management için teknik
+                                stack araştırması: PostgreSQL hierarchical data modeling, real-time WebSocket
+                                connections, file storage (AWS S3 vs Cloudflare R2), API design patterns"</div>
+                            <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                    class="file-out">technical-research.md</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-header phase-1">Product Brief</div>
+                    <div class="phase-content">
+                        <div class="workflow-item">
+                            <div class="item-header"><span class="item-title">Chat 5</span></div>
                             <code class="cmd">/bmad-bmm-create-product-brief</code>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Brainstorming,
-                                market-research ve domain-research'ü kullanarak product brief oluştur. Starter (Free),
-                                Team
+                                market-research, domain-research ve technical-research'ü kullanarak product brief
+                                oluştur. Starter (Free), Team
                                 ($25/user/ay), Enterprise (Custom) pricing modeli"</div>
                             <div class="file-wrapper"><span class="file-arrow">➝</span><span
                                     class="file-out">product-brief.md</span></div>
@@ -1478,7 +1493,7 @@
                     <div class="phase-header phase-2">Create PRD</div>
                     <div class="phase-content">
                         <div class="workflow-item required">
-                            <div class="item-header"><span class="item-title">Chat 5</span><span
+                            <div class="item-header"><span class="item-title">Chat 6</span><span
                                     class="badge-req">ZORUNLU</span></div>
                             <code class="cmd">/bmad-bmm-create-prd</code>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Product brief'i kullanarak
@@ -1494,7 +1509,7 @@
                     <div class="phase-header phase-2">Validate PRD</div>
                     <div class="phase-content">
                         <div class="workflow-item">
-                            <div class="item-header"><span class="item-title">Chat 6</span><span
+                            <div class="item-header"><span class="item-title">Chat 7</span><span
                                     class="badge-opt">ÖNERİ</span></div>
                             <code class="cmd">/bmad-bmm-validate-prd</code>
                             <div class="usage-row"><span class="usage-label">Kontrol:</span>Eksik gereksinimler,
@@ -1509,7 +1524,7 @@
                     <div class="phase-header phase-2">Edit PRD</div>
                     <div class="phase-content">
                         <div class="workflow-item">
-                            <div class="item-header"><span class="item-title">Chat 7</span><span
+                            <div class="item-header"><span class="item-title">Chat 8</span><span
                                     class="badge-opt">OPT</span></div>
                             <code class="cmd">/bmad-bmm-edit-prd</code>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Validation raporundaki
@@ -1525,7 +1540,7 @@
                     <div class="phase-header phase-2">UX Design</div>
                     <div class="phase-content">
                         <div class="workflow-item">
-                            <div class="item-header"><span class="item-title">Chat 8</span><span
+                            <div class="item-header"><span class="item-title">Chat 9</span><span
                                     class="badge-opt">ÖNERİ</span></div>
                             <code class="cmd">/bmad-bmm-create-ux-design</code>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Test management UI tasarımı.
@@ -1545,7 +1560,7 @@
                     <div class="phase-header phase-3">Architecture</div>
                     <div class="phase-content">
                         <div class="workflow-item required">
-                            <div class="item-header"><span class="item-title">Chat 9</span><span
+                            <div class="item-header"><span class="item-title">Chat 10</span><span
                                     class="badge-req">ZORUNLU</span></div>
                             <code class="cmd">/bmad-bmm-create-architecture</code>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Next.js 14 App Router,
@@ -1561,7 +1576,7 @@
                     <div class="phase-header phase-3">Epics & Stories</div>
                     <div class="phase-content">
                         <div class="workflow-item required">
-                            <div class="item-header"><span class="item-title">Chat 10</span><span
+                            <div class="item-header"><span class="item-title">Chat 11</span><span
                                     class="badge-req">ZORUNLU</span></div>
                             <code class="cmd">/bmad-bmm-create-epics-and-stories</code>
                             <div class="usage-row"><span class="usage-label">Prompt:</span>"Epics: 1) User Auth & RBAC
@@ -1577,7 +1592,7 @@
                     <div class="phase-header phase-3">Readiness</div>
                     <div class="phase-content">
                         <div class="workflow-item required">
-                            <div class="item-header"><span class="item-title">Chat 11</span><span
+                            <div class="item-header"><span class="item-title">Chat 12</span><span
                                     class="badge-req">ZORUNLU</span></div>
                             <code class="cmd">/bmad-bmm-check-implementation-readiness</code>
                             <div class="usage-row"><span class="usage-label">Kontrol:</span>PRD, UX, Architecture,
@@ -1597,7 +1612,7 @@
                 <div class="item-header"><span class="item-title">Sprint Başlangıcı</span><span
                         class="badge-req">ZORUNLU</span></div>
                 <code class="cmd">/bmad-bmm-sprint-planning</code>
-                <div class="usage-row"><span class="usage-label">Chat 12 Prompt:</span>"İlk sprint için 5 story seç.
+                <div class="usage-row"><span class="usage-label">Chat 13 Prompt:</span>"İlk sprint için 5 story seç.
                     Öncelik: Auth & User Roles, Project Creation, Test Suite CRUD, Test Case Creation, Basic Test Run"
                 </div>
                 <div class="meta" style="margin-top: 0.5rem;">
