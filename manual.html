@@ -371,26 +371,38 @@
                         Yaratıcı fikirler için.</div>
                 </div>
                 <div class="item">
-                    <div class="item-header"><span class="item-title">Competitor Analysis</span><span
-                            class="badge badge-opt">EKSTRA</span></div>
-                    <code class="cmd">create-competitor-analysis</code>
+                    <div class="item-header"><span class="item-title">Market Research</span><span
+                            class="badge badge-opt">OPT</span></div>
+                    <code class="cmd">/bmad-bmm-market-research</code>
                     <div class="meta"><span>Mary (BA)</span>
                         <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">competitor-analysis.md</span></div>
+                                class="file-out">market-research.md</span></div>
                     </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Rakip analizi raporu oluşturur.
+                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Rakip analizi, pazar ihtiyaçları.
                     </div>
                 </div>
                 <div class="item">
-                    <div class="item-header"><span class="item-title">General Research</span><span
+                    <div class="item-header"><span class="item-title">Domain Research</span><span
                             class="badge badge-opt">OPT</span></div>
-                    <code class="cmd">/bmad-bmm-research</code>
+                    <code class="cmd">/bmad-bmm-domain-research</code>
                     <div class="meta"><span>Mary (BA)</span>
                         <div class="file-wrapper"><span class="file-arrow">➝</span><span
-                                class="file-out">research.md</span></div>
+                                class="file-out">domain-research.md</span></div>
                     </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Genel pazar/teknik araştırma
-                        raporu.</div>
+                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Domain derinlemesine inceleme.
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Technical Research</span><span
+                            class="badge badge-opt">OPT</span></div>
+                    <code class="cmd">/bmad-bmm-technical-research</code>
+                    <div class="meta"><span>Mary (BA)</span>
+                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                class="file-out">technical-research.md</span></div>
+                    </div>
+                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Teknik fizibilite, mimari
+                        opsiyonlar.
+                    </div>
                 </div>
                 <div class="item">
                     <div class="item-header"><span class="item-title">Research Prompt</span><span
@@ -430,7 +442,8 @@
                                 class="file-out">PRD.md</span><span class="file-badge-req">REQ</span></div>
                     </div>
                     <div class="usage-row"><span class="usage-label">Kullanım:</span>Gereksinimleri belirler.
-                        <strong>Temel taş.</strong></div>
+                        <strong>Temel taş.</strong>
+                    </div>
                 </div>
                 <div class="item">
                     <div class="item-header"><span class="item-title">Validate PRD</span><span
@@ -529,6 +542,17 @@
                     </div>
                     <div class="usage-row"><span class="usage-label">Kullanım:</span>Sprint'i başlat.</div>
                 </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Sprint Status</span><span
+                            class="badge badge-opt">OPT</span></div>
+                    <code class="cmd">/bmad-bmm-sprint-status</code>
+                    <div class="meta"><span>Bob (SM)</span>
+                        <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Status
+                                Report</span></div>
+                    </div>
+                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Sprint durumu özeti + sonraki adıma
+                        yönlendir.</div>
+                </div>
                 <div class="item mandatory">
                     <div class="item-header"><span class="item-title">Create Story</span><span
                             class="badge badge-req">ZORUNLU</span></div>
@@ -538,6 +562,16 @@
                                 class="file-out">story-[slug].md</span><span class="file-badge-req">REQ</span></div>
                     </div>
                     <div class="usage-row"><span class="usage-label">Kullanım:</span>Tek bir story seçimi.</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Validate Story</span><span
+                            class="badge badge-opt">OPT</span></div>
+                    <code class="cmd">/bmad-bmm-validate-story</code>
+                    <div class="meta"><span>Bob (SM)</span>
+                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                class="file-out">Validation</span></div>
+                    </div>
+                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Story hazır mı? Kontrol et.</div>
                 </div>
                 <div class="item mandatory">
                     <div class="item-header"><span class="item-title">Dev Story</span><span
@@ -550,17 +584,6 @@
                     <div class="usage-row"><span class="usage-label">Kullanım:</span>Kodu yaz ve test et.</div>
                 </div>
                 <div class="item">
-                    <div class="item-header"><span class="item-title">Story Done</span><span
-                            class="badge badge-opt">EKSTRA</span></div>
-                    <code class="cmd">story-done</code>
-                    <div class="meta"><span>Amelia (Dev)</span>
-                        <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Status
-                                Update</span></div>
-                    </div>
-                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Story tamamlandığında workflow
-                        içinde yazılır.</div>
-                </div>
-                <div class="item">
                     <div class="item-header"><span class="item-title">QA Auto</span><span
                             class="badge badge-opt">ÖNERİ</span></div>
                     <code class="cmd">/bmad-bmm-qa-automate</code>
@@ -569,6 +592,28 @@
                                 class="file-out">tests/*.spec.ts</span></div>
                     </div>
                     <div class="usage-row"><span class="usage-label">Kullanım:</span>Otomatik test üretimi.</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Code Review</span><span
+                            class="badge badge-opt">ÖNERİ</span></div>
+                    <code class="cmd">/bmad-bmm-code-review</code>
+                    <div class="meta"><span>Amelia (Dev)</span>
+                        <div class="file-wrapper"><span class="file-arrow">➝</span><span class="file-out">Review
+                                Report</span></div>
+                    </div>
+                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Kod incelemesi, sorun varsa DS'e
+                        dön.</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Retrospective</span><span
+                            class="badge badge-opt">OPT</span></div>
+                    <code class="cmd">/bmad-bmm-retrospective</code>
+                    <div class="meta"><span>Bob (SM)</span>
+                        <div class="file-wrapper"><span class="file-arrow">➝</span><span
+                                class="file-out">retrospective.md</span></div>
+                    </div>
+                    <div class="usage-row"><span class="usage-label">Kullanım:</span>Epic bitince: öğrenilen dersler.
+                    </div>
                 </div>
             </div>
         </div>
