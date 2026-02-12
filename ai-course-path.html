@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Uzmanlık Yol Haritası | Zero to Mastery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #18181c;
+      --surface-hover: #1f1f24;
+      --border: #2a2a32;
+      --text: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --accent: #6366f1;
+      --accent-soft: rgba(99, 102, 241, 0.15);
+      --green: #22c55e;
+      --green-soft: rgba(34, 197, 94, 0.12);
+      --amber: #f59e0b;
+      --amber-soft: rgba(245, 158, 11, 0.12);
+      --red: #ef4444;
+      --red-soft: rgba(239, 68, 68, 0.12);
+      --radius: 6px;
+      --radius-sm: 4px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.3;
+      font-size: 11px;
+    }
+
+    .container {
+      height: 100vh;
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+    }
+    .btn-resource {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-resource:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .sections-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .path-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.35rem 0.5rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .path-section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      font-size: 0.7rem;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+
+    .path-section-title-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .btn-copy {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-copy:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-copy.copied {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .path-section-num {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 600;
+    }
+
+    .path-section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.6rem;
+      margin-bottom: 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .course-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    .course-card {
+      display: grid;
+      grid-template-columns: 1.1rem 1fr auto;
+      gap: 0.35rem;
+      align-items: center;
+      padding: 0.2rem 0.35rem;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      transition: background 0.15s;
+    }
+
+    .course-card:hover {
+      background: var(--surface-hover);
+    }
+
+    .course-order {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .course-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      min-width: 0;
+    }
+    .course-title-row h3 {
+      flex: 1;
+      min-width: 0;
+    }
+    .course-info h3 {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    .btn-copy-course {
+      width: 16px;
+      height: 16px;
+      font-size: 0.55rem;
+    }
+
+    .course-info p {
+      display: none;
+    }
+
+    .badge {
+      font-size: 0.5rem;
+      font-weight: 600;
+      padding: 0.1rem 0.25rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .badge-beginner { background: var(--green-soft); color: var(--green); }
+    .badge-intermediate { background: var(--accent-soft); color: var(--accent); }
+    .badge-advanced { background: var(--red-soft); color: var(--red); }
+    .badge-optional { background: var(--amber-soft); color: var(--amber); }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      padding: 0.35rem 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+    }
+
+    .summary-row strong { color: var(--text); }
+    .summary-row ol {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 0.75rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .summary-row li { display: inline; }
+    .summary-row li::after { content: ' →'; color: var(--accent); }
+    .summary-row li:last-child::after { content: ''; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AI Uzmanlık Yol Haritası</h1>
+      <div class="header-right">
+        <p class="subtitle">Zero to Mastery · Tek ekran özet</p>
+        <a href="https://roadmap.sh/ai-engineer" target="_blank" rel="noopener noreferrer" class="btn-resource" title="AI Engineer Roadmap – roadmap.sh">roadmap.sh</a>
+      </div>
+    </header>
+
+    <div class="sections-grid">
+    <section class="path-section">
+      <div class="path-section-title">
+        <span class="path-section-num">1</span>
+        <span class="path-section-title-text">Temel (Önce bunlar)</span>
+        <button type="button" class="btn-copy" title="Başlığı kopyala" aria-label="Başlığı kopyala">⎘</button>
+      </div>
+      <p class="path-section-subtitle">Python, istatistik ve veritabanı — AI için zemin</p>
+      <div class="course-list">
+        <div class="course-card">
+          <span class="course-order">1</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Complete Python Developer in 2026</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>AI/ML için Python şart; veri, API ve scriptler hep Python.</p>
+          </div>
+          <span class="badge badge-beginner">Beginner</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">2</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>AI for Beginners: Inside Large Language Models</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>LLM'lerin ne olduğunu, güçlü ve zayıf yanlarını anlamak.</p>
+          </div>
+          <span class="badge badge-beginner">Beginner</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">3</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Statistics Bootcamp (with Python)</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>ML ve veri analizi için istatistik temeli.</p>
+          </div>
+          <span class="badge badge-beginner">Beginner</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">4</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Complete SQL + Databases Bootcamp</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Veriyi toplama, saklama; RAG ve uygulamalar için gerekli.</p>
+          </div>
+          <span class="badge badge-beginner">Beginner</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-section">
+      <div class="path-section-title">
+        <span class="path-section-num">2</span>
+        <span class="path-section-title-text">Prompt ve LLM Kullanımı</span>
+        <button type="button" class="btn-copy" title="Başlığı kopyala" aria-label="Başlığı kopyala">⎘</button>
+      </div>
+      <p class="path-section-subtitle">Doğru prompt yazmak ve API ile uygulama</p>
+      <div class="course-list">
+        <div class="course-card">
+          <span class="course-order">5</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Prompt Engineering Bootcamp</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>LLM'leri etkili kullanmak; ezber prompt yerine mantıklı prompt.</p>
+          </div>
+          <span class="badge badge-beginner">Beginner</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">6</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>The Dark Side of AI</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Güvenlik, jailbreak, injection, hallüsinasyon — hem kullanırken hem geliştirirken önemli.</p>
+          </div>
+          <span class="badge badge-beginner">Beginner</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">7</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Building AI Apps with the OpenAI API (GPT, DALL-E, Whisper)</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Gerçek uygulama yapmaya başlamak için pratik API kullanımı.</p>
+          </div>
+          <span class="badge badge-intermediate">Intermediate</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-section">
+      <div class="path-section-title">
+        <span class="path-section-num">3</span>
+        <span class="path-section-title-text">Machine Learning Temeli</span>
+        <button type="button" class="btn-copy" title="Başlığı kopyala" aria-label="Başlığı kopyala">⎘</button>
+      </div>
+      <p class="path-section-subtitle">Modelleme ve veri bilimi altyapısı</p>
+      <div class="course-list">
+        <div class="course-card">
+          <span class="course-order">8</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Complete A.I. Machine Learning and Data Science</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>ML, veri bilimi, Tensorflow, Pandas — AI'ın “makine öğrenmesi” tarafının temeli.</p>
+          </div>
+          <span class="badge badge-intermediate">Intermediate</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">9</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Introduction to Regression Analysis</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Modelleme ve tahmin mantığını pekiştirir.</p>
+          </div>
+          <span class="badge badge-beginner">Beginner</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-section">
+      <div class="path-section-title">
+        <span class="path-section-num">4</span>
+        <span class="path-section-title-text">AI Mühendisliği (Uygulama + RAG + Agent)</span>
+        <button type="button" class="btn-copy" title="Başlığı kopyala" aria-label="Başlığı kopyala">⎘</button>
+      </div>
+      <p class="path-section-subtitle">LangChain, RAG ve çoklu agent sistemleri</p>
+      <div class="course-list">
+        <div class="course-card">
+          <span class="course-order">10</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>AI Engineering: Building AI Applications (LangChain, LLM APIs)</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>LangChain, LangSmith, LangGraph ile gerçek AI uygulamaları.</p>
+          </div>
+          <span class="badge badge-advanced">Advanced</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">11</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>AI Engineering: RAG for LLMs</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Kendi verinle çalışan akıllı sistemler (chatbot, analiz vb.).</p>
+          </div>
+          <span class="badge badge-intermediate">Intermediate</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">12</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>The AI Agents Bootcamp (CrewAI, LangGraph, MCP)</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Çoklu agent, otomasyon ve iş akışları.</p>
+          </div>
+          <span class="badge badge-advanced">Advanced</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">13</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Developing LLM Apps with LangChain</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>LangChain ile uygulama geliştirmeyi derinleştirir.</p>
+          </div>
+          <span class="badge badge-advanced">Advanced</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-section">
+      <div class="path-section-title">
+        <span class="path-section-num">5</span>
+        <span class="path-section-title-text">Fine-Tuning ve Dağıtım</span>
+        <button type="button" class="btn-copy" title="Başlığı kopyala" aria-label="Başlığı kopyala">⎘</button>
+      </div>
+      <p class="path-section-subtitle">Özelleştirilmiş modeller ve production</p>
+      <div class="course-list">
+        <div class="course-card">
+          <span class="course-order">14</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Introduction to Fine-Tuning LLMs</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>OpenAI ile fine-tuning'e giriş.</p>
+          </div>
+          <span class="badge badge-intermediate">Intermediate</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">15</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>AI Engineering: Fine-Tuning LLMs (QLoRA, AWS)</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Kendi verinle özelleştirilmiş modeller, AWS ile deploy.</p>
+          </div>
+          <span class="badge badge-intermediate">Intermediate</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">16</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>AI Engineering: AWS SageMaker</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Model eğitimi ve production'da çalıştırma.</p>
+          </div>
+          <span class="badge badge-intermediate">Intermediate</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-section">
+      <div class="path-section-title">
+        <span class="path-section-num">6</span>
+        <span class="path-section-title-text">Deep Learning (İsteğe Bağlı)</span>
+        <button type="button" class="btn-copy" title="Başlığı kopyala" aria-label="Başlığı kopyala">⎘</button>
+      </div>
+      <p class="path-section-subtitle">Daha teknik, matematik ve mimari odaklı</p>
+      <div class="course-list">
+        <div class="course-card">
+          <span class="course-order">17</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>PyTorch for Deep Learning Bootcamp</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Derin öğrenme, computer vision, neural network.</p>
+          </div>
+          <span class="badge badge-advanced">Advanced</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">18</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>TensorFlow for Deep Learning Bootcamp</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Alternatif framework, production tarafında yaygın.</p>
+          </div>
+          <span class="badge badge-advanced">Advanced</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">19</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Build a Simple Neural Network & Learn Backpropagation</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Matematiği ve “nasıl çalışıyor”u anlamak.</p>
+          </div>
+          <span class="badge badge-advanced">Advanced</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">20</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>AI Mastery: LLMs Explained with Math (Transformers, Attention)</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Transformer/LLM mimarisini matematikle kavramak.</p>
+          </div>
+          <span class="badge badge-advanced">Advanced</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-section">
+      <div class="path-section-title">
+        <span class="path-section-num">7</span>
+        <span class="path-section-title-text">Ek Pratik ve Niş Alanlar</span>
+        <button type="button" class="btn-copy" title="Başlığı kopyala" aria-label="Başlığı kopyala">⎘</button>
+      </div>
+      <p class="path-section-subtitle">İhtiyaca göre seçebileceğin ek kurslar</p>
+      <div class="course-list">
+        <div class="course-card">
+          <span class="course-order">—</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Machine Learning with Hugging Face</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Hazır modeller, pipeline, NLP/vision.</p>
+          </div>
+          <span class="badge badge-optional">Opsiyonel</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">—</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Build AI Agents with CrewAI / n8n</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Agent mantığı ve kod yazmadan otomasyon.</p>
+          </div>
+          <span class="badge badge-optional">Opsiyonel</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">—</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Ultimate AWS Bedrock Guide</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Çoklu model (Meta, Anthropic, Cohere) tek API.</p>
+          </div>
+          <span class="badge badge-optional">Opsiyonel</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">—</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Developing LLM App Frontends with Streamlit</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>Hızlı arayüz ve demo için.</p>
+          </div>
+          <span class="badge badge-optional">Opsiyonel</span>
+        </div>
+        <div class="course-card">
+          <span class="course-order">—</span>
+          <div class="course-info">
+            <div class="course-title-row">
+              <h3>Learn MCP (Model Context Protocol)</h3>
+              <button type="button" class="btn-copy btn-copy-course" title="Kurs adını kopyala" aria-label="Kurs adını kopyala">⎘</button>
+            </div>
+            <p>AI'ı harici kaynaklara bağlamak.</p>
+          </div>
+          <span class="badge badge-optional">Opsiyonel</span>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <div class="summary-row">
+      <strong>Özet sıra:</strong>
+      <ol>
+        <li><strong>Python + İstatistik + SQL</strong> Temel</li>
+        <li><strong>LLM + Prompt + Dark Side</strong> Güvenli kullanım</li>
+        <li><strong>OpenAI API</strong> İlk uygulamalar</li>
+        <li><strong>ML & Data Science</strong> ML mantığı</li>
+        <li><strong>LangChain + RAG + Agents</strong> Projeler</li>
+        <li><strong>Fine-tuning + SageMaker</strong> Production</li>
+        <li><strong>PyTorch/TF + Transformers</strong> Deep learning</li>
+      </ol>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.path-section-title .btn-copy').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var titleRow = this.closest('.path-section-title');
+        var num = titleRow.querySelector('.path-section-num').textContent.trim();
+        var text = titleRow.querySelector('.path-section-title-text').textContent.trim();
+        var fullTitle = num + ' ' + text;
+        navigator.clipboard.writeText(fullTitle).then(function() {
+          btn.classList.add('copied');
+          setTimeout(function() { btn.classList.remove('copied'); }, 800);
+        });
+      });
+    });
+    document.querySelectorAll('.btn-copy-course').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var card = this.closest('.course-card');
+        var courseName = card.querySelector('.course-title-row h3').textContent.trim();
+        navigator.clipboard.writeText(courseName).then(function() {
+          btn.classList.add('copied');
+          setTimeout(function() { btn.classList.remove('copied'); }, 800);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
