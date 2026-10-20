@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BMad Builder Kullanım Rehberi | Metehan Soner</title>
+<meta name="author" content="Metehan Soner">
+<meta name="description" content="Kendi ajanını, iş akışını ve paylaşılabilir BMAD modülünü oluştur.">
+<link rel="stylesheet" href="assets/ecosystem.css">
+<script src="assets/guide.js" defer>
+</script>
+</head>
+<body>
+<a class="skip" href="#overview">İçeriğe geç</a>
+<nav class="top-nav" aria-label="Ekosistemler">
+<div class="nav-content">
+<a class="logo" href="index.html">BMAD EKOSİSTEMİ</a>
+<button id="menu-toggle" aria-controls="sidebar" aria-expanded="false">Menü ☰</button>
+<ul class="nav-menu ecosystem-menu" id="sidebar">
+<li>
+<a href="index.html">BMAD Method</a>
+</li>
+<li>
+<a href="builder.html" class="current" aria-current="page">Builder</a>
+</li>
+<li>
+<a href="cis.html">Creative Intelligence</a>
+</li>
+<li>
+<a href="tea.html">Test Architect</a>
+</li>
+<li>
+<a href="loop.html">Loop</a>
+</li>
+<li>
+<a href="game-dev.html">Game Dev Studio</a>
+</li>
+</ul>
+</div>
+</nav>
+<section class="hero">
+<h1>BMad Builder</h1>
+<p>Kendi ajanını, iş akışını ve paylaşılabilir BMAD modülünü oluştur.</p>
+<div class="hero-buttons">
+<a class="btn btn-primary" href="#installation">Kurulumdan Başla</a>
+<a class="btn btn-secondary" href="#examples">Örnekle Öğren</a>
+</div>
+<div class="version-badge module-version">Paket 2.2.2 · kurulum kaydı 1.0.0 · Kaynak tarihi: 21 Ekim 2026</div>
+<p class="credit">Metehan Soner tarafından hazırlanmıştır.</p>
+</section>
+<main class="container">
+<nav class="local-menu" aria-label="Bu rehberin bölümleri">
+<a href="#overview">Genel bakış</a>
+<a href="#installation">Kurulum</a>
+<a href="#agents">Ajanlar / araçlar</a>
+<a href="#workflows">Adım adım kullanım</a>
+<a href="#commands">Komutlar</a>
+<a href="#examples">Proje örneği</a>
+<a href="#faq">Sık sorulanlar</a>
+<a href="#shortcuts">Builder yolları ve kısayollar</a>
+<a href="#evaluation">Eval Runner ve tamamlanmış modül örneği</a>
+<a href="#coverage">Kapsam ve ayrıntılı kaynaklar</a>
+<a href="#version">Sürüm ve kaynaklar</a>
+</nav>
+<div class="guide-content">
+<section class="section" id="overview">
+<h2>🛠️ Builder Nedir?</h2>
+<p>Method ile uygulama geliştirirsiniz; Builder ile o çalışmada tekrar kullanacağınız AI becerilerini üretirsiniz. Örneğin ekibinizin kurallarını bilen bir dokümantasyon ajanı, her sürümde aynı adımları izleyen yayın notu iş akışı veya bu ikisini içeren bir modül oluşturabilirsiniz.</p>
+<div class="alert alert-info">
+<strong>Üç farklı sonuç:</strong> Ajan bir rolü temsil eder; iş akışı bir işi tamamlar; modül bunları bir paket olarak sunar. Kişisel kullanım için her beceriyi modüle dönüştürmek gerekmez.</div>
+</section>
+<section class="section" id="installation">
+<h2>🚀 Kurulum</h2>
+<p>AI aracınızda beceri desteği, Node.js/npm, Git, Python 3.11+ ve uv hazırlayın. Proje klasörünüzde BMAD kurulumunu açın; Builder modülünü seçin.</p>
+<div class="cmd-wrapper">
+<code class="cmd">npx bmad-method@6.12.4 install</code>
+<button class="copy-text" data-copy="npx bmad-method@6.12.4 install" aria-label="Komutu kopyala: npx bmad-method@6.12.4 install">Kopyala</button>
+</div>
+<p>Builder seçimde yoksa resmî depoyu özel modül kaynağı olarak kullanabilirsiniz:</p>
+<div class="cmd-wrapper">
+<code class="cmd">npx bmad-method@6.12.4 install --custom-source https://github.com/bmad-code-org/bmad-builder</code>
+<button class="copy-text" data-copy="npx bmad-method@6.12.4 install --custom-source https://github.com/bmad-code-org/bmad-builder" aria-label="Komutu kopyala: npx bmad-method@6.12.4 install --custom-source https://github.com/bmad-code-org/bmad-builder">Kopyala</button>
+</div>
+<p>Bu komut Method kurucusunu sabitler; indirilen Builder kaynağını aynı sürüme sabitlemez. AI aracını yeniden açıp sohbet içinde kurulum becerisini çağırın:</p>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-bmb-setup</code>
+<button class="copy-text" data-copy="bmad-bmb-setup" aria-label="Komutu kopyala: bmad-bmb-setup">Kopyala</button>
+</div>
+<ol>
+<li>İletişim ve belge dilini seçin.</li>
+<li>Becerilerin ve raporların kaydedileceği klasörleri belirleyin.</li>
+<li>Kurulum çıktısındaki kayıt konumlarını not edin.</li>
+<li>Oluşturmak istediğiniz şeye göre Agent Builder veya Workflow Builder açın.</li>
+</ol>
+</section>
+<section class="section" id="agents">
+<h2>👥 Hangi Builder Kullanılır?</h2>
+<div class="agents-grid">
+<article class="agent-card">
+<h3>Agent Builder</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-agent-builder</code>
+<button class="copy-text" data-copy="bmad-agent-builder" aria-label="Komutu kopyala: bmad-agent-builder">Kopyala</button>
+</div>
+<p>Kişilik, yetenekler, dosya sınırları ve gerekirse oturumlar arası bellek tasarlar.</p>
+</article>
+<article class="agent-card">
+<h3>Workflow Builder</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-workflow-builder</code>
+<button class="copy-text" data-copy="bmad-workflow-builder" aria-label="Komutu kopyala: bmad-workflow-builder">Kopyala</button>
+</div>
+<p>Girdi, adımlar, karar noktaları ve çıktı biçimi belli bir süreç kurar.</p>
+</article>
+<article class="agent-card">
+<h3>Module Builder</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-module-builder</code>
+<button class="copy-text" data-copy="bmad-module-builder" aria-label="Komutu kopyala: bmad-module-builder">Kopyala</button>
+</div>
+<p>Fikri modül planına dönüştürür, becerileri kaydeder ve paylaşılabilir paket haline getirir.</p>
+</article>
+</div>
+<div class="alert alert-info">Menü kısaltmaları kaynak dokümanlar arasında farklı görünebilir. Doğrudan beceri adını çağırın; oluşturma, düzenleme, dönüştürme veya kalite analizi niyetinizi yazın ve açılan menüyü esas alın.</div>
+</section>
+<section class="section" id="workflows">
+<h2>📋 Adım Adım Oluşturma</h2>
+<div class="features-grid">
+<article class="feature-card">
+<h3>1. Amacı tanımla</h3>
+<p>Kimin hangi işi yapacağını ve başarılı sonucun nasıl görüneceğini söyleyin. “Her konuda yardımcı ajan” yerine belirli bir görev seçin.</p>
+</article>
+<article class="feature-card">
+<h3>2. Doğru türü seç</h3>
+<p>Kişilik ve ilişki gerekiyorsa ajan; tekrarlanan adımlar gerekiyorsa iş akışı seçin. Ajanın geçmişi hatırlamasına gerçekten ihtiyaç olup olmadığını belirtin.</p>
+</article>
+<article class="feature-card">
+<h3>3. Sınırları belirle</h3>
+<p>Hangi dosyaları okuyabilir, nereye yazabilir, neyi sormalı ve neyi kendisi yapabilir? Girdi ve çıktı biçimlerini tanımlayın.</p>
+</article>
+<article class="feature-card">
+<h3>4. Taslağı geliştirin</h3>
+<p>Builder’ın sunduğu yetenekleri ve adımları gözden geçirin; eksik, fazla veya çelişkili davranışları açıklayın.</p>
+</article>
+<article class="feature-card">
+<h3>5. Beceri klasörünü üret</h3>
+<p>SKILL.md ve destek dosyaları oluşur. Klasörü kullandığınız AI aracının beceri dizinine yerleştirin.</p>
+</article>
+<article class="feature-card">
+<h3>6. Gerekiyorsa paketle</h3>
+<p>Birden fazla beceriyi paylaşacaksanız Module Builder ile kayıt ve kurulum altyapısını oluşturun. Kişisel tek beceri için bunu atlayabilirsiniz.</p>
+</article>
+</div>
+<h3>Oluşturduğum beceriyi nasıl çağırırım?</h3>
+<p>Klasör ve beceri adını eşleştirin. Örneğin <code>agent-english-coach</code> klasörünü aracınızın beceri dizinine yerleştirdikten sonra aynı adı çağırın. Kendi becerilerinizde resmî projelere ayrılmış <code>bmad-</code> önekini kullanmayın.</p>
+</section>
+<section class="section" id="commands">
+<h2>⌨️ Builder Komutları</h2>
+<p>Arama yapın veya bir karttan başlayın. Beceri adları AI sohbetinde, terminal olarak belirtilen komutlar terminalde kullanılır.</p>
+<label for="command-search">Bu modülün komutlarında ara</label>
+<input id="command-search" type="search" placeholder="Komut veya kullanım amacı…">
+<p id="result-count" role="status">
+</p>
+<div class="features-grid">
+<article class="workflow-item command">
+<h3>Modülü hazırlama</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-bmb-setup</code>
+<button class="copy-text" data-copy="bmad-bmb-setup" aria-label="Komutu kopyala: bmad-bmb-setup">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Builder tercihlerini ve yardım kayıtlarını oluşturur.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> İlk kullanımda veya tercihleri güncellerken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Builder modülünü Türkçe iletişim ve Türkçe belge çıktısıyla yapılandır.</div>
+<div class="meta">Beklenen çıktı: Proje yapılandırması ve yardım kayıtları</div>
+</article>
+<article class="workflow-item command">
+<h3>Ajan oluşturma</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-agent-builder</code>
+<button class="copy-text" data-copy="bmad-agent-builder" aria-label="Komutu kopyala: bmad-agent-builder">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Yeni ajanı tasarlar; mevcut ajanı düzenleyebilir veya yeniden kurabilir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Bir rolün konuşma tarzı, yetkileri ve belleği gerektiğinde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Önceki derslerde zorlandığım konuları hatırlayan bir İngilizce çalışma koçu oluştur.</div>
+<div class="meta">Beklenen çıktı: SKILL.md ve gerekli destek dosyalarını içeren ajan klasörü</div>
+</article>
+<article class="workflow-item command">
+<h3>İş akışı oluşturma</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-workflow-builder</code>
+<button class="copy-text" data-copy="bmad-workflow-builder" aria-label="Komutu kopyala: bmad-workflow-builder">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Tekrarlanabilir bir görevi beceriye dönüştürür.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Girdi ve çıktısı belli bir süreci yeniden kullanmak istediğinizde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Sürüm değişikliklerini okuyup Türkçe yayın notu taslağı oluşturan bir iş akışı yap.</div>
+<div class="meta">Beklenen çıktı: İş akışı becerisi ve gerektiğinde yardımcı betikler</div>
+</article>
+<article class="workflow-item command">
+<h3>Modül planlama ve paketleme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-module-builder</code>
+<button class="copy-text" data-copy="bmad-module-builder" aria-label="Komutu kopyala: bmad-module-builder">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Birden çok beceriyi kurulabilir modülde bir araya getirir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Becerileri ekip veya toplulukla paylaşırken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Yayın notu yazarı ve sürüm kontrol listesini release-kit modülünde birleştir.</div>
+<div class="meta">Beklenen çıktı: Modül planı, kayıt dosyaları ve kurulum yapısı</div>
+</article>
+<article class="workflow-item command">
+<h3>Mevcut beceriyi dönüştürme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-workflow-builder</code>
+<button class="copy-text" data-copy="bmad-workflow-builder" aria-label="Komutu kopyala: bmad-workflow-builder">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Var olan bir beceriyi BMAD uyumlu yapıya dönüştürür.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> İşleyen bir taslağı standart bir beceriye taşırken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Mevcut release-notes beceri klasörünü düzenle: BMAD uyumlu yapıya dönüştür ve davranışını koru.</div>
+<div class="meta">Beklenen çıktı: Dönüştürülmüş beceri ve karşılaştırma raporu</div>
+</article>
+<article class="workflow-item command">
+<h3>Ajanı iyileştirme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-agent-builder</code>
+<button class="copy-text" data-copy="bmad-agent-builder" aria-label="Komutu kopyala: bmad-agent-builder">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Mevcut ajanı yapısal tutarlılık ve yetenek sınırları açısından ele alır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> İlk sürümü oluşturduktan veya gereksinimler değiştikten sonra.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> agent-english-coach klasöründeki ajanı kalite analiziyle incele; bellekte hangi bilgileri tutacağını netleştir.</div>
+<div class="meta">Beklenen çıktı: İyileştirme önerileri ve kalite raporu</div>
+</article>
+</div>
+<p id="no-results" hidden>Sonuç bulunamadı.</p>
+</section>
+<section class="section" id="examples">
+<h2>💡 Örnek: Ekibe Özel Yayın Modülü</h2>
+<div class="alert alert-info">
+<strong>Senaryo:</strong> Her sürümde değişikliklerden yayın notu çıkarıyor, aynı yazım kurallarını tekrar anlatıyorsunuz.</div>
+<ol>
+<li>
+<strong>Workflow Builder:</strong> “Commit özetlerini girdi alan; kullanıcı etkisi, düzeltmeler ve bilinen sorunlar başlıklarında Türkçe taslak hazırlayan release-notes becerisi oluştur. Yayınlamasın, dosyaya taslak yazsın.”</li>
+<li>
+<strong>Agent Builder:</strong> “Ekibimizin terim sözlüğüne uyan bir teknik editör oluştur. Anlamı değiştirmeden metni sadeleştirsin; emin olmadığı ürün davranışını bana sorsun.”</li>
+<li>
+<strong>Module Builder:</strong> “İki beceriyi release-kit modülü olarak paketle. Kullanıcıya dil ve çıktı klasörü ayarlarını sor.”</li>
+<li>
+<strong>Kullanım:</strong> Modülü kurun, kendi yayın notu becerinizi çağırın, değişiklik özetini verin ve taslağı editör ajanına aktarın.</li>
+</ol>
+<p>
+<strong>Beklenen sonuç:</strong> Tek seferlik bir metin yerine, aynı görevi sonraki sürümlerde tekrar yürütecek beceri klasörleri ve modül kayıtları elde edersiniz.</p>
+</section>
+<section class="section" id="faq">
+<h2>❓ Sık Sorulanlar</h2>
+<details>
+<summary>Bellek her ajan için gerekli mi?</summary>
+<p>Hayır. Tek seferlik görevler için durumsuz ajan yeterlidir. Kullanıcı tercihlerini veya ilerlemeyi oturumlar arasında korumak istiyorsanız bellekli tasarımı seçin.</p>
+</details>
+<details>
+<summary>Module Builder uygulamamın kodunu mu üretir?</summary>
+<p>Esas işi modül altyapısıdır. Uygulama geliştirme Method’un, beceri üretimi Agent/Workflow Builder’ın alanıdır.</p>
+</details>
+<details>
+<summary>Oluşturulan beceri kendiliğinden herkeste çalışır mı?</summary>
+<p>Hayır. Beceriyi hedef aracın tanıdığı dizine kurmak ve bağımlılıklarını sağlamak gerekir. Dağıtılan dosyalar, erişim yetkileri ve araç desteği önemlidir.</p>
+</details>
+</section>
+<section class="section" id="shortcuts"><h2>⌨️ · Builder yolları ve kısayollar</h2><p>Yardım kataloğunun kodları aşağıdadır. Güncel Agent/Workflow Builder, sabit bir kod menüsünden çok <strong>Create/Build, Edit, Analyze</strong> niyetleriyle yönlenir. Kaynak dokümanda görülen BP/QO adlarını her sürümde zorunlu menü kodu sanmayın.</p><div class="reference-table"><table><thead><tr><th>Katalog kodu</th><th>Amaç</th><th>Çağrılacak beceri</th></tr></thead><tbody><tr><td><code>SB</code></td><td>Modül tercihlerini kur veya güncelle</td><td><code>bmad-bmb-setup</code></td></tr><tr><td><code>BA</code></td><td>Yeni ajan oluştur / yeniden kur</td><td><code>bmad-agent-builder</code></td></tr><tr><td><code>AA</code></td><td>Mevcut ajanı analiz et</td><td><code>bmad-agent-builder</code></td></tr><tr><td><code>BW</code></td><td>İş akışı oluştur / düzenle</td><td><code>bmad-workflow-builder</code></td></tr><tr><td><code>AW</code></td><td>İş akışını analiz et</td><td><code>bmad-workflow-builder</code></td></tr><tr><td><code>CW</code></td><td>Mevcut beceriyi dönüştür</td><td><code>bmad-workflow-builder</code></td></tr><tr><td><code>IM</code></td><td>Modül fikrini ve mimarisini planla</td><td><code>bmad-module-builder</code></td></tr><tr><td><code>CM</code></td><td>Hazır becerileri modül olarak paketle</td><td><code>bmad-module-builder</code></td></tr><tr><td><code>VM</code></td><td>Modül kayıtlarını ve yapısını doğrula</td><td><code>bmad-module-builder</code></td></tr></tbody></table></div><h3>Güncel beceri niyetleri</h3><ul><li><strong>Agent Builder:</strong> Create yeni ajan veya yeniden kurma, Edit belirli davranışı değiştirme, Analyze rapor üretme.</li><li><strong>Workflow Builder:</strong> Build yeni beceri, Edit mevcut beceriyi değiştirme, Analyze kalite incelemesi. Dönüştürme için mevcut becerinin yolunu ve istenen değişikliği verin.</li><li><strong>Module Builder:</strong> IM planlama, CM paketleme, VM kayıt ve yapı doğrulaması. Beceriler oluşturulmadan CM adımına geçmeyin.</li><li><strong>Etkileşimsiz çalışma:</strong> Agent/Workflow Builder, <code>--headless</code> veya <code>-H</code> kabul eder. Module Builder’da etkileşimsiz çağrı CM yoluna yönlenebilir; VM niyetini açık belirtin ve kurulu sürümün yönlendirmesini esas alın.</li></ul></section><section class="section" id="evaluation"><h2>📊 · Eval Runner ve tamamlanmış modül örneği</h2><p><code>bmad-eval-runner</code>, ürettiğiniz becerinin davranışını değerlendiren ayrı bir Builder becerisidir. Beceri klasörü, önceden hazırlanmış değerlendirme örnekleri, ölçütler ve platform adapter ayarı gerekir; eksik örnekleri kendiliğinden uydurmaz.</p><div class="cmd-wrapper"><code class="cmd">bmad-eval-runner</code><button class="copy-text" data-copy="bmad-eval-runner">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Mod</th><th>Sorusu</th><th>Girdi</th></tr></thead><tbody><tr><td>baseline</td><td>Beceri aynı girdide yalın modelden daha iyi mi?</td><td>Beceri + örnekler</td></tr><tr><td>variant</td><td>Bir bölüm çıkarılınca sonuç değişiyor mu?</td><td>Tam beceri + karşılaştırma sürümü</td></tr><tr><td>quality</td><td>Çıktı tanımlanmış ölçütleri karşılıyor mu?</td><td>Örnekler + rubric</td></tr><tr><td>trigger</td><td>Beceri doğru istekte çağrılıp yanlış istekte sessiz kalıyor mu?</td><td>Olumlu/olumsuz tetikleyici istekleri</td></tr></tbody></table></div><h3>Parametreler</h3><p><code>--evals</code> örnek dosyası; <code>--mode</code> bir veya birden fazla mod; <code>--variant-path</code> karşılaştırma klasörü; <code>--project-root</code> proje; <code>--output-dir</code> sonuç klasörü; <code>--runs</code> tekrar sayısı; <code>--headless/-H</code> etkileşimsiz çalışma. Adapter yapılandırması, hangi AI çalışma ortamının kullanılacağını belirler.</p><h3>Eksiksiz örnek: release-kit</h3><ol><li>Module Builder’a IM niyetiyle yayın modülünün amacını ve kullanıcılarını verin.</li><li>Workflow Builder ile release-notes, Agent Builder ile teknik editör becerisini oluşturun.</li><li>Gerekirse Edit ile davranışı düzeltin; Analyze ile yapı raporu alın.</li><li>Örnek girdileri ve başarı ölçütlerini hazırlayıp Eval Runner’da quality veya trigger yolunu seçin.</li><li>Module Builder CM ile hazır becerileri paketleyin.</li><li>Module Builder VM ile kayıtların ve kurulum yapısının eksiklerini belirleyin; bulunan sorunları düzeltin.</li><li>Hedef araca kurup modülün kendi beceri adlarıyla kullanın.</li></ol><p><strong>Örnek istem:</strong> “release-notes becerimi quality modunda evals klasöründeki örneklerle değerlendir. Sadece kullanıcıya etkisi olan değişiklikleri aktarma ölçütünü kullan.” Beklenen sonuç, bulgular ve kalıcı bir değerlendirme çıktı klasörüdür.</p><p>Bu bölüm değerlendirme aracının kullanımını anlatır; rehber hazırlanırken değerlendirme çalıştırıldığı anlamına gelmez.</p></section><section class="section" id="coverage"><h2>📌 · Kapsam ve ayrıntılı kaynaklar</h2><p>Bu rehberdeki kapsam, belirtilen sürümün kullanıcıya açık becerileri, ajan menüleri ve belgelenen çalışma yollarıdır. Kaynak içindeki yardımcı Python betikleri bağımsız kullanıcı becerileri gibi sunulmaz. Yeni sürümler farklı adlar ekleyebilir.</p><p><strong>Üç farklı çağrı biçimi:</strong> Terminal komutu terminale; beceri adı AI aracına; kısa menü kodu yalnız ilgili ajan veya iş akışı açıldıktan sonra yazılır. Örneklerdeki dosya, klasör ve kimlikleri kendi projenizle değiştirin.</p><ul><li><a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/skills/module-help.csv">skills/module-help.csv</a></li><li><a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/skills/bmad-eval-runner/SKILL.md">skills/bmad-eval-runner/SKILL.md</a></li><li><a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/skills/bmad-agent-builder/SKILL.md">skills/bmad-agent-builder/SKILL.md</a></li><li><a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/skills/bmad-workflow-builder/SKILL.md">skills/bmad-workflow-builder/SKILL.md</a></li><li><a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/skills/bmad-module-builder/SKILL.md">skills/bmad-module-builder/SKILL.md</a></li></ul></section><section class="section" id="version">
+<h2>📌 Sürüm ve Kaynaklar</h2>
+<div class="alert alert-info">
+<strong>Bu rehberin kaynağı:</strong> package.json: 2.2.2; setup module.yaml: 1.0.0 · 21 Ekim 2026<br>Kaynak commit: <code>d4a921c49db7</code>
+<br>Metehan Soner tarafından hazırlanmıştır.</div>
+<ul>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/package.json">Paket sürümü</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/skills/module-help.csv">Beceri kayıtları</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/docs/reference/builder-commands.md">Oluşturma süreci</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/docs/how-to/distribute-your-module.md">Kurulum ve dağıtım</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-builder/blob/d4a921c49db71ad09c2dc62b8e62266b1f26ca4f/skills/bmad-bmb-setup/assets/module.yaml">Modül kayıt sürümü</a>
+</li>
+</ul>
+<p>Komutlar yukarıdaki kaynak anlık görüntüsüne dayanır. Kurulum komutları ana dalı izlediğinde daha yeni bir sürüm gelebilir. Paket sürümü ile modül kayıt sürümü farklıysa burada ayrı belirtilmiştir.</p>
+</section>
+</div>
+</main>
+<footer class="footer">
+<p>
+<strong>Metehan Soner tarafından hazırlanmıştır.</strong>
+</p>
+<p>BMad Builder · Paket 2.2.2 · kurulum kaydı 1.0.0 · 21 Ekim 2026</p>
+<p>Bağımsız Türkçe rehber · <a style="color:#ddd6fe" href="#version">Sürüm ve kaynaklar</a>
+</p>
+</footer>
+<div id="copy-status" role="status" aria-live="polite">
+</div>
+</body>
+</html>

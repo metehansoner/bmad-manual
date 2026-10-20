@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BMad Loop Kullanım Rehberi | Metehan Soner</title>
+<meta name="author" content="Metehan Soner">
+<meta name="description" content="Planlanmış işleri sırayla geliştiren, inceleyen ve kaydeden otomasyon döngüsü.">
+<link rel="stylesheet" href="assets/ecosystem.css">
+<script src="assets/guide.js" defer>
+</script>
+</head>
+<body>
+<a class="skip" href="#overview">İçeriğe geç</a>
+<nav class="top-nav" aria-label="Ekosistemler">
+<div class="nav-content">
+<a class="logo" href="index.html">BMAD EKOSİSTEMİ</a>
+<button id="menu-toggle" aria-controls="sidebar" aria-expanded="false">Menü ☰</button>
+<ul class="nav-menu ecosystem-menu" id="sidebar">
+<li>
+<a href="index.html">BMAD Method</a>
+</li>
+<li>
+<a href="builder.html">Builder</a>
+</li>
+<li>
+<a href="cis.html">Creative Intelligence</a>
+</li>
+<li>
+<a href="tea.html">Test Architect</a>
+</li>
+<li>
+<a href="loop.html" class="current" aria-current="page">Loop</a>
+</li>
+<li>
+<a href="game-dev.html">Game Dev Studio</a>
+</li>
+</ul>
+</div>
+</nav>
+<section class="hero">
+<h1>BMad Loop</h1>
+<p>Planlanmış işleri sırayla geliştiren, inceleyen ve kaydeden otomasyon döngüsü.</p>
+<div class="hero-buttons">
+<a class="btn btn-primary" href="#installation">Kurulumdan Başla</a>
+<a class="btn btn-secondary" href="#examples">Örnekle Öğren</a>
+</div>
+<div class="version-badge module-version">Loop 0.13.2 · erken açık beta · Kaynak tarihi: 21 Ekim 2026</div>
+<p class="credit">Metehan Soner tarafından hazırlanmıştır.</p>
+</section>
+<main class="container">
+<nav class="local-menu" aria-label="Bu rehberin bölümleri">
+<a href="#overview">Genel bakış</a>
+<a href="#installation">Kurulum</a>
+<a href="#agents">Ajanlar / araçlar</a>
+<a href="#workflows">Adım adım kullanım</a>
+<a href="#commands">Komutlar</a>
+<a href="#examples">Proje örneği</a>
+<a href="#faq">Sık sorulanlar</a>
+<a href="#cli-reference">Tam CLI başvurusu</a>
+<a href="#shortcuts">Terminal paneli kısayolları</a>
+<a href="#recovery">Duraklama, karar ve devam örnekleri</a>
+<a href="#coverage">Kapsam ve ayrıntılı kaynaklar</a>
+<a href="#version">Sürüm ve kaynaklar</a>
+</nav>
+<div class="guide-content">
+<section class="section" id="overview">
+<h2>🔁 Loop Nedir?</h2>
+<p>Loop, bir sprint veya story listesindeki işleri sırayla ele alan bir Python komut satırı aracıdır. Her iş için yeni bir kodlama ajanı oturumu açar; sonuçları doğrular, gerektiğinde inceleme veya düzeltmeye döner ve başarılı işi commit olarak kaydeder.</p>
+<div class="alert alert-info">
+<strong>Planlama ile karıştırmayın:</strong> Loop’un önüne tanımlanmış işler koyarsınız. Hangi ürünü yapmak istediğinizi keşfetmek için önce Method veya başka planlama araçlarını kullanın. Loop, yalnızca bir sohbet personası değildir; kod yazan oturumları yöneten çalıştırılabilir bir araçtır.</div>
+</section>
+<section class="section" id="installation">
+<h2>🚀 Kurulum</h2>
+<p>Python 3.11+, Git 2.34+, desteklenen bir kodlama CLI’ı ve terminal çoklayıcı gerekir. Linux/macOS için varsayılan tmux 3.2+; Windows WSL üzerinden kullanılabilir. Native Windows backend’i deneysel olarak belirtilir.</p>
+<p>v6 yolunda Method ≥ 6.10.0 ve <code>bmad-build-auto</code> becerisi gerekir. Sprint modu için sprint planı da hazırlanmış olmalıdır. Rehberde v6.12.4 ile bu yol esas alınır.</p>
+<div class="cmd-wrapper">
+<code class="cmd">uv tool install &quot;bmad-loop[tui] @ git+https://github.com/bmad-code-org/bmad-loop.git&quot;</code>
+<button class="copy-text" data-copy="uv tool install &quot;bmad-loop[tui] @ git+https://github.com/bmad-code-org/bmad-loop.git&quot;" aria-label="Komutu kopyala: uv tool install &quot;bmad-loop[tui] @ git+https://github.com/bmad-code-org/bmad-loop.git&quot;">Kopyala</button>
+</div>
+<p>Proje klasörüne geçtikten sonra:</p>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop init</code>
+<button class="copy-text" data-copy="bmad-loop init" aria-label="Komutu kopyala: bmad-loop init">Kopyala</button>
+</div>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop validate</code>
+<button class="copy-text" data-copy="bmad-loop validate" aria-label="Komutu kopyala: bmad-loop validate">Kopyala</button>
+</div>
+<p>Kullandığınız kodlama CLI’ını projede bir kez etkileşimli açıp ilk kullanım adımlarını tamamlayın. Otomatik açılan oturumlar bu ilk diyalogları yanıtlayamaz.</p>
+<div class="alert alert-info">Git tabanlı kurulum ana dalı izler. Bu rehber 0.13.2 kaynak anlık görüntüsünü anlatır. Loop gerçek dosyalarda değişiklik yapar ve commit oluşturur; ilk çalışmada küçük kapsam seçmek ve <code>worktree</code> izolasyonunu değerlendirmek kullanımın parçasıdır.</div>
+</section>
+<section class="section" id="agents">
+<h2>⚙️ Ajan Yerine Yürütme Rolleri</h2>
+<div class="agents-grid">
+<article class="agent-card">
+<h3>Geliştirme oturumu</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-build-auto</code>
+<button class="copy-text" data-copy="bmad-build-auto" aria-label="Komutu kopyala: bmad-build-auto">Kopyala</button>
+</div>
+<p>Seçilen story üzerinde çalışır. Loop her iş için yeni bağlamlı bir kodlama oturumu açar.</p>
+</article>
+<article class="agent-card">
+<h3>Loop kurulumu</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop-setup</code>
+<button class="copy-text" data-copy="bmad-loop-setup" aria-label="Komutu kopyala: bmad-loop-setup">Kopyala</button>
+</div>
+<p>AI aracından Loop kurulum ve güncelleme işlerini ele almak için sağlanan beceri.</p>
+</article>
+<article class="agent-card">
+<h3>Engel çözümü</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop-resolve</code>
+<button class="copy-text" data-copy="bmad-loop-resolve" aria-label="Komutu kopyala: bmad-loop-resolve">Kopyala</button>
+</div>
+<p>Duraklatan karar veya sorunun çözümünde kullanılan destek becerisi.</p>
+</article>
+<article class="agent-card">
+<h3>Ertelenen iş oturumu</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop-sweep</code>
+<button class="copy-text" data-copy="bmad-loop-sweep" aria-label="Komutu kopyala: bmad-loop-sweep">Kopyala</button>
+</div>
+<p>Ayrılmış bulguların değerlendirilmesinde kullanılan destek becerisi.</p>
+</article>
+</div>
+<p>Geliştirme ve inceleme farklı CLI profilleriyle yürütülebilir. Hangi aracın kullanılacağı politika dosyasındaki adapter ayarına bağlıdır; bir profil adını seçmek o aracın kurulu veya oturum açmış olduğu anlamına gelmez.</p>
+</section>
+<section class="section" id="workflows">
+<h2>📋 Bir Loop Çalışmasının Akışı</h2>
+<div class="features-grid">
+<article class="feature-card">
+<h3>1. İş kaynağını hazırla</h3>
+<p>Sprint modunda sprint-status.yaml; v6 stories modunda bmad-spec tarafından üretilen stories.yaml ve SPEC.md kullanılır. Kaynakları birbirine karıştırmayın.</p>
+</article>
+<article class="feature-card">
+<h3>2. Politikayı belirle</h3>
+<p>Yerel .bmad-loop/policy.toml içinde araç profilini, doğrulama komutlarını, bütçe sınırlarını ve karar noktalarını belirleyin.</p>
+</article>
+<article class="feature-card">
+<h3>3. Planı gör</h3>
+<p>run --dry-run, ajanları başlatmadan planı gösterir. İlk gerçek çalışmayı --max-stories 1 ile sınırlayabilirsiniz.</p>
+</article>
+<article class="feature-card">
+<h3>4. Geliştirme ve inceleme</h3>
+<p>Loop seçtiği iş için oturum açar, dosyalardaki sonucu ele alır ve politikaya göre bağımsız incelemeye geçirir.</p>
+</article>
+<article class="feature-card">
+<h3>5. Doğrulama ve commit</h3>
+<p>Projenize ait doğrulama komutları yürütülür. Başarılı iş bir story commit’i olarak kaydedilir; sonraki işe geçilir.</p>
+</article>
+<article class="feature-card">
+<h3>6. İnsan kararını ele al</h3>
+<p>Engellenen işte status ve TUI üzerinden nedeni okuyun. Gerekirse resolve veya ilgili karar akışını kullanın; ardından resume ile sürdürün.</p>
+</article>
+</div>
+<h3>Politika örneği</h3>
+<p>Aşağıdaki örnek yalnızca adapter ve izolasyon seçimini gösterir. Projenizin doğrulama komutları ayrıca tanımlanmalıdır.</p>
+<pre>[adapter]
+name = "claude"
+
+[scm]
+isolation = "worktree"
+
+[gates]
+mode = "per-epic"</pre>
+<p>v7 ticket-tree yolu ayrıca vardır: <code>bmad</code> merkezi, v7 planlama yapısı ve <code>[stories] source = "tickets"</code> kullanır. Bu deneysel yol, burada anlatılan v6 sprint yoluyla aynı kurulum değildir.</p>
+</section>
+<section class="section" id="commands">
+<h2>⌨️ Loop Komutları</h2>
+<p>Arama yapın veya bir karttan başlayın. Beceri adları AI sohbetinde, terminal olarak belirtilen komutlar terminalde kullanılır.</p>
+<label for="command-search">Bu modülün komutlarında ara</label>
+<input id="command-search" type="search" placeholder="Komut veya kullanım amacı…">
+<p id="result-count" role="status">
+</p>
+<div class="features-grid">
+<article class="workflow-item command">
+<h3>Projeyi hazırlama · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop init</code>
+<button class="copy-text" data-copy="bmad-loop init" aria-label="Komutu kopyala: bmad-loop init">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Becerileri, hook bağlantılarını ve politika dosyasını yerleştirir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Loop’u projeye ilk kez eklerken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop init</div>
+<div class="meta">Beklenen çıktı: Projedeki Loop yapılandırması</div>
+</article>
+<article class="workflow-item command">
+<h3>Ön koşulları inceleme · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop validate</code>
+<button class="copy-text" data-copy="bmad-loop validate" aria-label="Komutu kopyala: bmad-loop validate">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Kurulum, plan kaynağı, Git ve araç koşullarını kontrol eder.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Bir çalışmayı başlatmadan önce.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop validate</div>
+<div class="meta">Beklenen çıktı: Sorun ve uyarı listesi</div>
+</article>
+<article class="workflow-item command">
+<h3>Planı gösterme · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop run --dry-run</code>
+<button class="copy-text" data-copy="bmad-loop run --dry-run" aria-label="Komutu kopyala: bmad-loop run --dry-run">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Ajan oturumu başlatmadan seçilecek işleri gösterir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Hangi story’lerin işleneceğini görmek için.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop run --dry-run</div>
+<div class="meta">Beklenen çıktı: Yürütme planı</div>
+</article>
+<article class="workflow-item command">
+<h3>Sınırlı çalışma · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop run --max-stories 1</code>
+<button class="copy-text" data-copy="bmad-loop run --max-stories 1" aria-label="Komutu kopyala: bmad-loop run --max-stories 1">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> En fazla bir story işleyecek çalışma başlatır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> İlk kullanımda küçük bir iş üzerinden ilerlemek için.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop run --max-stories 1</div>
+<div class="meta">Beklenen çıktı: Kod, kanıtlar, çalışma kaydı ve başarılıysa commit</div>
+</article>
+<article class="workflow-item command">
+<h3>Görsel terminal paneli</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop tui</code>
+<button class="copy-text" data-copy="bmad-loop tui" aria-label="Komutu kopyala: bmad-loop tui">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Çalışmaları, story durumlarını ve kararları gösterir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Çalışmayı terminal panelinden izlemek veya yönetmek için.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop tui</div>
+<div class="meta">Beklenen çıktı: Canlı terminal arayüzü</div>
+</article>
+<article class="workflow-item command">
+<h3>Durumu öğrenme · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop status</code>
+<button class="copy-text" data-copy="bmad-loop status" aria-label="Komutu kopyala: bmad-loop status">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Son çalışmanın durumunu gösterir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Nerede kaldığını görmek için.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop status</div>
+<div class="meta">Beklenen çıktı: Çalışma durumu</div>
+</article>
+<article class="workflow-item command">
+<h3>Çalışmaları listeleme · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop list</code>
+<button class="copy-text" data-copy="bmad-loop list" aria-label="Komutu kopyala: bmad-loop list">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Kayıtlı çalışmaların kimliklerini gösterir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Resume veya stop için bir çalışma seçerken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop list</div>
+<div class="meta">Beklenen çıktı: Run ID listesi</div>
+</article>
+<article class="workflow-item command">
+<h3>Çalışmayı durdurma · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop stop &lt;run-id&gt;</code>
+<button class="copy-text" data-copy="bmad-loop stop &lt;run-id&gt;" aria-label="Komutu kopyala: bmad-loop stop &lt;run-id&gt;">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Belirtilen çalışmaya durdurma isteği gönderir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Yürütmeyi kesmeniz gerektiğinde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop stop &lt;run-id&gt; — yer tutucuyu list çıktısındaki kimlikle değiştirin.</div>
+<div class="meta">Beklenen çıktı: Durdurulan çalışmanın kaydı</div>
+</article>
+<article class="workflow-item command">
+<h3>Devam etme · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop resume &lt;run-id&gt;</code>
+<button class="copy-text" data-copy="bmad-loop resume &lt;run-id&gt;" aria-label="Komutu kopyala: bmad-loop resume &lt;run-id&gt;">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Kayıtlı çalışmayı kaldığı yerden sürdürür.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Duraklama nedeni çözüldüğünde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop resume &lt;run-id&gt;</div>
+<div class="meta">Beklenen çıktı: Devam eden çalışma</div>
+</article>
+<article class="workflow-item command">
+<h3>Engeli ele alma · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop resolve &lt;run-id&gt;</code>
+<button class="copy-text" data-copy="bmad-loop resolve &lt;run-id&gt;" aria-label="Komutu kopyala: bmad-loop resolve &lt;run-id&gt;">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Kritik yükseltmeyi etkileşimli bir ajanla çözmeye yardım eder.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> CRITICAL durumuyla duraklayan işte.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop resolve &lt;run-id&gt;</div>
+<div class="meta">Beklenen çıktı: Güncellenen karar veya tanım ve yeniden ele alınan iş</div>
+</article>
+<article class="workflow-item command">
+<h3>Ertelenen işleri ele alma · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop sweep</code>
+<button class="copy-text" data-copy="bmad-loop sweep" aria-label="Komutu kopyala: bmad-loop sweep">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Ertelenmiş bulguları değerlendirir ve uygulanabilir işleri yürütür.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Ana çalışma sırasında ayrılan işleri toplarken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop sweep</div>
+<div class="meta">Beklenen çıktı: Sınıflandırılmış ertelenen işler ve uygulanan paketler</div>
+</article>
+<article class="workflow-item command">
+<h3>Tanılama raporu · terminal</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-loop diagnose</code>
+<button class="copy-text" data-copy="bmad-loop diagnose" aria-label="Komutu kopyala: bmad-loop diagnose">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Çalışma yapısına ilişkin tanılama bilgisi sunar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Bir Loop sorununu anlamaya çalışırken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> bmad-loop diagnose</div>
+<div class="meta">Beklenen çıktı: Tanılama özeti</div>
+</article>
+</div>
+<p id="no-results" hidden>Sonuç bulunamadı.</p>
+</section>
+<section class="section" id="examples">
+<h2>💡 Örnek: Hazır Rezervasyon Story’lerini İşleme</h2>
+<div class="alert alert-info">
+<strong>Senaryo:</strong> Oda listesi, rezervasyon oluşturma ve iptal story’leri önceden planlandı. Şimdi sıralı uygulamayı otomatikleştirmek istiyorsunuz.</div>
+<ol>
+<li>
+<strong>Method ile hazırlık:</strong> Gereksinimleri ve kabul ölçütlerini netleştirip sprint planını üretin. Loop’ta hangi plan kaynağını kullanacağınızı seçin.</li>
+<li>
+<strong>Kurulum:</strong> Proje kökünde init çalıştırın. Kullandığınız CLI ve projenizin gerçek doğrulama komutlarını politika dosyasına yazın.</li>
+<li>
+<strong>Plan:</strong> run --dry-run ile listelenen işleri okuyun.</li>
+<li>
+<strong>İlk iş:</strong> run --max-stories 1 ile başlayın. TUI veya status çıktısından ilerleyişi takip edin.</li>
+<li>
+<strong>Karar:</strong> Ortaya çıkan değişiklik ve sonuçları değerlendirin. Çalışma bir insan kararı bekliyorsa gerekçeyi ele alın; otomatik olarak “tamam” saymayın.</li>
+<li>
+<strong>Devam:</strong> İşlerin sınırları uygunsa kalan story’leri yürütün; ertelenen işleri sweep ile ayrı ele alın.</li>
+</ol>
+<p>
+<strong>Beklenen sonuç:</strong> İş bazında kayıt, uygulama değişiklikleri, doğrulama sonuçları ve başarılı işlerde commit. Çözülemeyen işler ertelenebilir veya insan müdahalesi için duraklayabilir.</p>
+</section>
+<section class="section" id="faq">
+<h2>❓ Sık Sorulanlar</h2>
+<details>
+<summary>TUI penceresini kapatınca iş durur mu?</summary>
+<p>Kaynakta TUI’nın başlattığı çalışmaların panelden bağımsız süreçler olduğu belirtilir. Durdurmak için ilgili stop komutunu kullanın.</p>
+</details>
+<details>
+<summary>Loop ile bmad-build-auto aynı mı?</summary>
+<p>Hayır. build-auto tek geliştirme iterasyonunu yürütür. Loop iş seçimi, oturumlar, yeniden denemeler, doğrulama ve kayıt gibi çevre süreci yönetir.</p>
+</details>
+<details>
+<summary>Ertelenen iş kaybolur mu?</summary>
+<p>Ertelenen işler kayıt altında tutulur. sweep bunları kodun mevcut durumuyla karşılaştırıp çözülen, uygulanabilir veya karar bekleyen işler olarak ele alır.</p>
+</details>
+<details>
+<summary>Buradaki komutlar otomatik çalıştırılıyor mu?</summary>
+<p>Hayır. Bu sayfa kullanım rehberidir. Kopyaladığınız komutları kendi projenizde siz çalıştırırsınız.</p>
+</details>
+</section>
+<section class="section" id="cli-reference"><h2>📚 · Tam CLI başvurusu</h2><p>Bu katalog, Loop 0.13.2 kaynağındaki tüm üst düzey alt komutları ve belgelenen çağrı biçimlerini içerir. Köşeli parantez isteğe bağlı alanı, büyük harfli sözcük veya run_id yer tutucuyu gösterir; örnek değerlerle değiştirin, parantezleri komuta yazmayın.</p><p><code>--project</code> relay dışındaki komutlarda proje kökünü seçer. <code>--json</code> yalnız aşağıda bu seçeneği gösterilen komutlarda kullanılmalıdır. Genel <code>bmad-loop --version</code> sürümü, <code>bmad-loop --help</code> yardımı gösterir.</p><details><summary>init — Beceri, hook ve politika kurulumunu yapar</summary><p>Beceri, hook ve politika kurulumunu yapar. --cli hedef profili, --no-skills beceri kopyalamamayı, --force-skills mevcut becerileri yenilemeyi seçer.</p><pre>bmad-loop init [--project PROJECT] [--cli PROFILE] [--no-skills] [--force-skills]</pre></details><details><summary>validate — Ön koşulları değerlendirir</summary><p>Ön koşulları değerlendirir. --spec stories modunu seçer. --render-probe ve --probes ek çalıştırmalar yapabilir; varsayılan incelemeyle aynı değildir.</p><pre>bmad-loop validate [--project PROJECT] [--spec FOLDER] [--render-probe] [--probes] [--json]</pre></details><details><summary>mux — Terminal çoklayıcı backend’lerini listeler veya set ile seçim kaydeder</summary><p>Terminal çoklayıcı backend’lerini listeler veya set ile seçim kaydeder. --clear özel seçimi kaldırır; --force tanınmayan adı da kaydedebilir.</p><pre>bmad-loop mux [--project PROJECT] [--clear] [--force] [{set}] [name]</pre></details><details><summary>plugins — Plugin durumunu listeler; enable etkinleştirme, accept değişmiş içeriğin yeni hash’ini kabul etme, revoke kaydı geri alma içindir</summary><p>Plugin durumunu listeler; enable etkinleştirme, accept değişmiş içeriğin yeni hash’ini kabul etme, revoke kaydı geri alma içindir. Harici plugin kodu çalıştırmaya ilişkin seçimdir.</p><pre>bmad-loop plugins [--project PROJECT] [--json] [{list,enable,accept,revoke}] [name]</pre></details><details><summary>adapters — Kayıtlı kodlama CLI adapter türlerini ve onları seçen profilleri gösterir</summary><p>Kayıtlı kodlama CLI adapter türlerini ve onları seçen profilleri gösterir.</p><pre>bmad-loop adapters [--project PROJECT]</pre></details><details><summary>probe-adapter — Adapter profili için bilgiyi toplar</summary><p>Adapter profili için bilgiyi toplar. collect-adapter-data aynı komutun diğer adıdır. --probe canlı bir oturum açar; varsayılan tarama oturum açmaz. --transcript veya --session-dir kaynak, --out çıktı, --binary/--model/--workspace/--timeout canlı ortam ayarlarıdır.</p><pre>bmad-loop probe-adapter [--project PROJECT] [--probe] [--transcript TRANSCRIPT] [--session-dir SESSION_DIR]
+                        [--binary BINARY] [--model MODEL] [--workspace PATH] [--timeout TIMEOUT] [--out OUT] [--json] cli</pre></details><details><summary>run — İş yürütmesini başlatır</summary><p>İş yürütmesini başlatır. --spec story klasörü, --epic epic, --story tek iş, --max-stories sınır, --dry-run ise yalnız planı seçer.</p><pre>bmad-loop run [--project PROJECT] [--spec FOLDER] [--epic EPIC] [--story STORY] [--max-stories MAX_STORIES] [--dry-run]</pre></details><details><summary>sweep — Ertelenen işleri gruplar ve yürütür</summary><p>Ertelenen işleri gruplar ve yürütür. --decisions-only yalnız kararları toplar; --no-prompt karar gerektirmeyen işleri yürütür. --only ve --min-severity birlikte kullanılmaz. --repeat/--no-repeat, --max-cycles ve --max-bundles sınırları belirler. --archive kapalı kayıtları taşır, yeni ajan açmaz; yalnız --dry-run ve --before ile birleştirilir.</p><pre>bmad-loop sweep [--project PROJECT] [--no-prompt] [--decisions-only] [--max-bundles MAX_BUNDLES]
+                [--only DW-ID,... | --min-severity {low,medium,high,critical}] [--repeat | --no-repeat]
+                [--max-cycles MAX_CYCLES] [--dry-run] [--archive] [--before DATE]</pre></details><details><summary>resume — Duraklayan veya kesilen çalışmayı sürdürür</summary><p>Duraklayan veya kesilen çalışmayı sürdürür. --accept-baseline mevcut HEAD’i yeni başlangıç kabul eder; varsayılan devamla aynı değildir.</p><pre>bmad-loop resume [--project PROJECT] [--accept-baseline] run_id</pre></details><details><summary>resolve — Kritik engeli çözüp işi yeniden hazırlar</summary><p>Kritik engeli çözüp işi yeniden hazırlar. --no-interactive ajan açmadan yeniden hazırlar; --restore-patch kayıtlı değişikliği geri uygular; --adopt-branch eldeki dalı kabul edip commit/merge yapar; --reverify geliştirme açmadan eldeki işi yeniden doğrular; --abandon replay çalışmasını birleştirmeden kapatır. Bu dört mod birbirini dışlar. --no-resume yalnız hazırlama, --resume devam etme içindir.</p><pre>bmad-loop resolve [--project PROJECT] [--story STORY] [--no-interactive]
+                  [--restore-patch PATH | --adopt-branch | --reverify | --abandon] [--resume | --no-resume] [--force] run_id</pre></details><details><summary>decisions — Önceki sweep’lerden kalan kararları gösterir veya yanıtlatır</summary><p>Önceki sweep’lerden kalan kararları gösterir veya yanıtlatır. --list sadece listeler. close kaydı kapatır; build ve keep-open sonraki sweep için saklanır.</p><pre>bmad-loop decisions [--project PROJECT] [--list] [--json]</pre></details><details><summary>confirm — awaiting-operator işinde dışarıda tamamlanması gereken adımları onaylar</summary><p>awaiting-operator işinde dışarıda tamamlanması gereken adımları onaylar. --list bekleyenleri gösterir; --reverify onaydan sonra doğrulama çalıştırır; --yes adım başına onay sorularını atlar. Normal yeniden geliştirme veya resume değildir.</p><pre>bmad-loop confirm [--project PROJECT] [--list] [--yes] [--reverify] [--json] [story_key]</pre></details><details><summary>list — Çalışma kimliklerini listeler</summary><p>Çalışma kimliklerini listeler. Sonraki işlemlerde run_id bu listeden alınır.</p><pre>bmad-loop list [--project PROJECT] [--json]</pre></details><details><summary>status — Seçilen veya son çalışmanın durumunu verir</summary><p>Seçilen veya son çalışmanın durumunu verir.</p><pre>bmad-loop status [--project PROJECT] [--json] [run_id]</pre></details><details><summary>diagnose — Seçilen veya son çalışma için tanılama raporu verir</summary><p>Seçilen veya son çalışma için tanılama raporu verir.</p><pre>bmad-loop diagnose [--project PROJECT] [--all] [--out OUT] [--json] [--max-journal-entries N] [run_id]</pre></details><details><summary>attach — Canlı ajan oturumuna veya karar bekleyen kontrol penceresine terminalden bağlanır</summary><p>Canlı ajan oturumuna veya karar bekleyen kontrol penceresine terminalden bağlanır.</p><pre>bmad-loop attach [--project PROJECT] [run_id]</pre></details><details><summary>stop — Varsayılan olarak sert durdurur</summary><p>Varsayılan olarak sert durdurur. --graceful mevcut işin commit aşamasına kadar bitmesini bekleyip durdurur; --cancel-graceful bekleyen durdurma isteğini geri alır.</p><pre>bmad-loop stop [--project PROJECT] [--graceful | --cancel-graceful] run_id</pre></details><details><summary>delete — Çalışma dizini ve kontrol düzlemi dizinini kalıcı kaldırır</summary><p>Çalışma dizini ve kontrol düzlemi dizinini kalıcı kaldırır. --force canlı motoru önce sert durdurabilir; bazı tutarlılık engellerini yine aşmaz.</p><pre>bmad-loop delete [--project PROJECT] [--force] run_id</pre></details><details><summary>archive — Çalışma dizinini tar</summary><p>Çalışma dizinini tar.gz arşivine alıp etkin dizinleri kaldırır. Arşiv yalnız depo içindeki çalışma dizinini içerir. --force canlı çalışma davranışını değiştirir.</p><pre>bmad-loop archive [--project PROJECT] [--force] run_id</pre></details><details><summary>cleanup — Artakalan çoklayıcı oturumlarını ve kontrol pencerelerini temizler</summary><p>Artakalan çoklayıcı oturumlarını ve kontrol pencerelerini temizler. --dry-run yalnız kaldırılacakları gösterir; çalışma geçmişi temizliğiyle aynı değildir.</p><pre>bmad-loop cleanup [--project PROJECT] [--dry-run] [--json]</pre></details><details><summary>clean — Tamamlanmış çalışmaların disk alanını politikaya göre geri alır</summary><p>Tamamlanmış çalışmaların disk alanını politikaya göre geri alır. --keep tam kimlikle korur; --retain tutulacak sayıyı seçer; --hard arşiv yerine siler. --dry-run yalnız planı gösterir.</p><pre>bmad-loop clean [--project PROJECT] [--dry-run] [--keep RUN_ID] [--retain N] [--hard] [--json]</pre></details><details><summary>tui — Terminal panelini açar</summary><p>Terminal panelini açar. --low-frame-rate animasyonları kapatıp kare hızını düşürür.</p><pre>bmad-loop tui [--project PROJECT] [--low-frame-rate]</pre></details><details><summary>relay — Hook üzerinden gelen oturum olayını kaydeder</summary><p>Hook üzerinden gelen oturum olayını kaydeder. init tarafından bağlanır; kullanıcı tarafından elle çalıştırılacak bir iş akışı değildir.</p><pre>bmad-loop relay [event]</pre></details><p><strong>Kimlikler:</strong> status, attach ve diagnose kimlik verilmezse son çalışmayı seçebilir. Diğer ilgili işlemlerde list çıktısındaki kimliği açık kullanın. Silme ve temizlik komutları örnekleri okurken kendiliğinden çalışmaz.</p></section><section class="section" id="shortcuts"><h2>⌨️ · Terminal paneli kısayolları</h2><p>Bunlar <code>bmad-loop tui</code> açıkken klavyede kullanılır; AI sohbetine yazılmaz. Büyük ve küçük harf farklı eylemlerdir.</p><div class="reference-table"><table><thead><tr><th>Tuş</th><th>Eylem</th></tr></thead><tbody><tr><td><code>r</code></td><td>Yeni çalışma başlatma penceresi</td></tr><tr><td><code>s</code></td><td>Ertelenen işler için sweep başlatma</td></tr><tr><td><code>e</code></td><td>Seçilen duraklamış/kesilmiş çalışmayı sürdürme</td></tr><tr><td><code>p</code></td><td>Duraklayan çalışmayı insan karar ekranında inceleme</td></tr><tr><td><code>R</code></td><td>Kritik yükseltmeyi çözme ve yeniden hazırlama</td></tr><tr><td><code>V</code></td><td>Elde tutulan story değişikliğini yeniden doğrulama</td></tr><tr><td><code>d</code></td><td>Önceki sweep’lerin açık kararlarını yanıtlama</td></tr><tr><td><code>a</code></td><td>Canlı oturuma veya pencereye bağlanma</td></tr><tr><td><code>x</code></td><td>Canlı çalışmayı sert durdurma; devam eden işi yarıda keser</td></tr><tr><td><code>S</code></td><td>Devam eden işi tamamlayıp kontrollü durdurma</td></tr><tr><td><code>D</code></td><td>Seçilen çalışma dizinini silme</td></tr><tr><td><code>A</code></td><td>Seçilen çalışmayı arşivleme</td></tr><tr><td><code>c</code></td><td>Bitmiş çalışmaların çoklayıcı oturumlarını temizleme</td></tr><tr><td><code>v</code></td><td>Ön koşul incelemesini açma; bu pencerede d ayrıntıyı değiştirir</td></tr><tr><td><code>g</code></td><td>Politika ayarları düzenleyicisi</td></tr><tr><td><code>M</code></td><td>Açık/koyu görünüm</td></tr><tr><td><code>y</code></td><td>Etkin Log/Attention panelini kopyalama</td></tr><tr><td><code>Escape</code></td><td>Sabitlenmiş kayıt görünümünü bırakıp yeni çıktıyı izleme</td></tr><tr><td><code>Ctrl+W</code></td><td>Panel boyutlandırma moduna girme/çıkma</td></tr><tr><td><code>q</code></td><td>Panelden çıkma; çalışan motorlar durmaz</td></tr><tr><td><code>Ctrl+P</code></td><td>Geçerli ekrana göre komut paleti</td></tr></tbody></table></div><p>Panellerde Enter seçili kaydın ayrıntısını açabilir. Ctrl+W ile boyutlandırma moduna geçtiğinizde ok tuşlarıyla ayarlayın. Başlatma ve ayar pencerelerinin alanları seçilen plan kaynağına göre değişir.</p></section><section class="section" id="recovery"><h2>🧭 · Duraklama, karar ve devam örnekleri</h2><h3>1. Çalışmayı kontrollü durdurup devam etme</h3><div class="cmd-wrapper"><code class="cmd">bmad-loop list</code><button class="copy-text" data-copy="bmad-loop list">Kopyala</button></div><div class="cmd-wrapper"><code class="cmd">bmad-loop stop --graceful &lt;run-id&gt;</code><button class="copy-text" data-copy="bmad-loop stop --graceful &lt;run-id&gt;">Kopyala</button></div><p>Yer tutucuyu list çıktısındaki kimlikle değiştirin. Devam eden iş bitip çalışma durduktan sonra:</p><div class="cmd-wrapper"><code class="cmd">bmad-loop resume &lt;run-id&gt;</code><button class="copy-text" data-copy="bmad-loop resume &lt;run-id&gt;">Kopyala</button></div><h3>2. Kritik belirsizlik veya engel</h3><p>status ile nedeni okuyun; gerekirse attach ile oturuma bağlanın. CRITICAL yükseltmede resolve kullanıp sorunu çözün. Rastgele confirm kullanmayın; o başka durum içindir.</p><div class="cmd-wrapper"><code class="cmd">bmad-loop resolve &lt;run-id&gt;</code><button class="copy-text" data-copy="bmad-loop resolve &lt;run-id&gt;">Kopyala</button></div><h3>3. Operatörden dış işlem bekleyen iş</h3><div class="cmd-wrapper"><code class="cmd">bmad-loop confirm --list</code><button class="copy-text" data-copy="bmad-loop confirm --list">Kopyala</button></div><p>Örneğin dış sistemde yapılması gereken bir ayar varsa gerçekten tamamlayın. Ardından yalnız ilgili story için:</p><div class="cmd-wrapper"><code class="cmd">bmad-loop confirm &lt;story-key&gt;</code><button class="copy-text" data-copy="bmad-loop confirm &lt;story-key&gt;">Kopyala</button></div><p>Bu, işi yeniden geliştirmez; tamamlanan dış eylemleri kaydedip bekleme durumunu kapatır. run-id ile story-key aynı kimlik değildir.</p><h3>4. Sweep’in açık bıraktığı karar</h3><div class="cmd-wrapper"><code class="cmd">bmad-loop decisions --list</code><button class="copy-text" data-copy="bmad-loop decisions --list">Kopyala</button></div><div class="cmd-wrapper"><code class="cmd">bmad-loop decisions</code><button class="copy-text" data-copy="bmad-loop decisions">Kopyala</button></div><p>close kaydı hemen kapatır. build veya keep-open seçimi sonraki sweep’e bırakılır. Uygulanacak iş kaldığında:</p><div class="cmd-wrapper"><code class="cmd">bmad-loop sweep</code><button class="copy-text" data-copy="bmad-loop sweep">Kopyala</button></div><h3>5. Oturum artıkları ve disk geçmişi</h3><div class="cmd-wrapper"><code class="cmd">bmad-loop cleanup --dry-run</code><button class="copy-text" data-copy="bmad-loop cleanup --dry-run">Kopyala</button></div><div class="cmd-wrapper"><code class="cmd">bmad-loop clean --dry-run</code><button class="copy-text" data-copy="bmad-loop clean --dry-run">Kopyala</button></div><p>İlki çoklayıcı oturumlarını, ikincisi tamamlanan çalışma dosyalarını hedefler. Planı okuduktan sonra gerekiyorsa dry-run seçeneğini kaldırın. archive geri bakmak için sıkıştırılmış kayıt tutar; delete kalıcı kaldırır.</p><h3>Üç plan kaynağı</h3><ul><li><strong>Sprint:</strong> sprint-status.yaml, varsayılan v6 yolu.</li><li><strong>Stories:</strong> SPEC.md yanındaki stories.yaml; <code>bmad-loop run --spec &lt;klasör&gt;</code> veya policy içindeki stories source/spec_folder ile seçilir.</li><li><strong>Tickets:</strong> v7 girişim ağacı; v7 bmad merkezi, Sofia planlaması ve <code>source = "tickets"</code> gerekir. Deneysel yol, v6 story dosyası gibi ele alınmaz.</li></ul><p>v7 yolunda sırasıyla <code>npx skills add bmad-code-org/bmad-loop</code>, AI sohbetinde <code>bmad setup bmad-loop</code> ve <code>bmad-loop-setup</code> kullanılır. Kaynak ve yapılandırma çalışma sürerken değişirse devam reddedilebilir; önce bildirilen uyumsuzluğu çözün.</p></section><section class="section" id="coverage"><h2>📌 · Kapsam ve ayrıntılı kaynaklar</h2><p>Bu rehberdeki kapsam, belirtilen sürümün kullanıcıya açık becerileri, ajan menüleri ve belgelenen çalışma yollarıdır. Kaynak içindeki yardımcı Python betikleri bağımsız kullanıcı becerileri gibi sunulmaz. Yeni sürümler farklı adlar ekleyebilir.</p><p><strong>Üç farklı çağrı biçimi:</strong> Terminal komutu terminale; beceri adı AI aracına; kısa menü kodu yalnız ilgili ajan veya iş akışı açıldıktan sonra yazılır. Örneklerdeki dosya, klasör ve kimlikleri kendi projenizle değiştirin.</p><ul><li><a href="https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/docs/reference/cli.md">docs/reference/cli.md</a></li><li><a href="https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/docs/tui-guide.md">docs/tui-guide.md</a></li><li><a href="https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/docs/escalations-guide.md">docs/escalations-guide.md</a></li></ul></section><section class="section" id="version">
+<h2>📌 Sürüm ve Kaynaklar</h2>
+<div class="alert alert-info">
+<strong>Bu rehberin kaynağı:</strong> pyproject.toml: 0.13.2; erken açık beta · 21 Ekim 2026<br>Kaynak commit: <code>40f0de625d85</code>
+<br>Metehan Soner tarafından hazırlanmıştır.</div>
+<ul>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/pyproject.toml">Sürüm ve Python gereksinimi</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/README.md">Çalışma döngüsü ve kurulum</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/docs/reference/cli.md">CLI komutları</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/docs/setup-guide.md">Kurulum yolları</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/docs/reference/configuration.md">Politika seçenekleri</a>
+</li>
+</ul>
+<p>Komutlar yukarıdaki kaynak anlık görüntüsüne dayanır. Kurulum komutları ana dalı izlediğinde daha yeni bir sürüm gelebilir. Paket sürümü ile modül kayıt sürümü farklıysa burada ayrı belirtilmiştir.</p>
+</section>
+</div>
+</main>
+<footer class="footer">
+<p>
+<strong>Metehan Soner tarafından hazırlanmıştır.</strong>
+</p>
+<p>BMad Loop · Loop 0.13.2 · erken açık beta · 21 Ekim 2026</p>
+<p>Bağımsız Türkçe rehber · <a style="color:#ddd6fe" href="#version">Sürüm ve kaynaklar</a>
+</p>
+</footer>
+<div id="copy-status" role="status" aria-live="polite">
+</div>
+</body>
+</html>

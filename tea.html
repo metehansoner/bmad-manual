@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test Architect · TEA Kullanım Rehberi | Metehan Soner</title>
+<meta name="author" content="Metehan Soner">
+<meta name="description" content="Riskten test planına, otomasyondan kanıta dayalı kalite kararına.">
+<link rel="stylesheet" href="assets/ecosystem.css">
+<script src="assets/guide.js" defer>
+</script>
+</head>
+<body>
+<a class="skip" href="#overview">İçeriğe geç</a>
+<nav class="top-nav" aria-label="Ekosistemler">
+<div class="nav-content">
+<a class="logo" href="index.html">BMAD EKOSİSTEMİ</a>
+<button id="menu-toggle" aria-controls="sidebar" aria-expanded="false">Menü ☰</button>
+<ul class="nav-menu ecosystem-menu" id="sidebar">
+<li>
+<a href="index.html">BMAD Method</a>
+</li>
+<li>
+<a href="builder.html">Builder</a>
+</li>
+<li>
+<a href="cis.html">Creative Intelligence</a>
+</li>
+<li>
+<a href="tea.html" class="current" aria-current="page">Test Architect</a>
+</li>
+<li>
+<a href="loop.html">Loop</a>
+</li>
+<li>
+<a href="game-dev.html">Game Dev Studio</a>
+</li>
+</ul>
+</div>
+</nav>
+<section class="hero">
+<h1>Test Architect · TEA</h1>
+<p>Riskten test planına, otomasyondan kanıta dayalı kalite kararına.</p>
+<div class="hero-buttons">
+<a class="btn btn-primary" href="#installation">Kurulumdan Başla</a>
+<a class="btn btn-secondary" href="#examples">Örnekle Öğren</a>
+</div>
+<div class="version-badge module-version">TEA 3.3.0 · Kaynak tarihi: 21 Ekim 2026</div>
+<p class="credit">Metehan Soner tarafından hazırlanmıştır.</p>
+</section>
+<main class="container">
+<nav class="local-menu" aria-label="Bu rehberin bölümleri">
+<a href="#overview">Genel bakış</a>
+<a href="#installation">Kurulum</a>
+<a href="#agents">Ajanlar / araçlar</a>
+<a href="#workflows">Adım adım kullanım</a>
+<a href="#commands">Komutlar</a>
+<a href="#examples">Proje örneği</a>
+<a href="#faq">Sık sorulanlar</a>
+<a href="#shortcuts">Ajan menüleri ve kısayollar</a>
+<a href="#routes">CI, AT, GATE ve devam yolları</a>
+<a href="#coverage">Kapsam ve ayrıntılı kaynaklar</a>
+<a href="#version">Sürüm ve kaynaklar</a>
+</nav>
+<div class="guide-content">
+<section class="section" id="overview">
+<h2>🧪 TEA Nedir?</h2>
+<p>Test Engineering Architect, test planlama, otomasyon, değerlendirme ve sürüm kararları için uzmanlaşmış BMAD modülüdür. Murat adlı ajan sekiz ana iş akışını yönetir. Method ile birlikte kullanılabilir; ürün geliştirme modülünün tamamını kullanmadan da test çalışmasına odaklanabilirsiniz.</p>
+<div class="alert alert-info">
+<strong>Method’tan farkı:</strong> Yalnızca “test yaz” demek yerine gereksinim → risk → test → kanıt → karar ilişkisini kurar. Test sayısından çok, önemli davranışların güvenilir biçimde doğrulanmasına odaklanır.</div>
+</section>
+<section class="section" id="installation">
+<h2>🚀 Kurulum</h2>
+<p>Bu sayfa TEA 3.3.0 içindir. Modül kaydı <code>bmad</code> merkezinin <code>6.13.0-next</code> hattını ister; v6.12.4 Method kurulumu tek başına yeterli kabul edilmemelidir. Node.js/npm, Git, uv ve desteklenen bir AI aracı hazırlayın.</p>
+<div class="cmd-wrapper">
+<code class="cmd">npx skills add bmad-code-org/BMAD-METHOD --skill bmad bmod-core-tools</code>
+<button class="copy-text" data-copy="npx skills add bmad-code-org/BMAD-METHOD --skill bmad bmod-core-tools" aria-label="Komutu kopyala: npx skills add bmad-code-org/BMAD-METHOD --skill bmad bmod-core-tools">Kopyala</button>
+</div>
+<div class="cmd-wrapper">
+<code class="cmd">npx skills add bmad-code-org/bmad-method-test-architecture-enterprise</code>
+<button class="copy-text" data-copy="npx skills add bmad-code-org/bmad-method-test-architecture-enterprise" aria-label="Komutu kopyala: npx skills add bmad-code-org/bmad-method-test-architecture-enterprise">Kopyala</button>
+</div>
+<p>AI sohbetinde:</p>
+<div class="cmd-wrapper">
+<code class="cmd">bmad setup tea</code>
+<button class="copy-text" data-copy="bmad setup tea" aria-label="Komutu kopyala: bmad setup tea">Kopyala</button>
+</div>
+<ol>
+<li>Proje türünü ve kullandığınız test çerçevesini belirtin.</li>
+<li>Test belgelerinin yazılacağı klasörü seçin.</li>
+<li>İhtiyacınıza göre tarayıcı otomasyonu ve entegrasyon tercihlerini belirleyin.</li>
+<li>Murat’ı bmad-tea ile açın veya doğrudan test-design becerisine geçin.</li>
+</ol>
+<p>Kurulum ayarları <code>_bmad/config.toml</code> içinde tutulur. Playwright, Pact yardımcıları veya harici MCP servisleri ayrı kurulum gerektirebilir. Yalnızca ihtiyacınız olanları seçin.</p>
+<div class="alert alert-info">Eski <code>bmad-testarch-*</code> adlarını bu sürümün komutlarıyla karıştırmayın. TEA 3.x doğrudan iş akışlarında <code>bmad-tea-*</code> önekini kullanır.</div>
+</section>
+<section class="section" id="agents">
+<h2>👤 Murat ve Menüleri</h2>
+<div class="agents-grid">
+<article class="agent-card">
+<h3>Murat · Test Engineering Architect</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea</code>
+<button class="copy-text" data-copy="bmad-tea" aria-label="Komutu kopyala: bmad-tea">Kopyala</button>
+</div>
+<p>Projenin kalite ihtiyacını konuşarak doğru iş akışına yönlendirir. TD tasarım, TF altyapı, TA otomasyon, RV inceleme, NR NFR, TR izlenebilirlik, EV değerlendirme ve TMT öğrenme içindir.</p>
+</article>
+</div>
+<p>
+<strong>Ek yönlendirmeler:</strong> CI menüsü altyapının CI kapsamına; AT menüsü red kabul testi üretimine yönelir. GATE ise test incelemesi, NFR kanıtı ve Trace Phase 2 yolunu birleştirir. Bunları Murat’ın menüsünde kullanın; ayrı terminal komutları değildir.</p>
+</section>
+<section class="section" id="workflows">
+<h2>📋 Hangi Sırayla Kullanılır?</h2>
+<div class="features-grid">
+<article class="feature-card">
+<h3>1. Riskleri ve kapsamı planla</h3>
+<p>bmad-tea-test-design ile hangi davranışın bozulmasının en önemli sonuçları doğuracağını belirleyin. Test seviyelerini ve kanıt ihtiyacını yazın.</p>
+</article>
+<article class="feature-card">
+<h3>2. Eksik altyapıyı hazırla</h3>
+<p>bmad-tea-framework ile test çerçevesi ve gerekiyorsa CI kurun. Çalışan altyapınız varsa bu adımı atlayabilirsiniz.</p>
+</article>
+<article class="feature-card">
+<h3>3. Test üretimini seç</h3>
+<p>Henüz geliştirilmemiş davranış için red modunu; mevcut kodun kapsamını genişletmek için expand modunu isteyin. Doğrudan automate çağrısının varsayılanı expand’dır.</p>
+</article>
+<article class="feature-card">
+<h3>4. Test kalitesini incele</h3>
+<p>bmad-tea-test-review ile testlerin anlamlı ve kararlı olup olmadığını ele alın. Geçen bir testin doğru davranışı ölçtüğünden emin olun.</p>
+</article>
+<article class="feature-card">
+<h3>5. Kanıtları tamamla</h3>
+<p>bmad-tea-nfr ile performans ve benzeri gereksinimlerin gerçek ölçümlerini değerlendirin. Eksik kanıtı başarı gibi yorumlamayın.</p>
+</article>
+<article class="feature-card">
+<h3>6. Gereksinime bağla</h3>
+<p>bmad-tea-trace ile hangi gereksinimin hangi test veya sonuçla karşılandığını görün; Phase 2 kalite kararını çıkarır.</p>
+</article>
+</div>
+<h3>Kararlar nasıl okunur?</h3>
+<ul>
+<li>
+<strong>PASS:</strong> Kapı ölçütlerinin karşılandığına yönelik karar.</li>
+<li>
+<strong>CONCERNS:</strong> Ele alınması gereken çekinceler vardır.</li>
+<li>
+<strong>FAIL:</strong> Karşılanmayan ölçütler veya engelleyici durumlar vardır.</li>
+</ul>
+<p>İstisnalar ayrı kaydedilir. Bu rapor, tek başına ürünün otomatik yayımlanması anlamına gelmez.</p>
+</section>
+<section class="section" id="commands">
+<h2>⌨️ Sekiz Ana İş Akışı</h2>
+<p>Arama yapın veya bir karttan başlayın. Beceri adları AI sohbetinde, terminal olarak belirtilen komutlar terminalde kullanılır.</p>
+<label for="command-search">Bu modülün komutlarında ara</label>
+<input id="command-search" type="search" placeholder="Komut veya kullanım amacı…">
+<p id="result-count" role="status">
+</p>
+<div class="features-grid">
+<article class="workflow-item command">
+<h3>TD · Test tasarımı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea-test-design</code>
+<button class="copy-text" data-copy="bmad-tea-test-design" aria-label="Komutu kopyala: bmad-tea-test-design">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Gereksinimleri risk, öncelik ve kapsama dönüştürür.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Koddan önce neyin ve hangi seviyede test edileceğini planlarken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Rezervasyon çakışması ve yetkisiz iptal risklerini P0–P3 öncelikleriyle ele al.</div>
+<div class="meta">Beklenen çıktı: Risk tablosu, kapsam ve kanıt planı</div>
+</article>
+<article class="workflow-item command">
+<h3>TF / CI · Altyapı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea-framework</code>
+<button class="copy-text" data-copy="bmad-tea-framework" aria-label="Komutu kopyala: bmad-tea-framework">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Test çerçevesini, CI sürecini veya ikisini kurar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Test altyapısı yoksa veya otomasyonu CI sistemine bağlarken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Mevcut TypeScript projesinde Playwright altyapısı ve CI kurulumu hazırla; var olan komutları koru.</div>
+<div class="meta">Beklenen çıktı: Test yapılandırması, yardımcı dosyalar ve istenmişse CI</div>
+</article>
+<article class="workflow-item command">
+<h3>TA / AT · Test otomasyonu</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea-automate</code>
+<button class="copy-text" data-copy="bmad-tea-automate" aria-label="Komutu kopyala: bmad-tea-automate">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Yeni kabul senaryoları veya mevcut kod için kapsam üretir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Geliştirmeden önce red; çalışan kodda expand yaklaşımıyla.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> red modunda, aynı oda için çakışan iki rezervasyonun reddedilmesini kapsayan kabul senaryosu oluştur.</div>
+<div class="meta">Beklenen çıktı: Otomatik testler ve çalıştırma sonuçları</div>
+</article>
+<article class="workflow-item command">
+<h3>RV · Test kalitesi</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea-test-review</code>
+<button class="copy-text" data-copy="bmad-tea-test-review" aria-label="Komutu kopyala: bmad-tea-test-review">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Testleri belirli kalite ölçütlerine göre inceler.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Test var ama güvenilirliğinden veya anlamlılığından emin değilken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Rezervasyon testlerini izolasyon, kararlılık ve gerçek davranışı doğrulama açısından incele.</div>
+<div class="meta">Beklenen çıktı: Puanlanmış bulgular ve iyileştirme önerileri</div>
+</article>
+<article class="workflow-item command">
+<h3>NR · İşlevsel olmayan gereksinimler</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea-nfr</code>
+<button class="copy-text" data-copy="bmad-tea-nfr" aria-label="Komutu kopyala: bmad-tea-nfr">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Uygulanmış sistemin NFR kanıtlarını değerlendirir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Performans, güvenlik veya dayanıklılık iddialarını değerlendirirken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Hedef yanıt süresi ve yük sonuçlarını karşılaştır; kanıt olmayan alanları açıkça belirt.</div>
+<div class="meta">Beklenen çıktı: Kanıta dayalı NFR değerlendirmesi</div>
+</article>
+<article class="workflow-item command">
+<h3>TR · İzlenebilirlik ve kapı kararı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea-trace</code>
+<button class="copy-text" data-copy="bmad-tea-trace" aria-label="Komutu kopyala: bmad-tea-trace">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Gereksinimleri test kanıtlarına bağlar ve kalite kapısı kararı üretir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Kapsam açığı bulmak veya sürüm öncesi karar almak için.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Rezervasyon gereksinimlerini testlerle eşleştir; Phase 2 ile yayın kapısı kararını çıkar.</div>
+<div class="meta">Beklenen çıktı: İzlenebilirlik matrisi ve PASS / CONCERNS / FAIL / WAIVED</div>
+</article>
+<article class="workflow-item command">
+<h3>EV · AI davranış değerlendirmesi</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea-evaluate</code>
+<button class="copy-text" data-copy="bmad-tea-evaluate" aria-label="Komutu kopyala: bmad-tea-evaluate">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Beceri, ajan ve AI özellikleri için davranış değerlendirmesi kurar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> AI çıktılarının beklenen davranışı koruyup korumadığını ölçerken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Destek yanıtı becerisini yanlış bilgi, eksik bağlam ve doğru yönlendirme örnekleriyle değerlendir.</div>
+<div class="meta">Beklenen çıktı: Puanlanabilir örnekler ve değerlendirme sonuçları</div>
+</article>
+<article class="workflow-item command">
+<h3>TMT · Test öğrenme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-tea-teach-me-testing</code>
+<button class="copy-text" data-copy="bmad-tea-teach-me-testing" aria-label="Komutu kopyala: bmad-tea-teach-me-testing">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Yedi oturumlu öğrenme süreci sunar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Test yaklaşımını uygulamalı öğrenmek istediğinizde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Test bilgim başlangıç seviyesinde. Rezervasyon projem üzerinden ilk oturumu başlat.</div>
+<div class="meta">Beklenen çıktı: Öğrenme yolu, alıştırmalar ve ilerleme</div>
+</article>
+</div>
+<p id="no-results" hidden>Sonuç bulunamadı.</p>
+</section>
+<section class="section" id="examples">
+<h2>💡 Örnek: Rezervasyon Özelliğinin Kalite Planı</h2>
+<div class="alert alert-info">
+<strong>Senaryo:</strong> Aynı odaya çakışan rezervasyon yapılamamalı; kullanıcı başkasının rezervasyonunu iptal edememeli.</div>
+<ol>
+<li>
+<strong>TD:</strong> “Bu iki gereksinimi risk ve önceliklerine göre ayır; hangi katmanda doğrulanacaklarını öner.”</li>
+<li>
+<strong>TF:</strong> Altyapı yoksa “API ve arayüz senaryoları için uygun test altyapısını kur. CI da istiyorum.”</li>
+<li>
+<strong>TA:</strong> Mevcut kod için “expand modunda iki eşzamanlı rezervasyonu ve başka kullanıcının iptal denemesini kapsa.”</li>
+<li>
+<strong>RV:</strong> “Testler gerçekten yarış koşulunu ve yetki sınırını sınayabiliyor mu? Zamanlamaya bağlı kararsızlıkları incele.”</li>
+<li>
+<strong>TR:</strong> “İki gereksinimi test sonuçlarıyla eşleştir; eksik kanıt varsa belirt ve kalite kapısını değerlendir.”</li>
+</ol>
+<p>
+<strong>Beklenen sonuç:</strong> Yalnızca test dosyaları değil; neden o testlerin seçildiğini açıklayan risk planı, kalite bulguları ve gereksinimlere bağlı kanıtlar.</p>
+</section>
+<section class="section" id="faq">
+<h2>❓ Sık Sorulanlar</h2>
+<details>
+<summary>Red modu hata mı demek?</summary>
+<p>Henüz uygulanmamış davranışın kabul testinin beklenen nedenle başarısız olduğunu göstermeyi hedefler. Altyapı hatası veya yanlış testten kaynaklanan başarısızlık aynı şey değildir.</p>
+</details>
+<details>
+<summary>TEA kullanmak için her sekiz iş akışını çalıştırmalı mıyım?</summary>
+<p>Hayır. Mevcut testleri incelemek için doğrudan test-review, test öğrenmek için teach-me-testing ile başlayabilirsiniz.</p>
+</details>
+<details>
+<summary>Bu rehberdeki test adımları şu anda çalıştırılıyor mu?</summary>
+<p>Hayır. Bunlar TEA kullanıcısına yönelik kullanım talimatlarıdır; bu rehberin hazırlanması sırasında çalıştırılmış testler değildir.</p>
+</details>
+</section>
+<section class="section" id="shortcuts"><h2>⌨️ · Ajan menüleri ve kısayollar</h2><p><strong>Kullanım sırası:</strong> Ajanın beceri adını AI sohbetinde çağırın → açılan menüden kodu yazın → hedefinizi ve ilgili dosyaları verin → çıktıyı sonraki işe aktarın. Bu kodlar terminal komutu veya her yerde çalışan genel kısayollar değildir.</p><h3>bmad-tea</h3><div class="cmd-wrapper"><code class="cmd">bmad-tea</code><button class="copy-text" data-copy="bmad-tea">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>TMT</code></td><td>Yedi oturumlu öğrenme süreci sunar.</td><td><code>bmad-tea-teach-me-testing</code></td></tr><tr><td><code>TD</code></td><td>Gereksinimleri risk, öncelik ve kapsama dönüştürür.</td><td><code>bmad-tea-test-design</code></td></tr><tr><td><code>TF</code></td><td>Test çerçevesini, CI sürecini veya ikisini kurar.</td><td><code>bmad-tea-framework</code></td></tr><tr><td><code>CI</code></td><td>Framework’ü yalnız CI kapsamıyla açar.</td><td><code>bmad-tea-framework</code></td></tr><tr><td><code>AT</code></td><td>Automate’i red kabul testi moduyla açar.</td><td><code>bmad-tea-automate</code></td></tr><tr><td><code>TA</code></td><td>Automate’i mevcut kod kapsamını genişleten expand moduyla açar.</td><td><code>bmad-tea-automate</code></td></tr><tr><td><code>EV</code></td><td>Beceri, ajan ve AI özellikleri için davranış değerlendirmesi kurar.</td><td><code>bmad-tea-evaluate</code></td></tr><tr><td><code>GATE</code></td><td>Mevcut kanıta göre test incelemesi, NFR ve Trace Phase 2 kapı yoluna yönlendirme.</td><td><code>Ajanın kendi iç işlemi</code></td></tr><tr><td><code>RV</code></td><td>Testleri belirli kalite ölçütlerine göre inceler.</td><td><code>bmad-tea-test-review</code></td></tr><tr><td><code>NR</code></td><td>Uygulanmış sistemin NFR kanıtlarını değerlendirir.</td><td><code>bmad-tea-nfr</code></td></tr><tr><td><code>TR</code></td><td>Phase 1: gereksinim-test eşleme. Phase 2: kalite kapısı kararı.</td><td><code>bmad-tea-trace</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-method-test-architecture-enterprise/blob/da6a478edf1444a23a3dcd6ff8f96e097f8b6ffb/skills/bmad-tea/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><p><strong>Önemli ayrım:</strong> Aynı kod farklı ajanda farklı iş başlatabilir. Örneğin Method analistinin CR kodu rakip araştırması, geliştiricinin CR kodu kod incelemesi, CIS sunum uzmanının CR kodu sunum eleştirisidir.</p></section><section class="section" id="routes"><h2>🧭 · CI, AT, GATE ve devam yolları</h2><h3>CI: Mevcut altyapıyı otomasyona bağlama</h3><p><code>bmad-tea</code> → <code>CI</code> → “Mevcut test komutlarını koruyarak yalnız CI yapılandırmasını hazırla.” Framework aynı beceridir; istenen kapsam CI’dır. Çıktı CI yapılandırmasıdır, otomatik ürün yayını değildir.</p><h3>AT: Önce kabul davranışını tarif etme</h3><p>Murat → <code>AT</code> → “red modunda, çakışan rezervasyonu reddetme gereksinimini kapsa.” Beklenen eksik davranış nedeniyle başarısız senaryo belirlenir. Ürün uygulandıktan sonra <code>TA</code> ile expand kapsamı ele alınabilir. Red ve expand’i aynı amaçla kullanmayın.</p><h3>GATE: Sürüm kararı için kanıtları toplama</h3><ol><li>Murat’ı açıp GATE seçin; gereksinimleri, test sonuçlarını ve NFR kanıtlarını paylaşın.</li><li>Mevcut kanıta göre gerekliyse RV test kalitesini ve NR işlevsel olmayan gereksinimleri ele alır.</li><li>TR Phase 1 gereksinim-test eşlemesini; Phase 2 kapı kararını üretir.</li><li>Eksik kanıt veya başarısız ölçüt varsa ilgili iş akışında düzeltip yeniden değerlendirin.</li></ol><p>Trace becerisinin bu kaynak sürümünde <strong>PASS, CONCERNS, FAIL ve WAIVED</strong> sonuçları tanımlanır. WAIVED, ölçütün karşılandığı anlamına gelmez; gerekçeli istisna kaydıdır. README bazı yerlerde yalnız ilk üç sonucu özetler; burada doğrudan Trace becerisi esas alınmıştır.</p><h3>Yarım kalan veya değişen çalışma</h3><p>Örneğin Trace açılışında <strong>C Create</strong> yeni çalışma, <strong>R Resume</strong> yarım kalan çalışmayı sürdürme, <strong>V Validate</strong> mevcut çıktıyı değerlendirme ve <strong>E Edit</strong> düzenleme seçenekleri bulunur. Bunlar seçilmiş iş akışının menüsüdür; Murat’ın ana menüsü veya bağımsız terminal komutu değildir. Devam ederken önceki çıktı klasörünü belirtin.</p><h3>Örnek: İki rezervasyon gereksinimi</h3><p>“GATE: çakışmayı engelleme ve başkasının rezervasyonunu iptal edememe gereksinimleri için elimizdeki sonuçları değerlendir. Kanıtı olmayan gereksinime PASS verme; istisna istenirse gerekçesini ayrı kaydet.” Sonuç, gerekçeli bir kalite kararıdır.</p></section><section class="section" id="coverage"><h2>📌 · Kapsam ve ayrıntılı kaynaklar</h2><p>Bu rehberdeki kapsam, belirtilen sürümün kullanıcıya açık becerileri, ajan menüleri ve belgelenen çalışma yollarıdır. Kaynak içindeki yardımcı Python betikleri bağımsız kullanıcı becerileri gibi sunulmaz. Yeni sürümler farklı adlar ekleyebilir.</p><p><strong>Üç farklı çağrı biçimi:</strong> Terminal komutu terminale; beceri adı AI aracına; kısa menü kodu yalnız ilgili ajan veya iş akışı açıldıktan sonra yazılır. Örneklerdeki dosya, klasör ve kimlikleri kendi projenizle değiştirin.</p><ul><li><a href="https://github.com/bmad-code-org/bmad-method-test-architecture-enterprise/blob/da6a478edf1444a23a3dcd6ff8f96e097f8b6ffb/skills/bmad-tea-trace/SKILL.md">skills/bmad-tea-trace/SKILL.md</a></li></ul></section><section class="section" id="version">
+<h2>📌 Sürüm ve Kaynaklar</h2>
+<div class="alert alert-info">
+<strong>Bu rehberin kaynağı:</strong> Paket ve modül: 3.3.0 · 21 Ekim 2026<br>Kaynak commit: <code>da6a478edf14</code>
+<br>Metehan Soner tarafından hazırlanmıştır.</div>
+<ul>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-method-test-architecture-enterprise/blob/da6a478edf1444a23a3dcd6ff8f96e097f8b6ffb/skills/bmod-tea/bmod.toml">Sürüm, bağımlılıklar ve yapılandırma</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-method-test-architecture-enterprise/blob/da6a478edf1444a23a3dcd6ff8f96e097f8b6ffb/README.md">Kurulum, sekiz iş akışı ve menüler</a>
+</li>
+</ul>
+<p>Komutlar yukarıdaki kaynak anlık görüntüsüne dayanır. Kurulum komutları ana dalı izlediğinde daha yeni bir sürüm gelebilir. Paket sürümü ile modül kayıt sürümü farklıysa burada ayrı belirtilmiştir.</p>
+</section>
+</div>
+</main>
+<footer class="footer">
+<p>
+<strong>Metehan Soner tarafından hazırlanmıştır.</strong>
+</p>
+<p>Test Architect · TEA · TEA 3.3.0 · 21 Ekim 2026</p>
+<p>Bağımsız Türkçe rehber · <a style="color:#ddd6fe" href="#version">Sürüm ve kaynaklar</a>
+</p>
+</footer>
+<div id="copy-status" role="status" aria-live="polite">
+</div>
+</body>
+</html>

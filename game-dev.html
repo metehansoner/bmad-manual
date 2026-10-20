@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Game Dev Studio Kullanım Rehberi | Metehan Soner</title>
+<meta name="author" content="Metehan Soner">
+<meta name="description" content="Oyun fikrinden GDD’ye, mimariden oynanabilir prototip ve üretim döngüsüne.">
+<link rel="stylesheet" href="assets/ecosystem.css">
+<script src="assets/guide.js" defer>
+</script>
+</head>
+<body>
+<a class="skip" href="#overview">İçeriğe geç</a>
+<nav class="top-nav" aria-label="Ekosistemler">
+<div class="nav-content">
+<a class="logo" href="index.html">BMAD EKOSİSTEMİ</a>
+<button id="menu-toggle" aria-controls="sidebar" aria-expanded="false">Menü ☰</button>
+<ul class="nav-menu ecosystem-menu" id="sidebar">
+<li>
+<a href="index.html">BMAD Method</a>
+</li>
+<li>
+<a href="builder.html">Builder</a>
+</li>
+<li>
+<a href="cis.html">Creative Intelligence</a>
+</li>
+<li>
+<a href="tea.html">Test Architect</a>
+</li>
+<li>
+<a href="loop.html">Loop</a>
+</li>
+<li>
+<a href="game-dev.html" class="current" aria-current="page">Game Dev Studio</a>
+</li>
+</ul>
+</div>
+</nav>
+<section class="hero">
+<h1>Game Dev Studio</h1>
+<p>Oyun fikrinden GDD’ye, mimariden oynanabilir prototip ve üretim döngüsüne.</p>
+<div class="hero-buttons">
+<a class="btn btn-primary" href="#installation">Kurulumdan Başla</a>
+<a class="btn btn-secondary" href="#examples">Örnekle Öğren</a>
+</div>
+<div class="version-badge module-version">Paket 0.7.2 · modül kaydı 0.7.0 · Kaynak tarihi: 21 Ekim 2026</div>
+<p class="credit">Metehan Soner tarafından hazırlanmıştır.</p>
+</section>
+<main class="container">
+<nav class="local-menu" aria-label="Bu rehberin bölümleri">
+<a href="#overview">Genel bakış</a>
+<a href="#installation">Kurulum</a>
+<a href="#agents">Ajanlar / araçlar</a>
+<a href="#workflows">Adım adım kullanım</a>
+<a href="#commands">Komutlar</a>
+<a href="#examples">Proje örneği</a>
+<a href="#faq">Sık sorulanlar</a>
+<a href="#shortcuts">Ajan menüleri ve kısayollar</a>
+<a href="#menu-examples">Oyun ajanı menülerinin kullanım örnekleri</a>
+<a href="#coverage">Kapsam ve ayrıntılı kaynaklar</a>
+<a href="#version">Sürüm ve kaynaklar</a>
+</nav>
+<div class="guide-content">
+<section class="section" id="overview">
+<h2>🎮 Game Dev Studio Nedir?</h2>
+<p>Game Dev Studio, BMAD yaklaşımını oyun geliştirmeye uyarlar. Konsept, oyun tasarım belgesi (GDD), anlatı, UX, motor mimarisi ve epic tabanlı üretim süreçlerini kapsar. Unity, Unreal, Godot ve diğer motorlarla çalışılabilir; seçilen motorun ortamını ve proje dosyalarını sizin sağlamanız gerekir.</p>
+<div class="alert alert-info">
+<strong>İki başlangıç:</strong> Küçük bir mekaniği denemek için <code>gds-quick-dev</code>; kapsamlı oyun için brief → GDD → mimari → story üretim yolu. Her prototipe tam üretim planı gerekmez.</div>
+</section>
+<section class="section" id="installation">
+<h2>🚀 Kurulum</h2>
+<p>Node.js/npm, Python 3.11+, uv, desteklenen AI aracı ve seçtiğiniz oyun motorunu hazırlayın. Proje kökünde BMAD kurucusunu açın:</p>
+<div class="cmd-wrapper">
+<code class="cmd">npx bmad-method@6.12.4 install</code>
+<button class="copy-text" data-copy="npx bmad-method@6.12.4 install" aria-label="Komutu kopyala: npx bmad-method@6.12.4 install">Kopyala</button>
+</div>
+<ol>
+<li>Modül listesinde Game Dev Studio’yu seçin. Ana Method modülünün tamamını kurmak zorunlu değildir.</li>
+<li>Oyun adı, deneyim seviyesi, hedef motor ve çıktı klasörlerini belirtin.</li>
+<li>Kurulumdan sonra AI aracını proje kökünde açın.</li>
+<li>bmad-help ile başlangıç yolunu sorun veya gds-quick-dev çağırın.</li>
+</ol>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-help</code>
+<button class="copy-text" data-copy="bmad-help" aria-label="Komutu kopyala: bmad-help">Kopyala</button>
+</div>
+<p>Kurucunun sürümü sabitlenmiş olsa da harici oyun modülü daha yeni bir kaynak indirebilir. Bu sayfadaki komut adları paket 0.7.2 kaynağındaki gerçek skill dosyalarına dayanır.</p>
+<div class="alert alert-info">Bazı README örneklerinde eski <code>bmgd-*</code> isimleri bulunur. Bu rehberde <code>src/module-help.csv</code> ve beceri dosyalarındaki <code>gds-*</code> adları kullanılır. Kurduğunuz sürümün beceri listesini esas alın.</div>
+</section>
+<section class="section" id="agents">
+<h2>👥 Beş Oyun Geliştirme Rolü</h2>
+<div class="agents-grid">
+<article class="agent-card">
+<h3>Samus Shepard · Oyun tasarımcısı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-agent-game-designer</code>
+<button class="copy-text" data-copy="gds-agent-game-designer" aria-label="Komutu kopyala: gds-agent-game-designer">Kopyala</button>
+</div>
+<p>Vizyon, GDD ve anlatı kararlarını yönetir. Mekaniğin oyuncuya neden ilginç geldiğini sorgular.</p>
+</article>
+<article class="agent-card">
+<h3>Cloud Dragonborn · Oyun mimarı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-agent-game-architect</code>
+<button class="copy-text" data-copy="gds-agent-game-architect" aria-label="Komutu kopyala: gds-agent-game-architect">Kopyala</button>
+</div>
+<p>Motor sistemleri, teknik yapı ve gerektiğinde çok oyunculu altyapı üzerinde çalışır.</p>
+</article>
+<article class="agent-card">
+<h3>Link Freeman · Oyun geliştirici</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-agent-game-dev</code>
+<button class="copy-text" data-copy="gds-agent-game-dev" aria-label="Komutu kopyala: gds-agent-game-dev">Kopyala</button>
+</div>
+<p>Story uygulaması, kod inceleme, QA ve sprint çalışmalarını birleştiren geliştirici rolüdür.</p>
+</article>
+<article class="agent-card">
+<h3>Indie · Solo geliştirici</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-agent-game-solo-dev</code>
+<button class="copy-text" data-copy="gds-agent-game-solo-dev" aria-label="Komutu kopyala: gds-agent-game-solo-dev">Kopyala</button>
+</div>
+<p>Küçük kapsamlı işler ve hızlı prototipler için kullanılır.</p>
+</article>
+<article class="agent-card">
+<h3>Paige · Teknik yazar</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-agent-tech-writer</code>
+<button class="copy-text" data-copy="gds-agent-tech-writer" aria-label="Komutu kopyala: gds-agent-tech-writer">Kopyala</button>
+</div>
+<p>Oyun projesini geliştiriciler ve sonraki ajanlar için anlaşılır biçimde belgeler.</p>
+</article>
+</div>
+</section>
+<section class="section" id="workflows">
+<h2>📋 Konseptten Üretime</h2>
+<div class="features-grid">
+<article class="feature-card">
+<h3>1. Ön üretim</h3>
+<p>gds-brainstorm-game ile fikir üretin; gerekiyorsa araştırın. gds-create-game-brief ile hedef oyuncu, platform ve çekirdek döngüyü netleştirin.</p>
+</article>
+<article class="feature-card">
+<h3>2. Tasarım</h3>
+<p>gds-gdd ile mekanikler ve ilerlemeyi yazın. Hikâye gerekiyorsa narrative, arayüz ve girdi için gds-ux ekleyin.</p>
+</article>
+<article class="feature-card">
+<h3>3. Teknik hazırlık</h3>
+<p>gds-game-architecture ile sistemleri tasarlayın. Epic/story listesi ve uygulama hazırlığı değerlendirmesini yapın.</p>
+</article>
+<article class="feature-card">
+<h3>4. Üretim planı</h3>
+<p>gds-sprint-planning ile takip dosyasını oluşturun. gds-create-story ile sıradaki işi ayrıntılandırın.</p>
+</article>
+<article class="feature-card">
+<h3>5. Uygulama döngüsü</h3>
+<p>gds-dev-story → gds-code-review yoluyla story’yi geliştirin. Kapsam değişirse correct-course; neden belirsizse investigate kullanın.</p>
+</article>
+<article class="feature-card">
+<h3>6. Oyun deneyimi ve kapanış</h3>
+<p>Playtest, performans ve otomasyon ihtiyaçlarını seçin. Epic sonunda retrospective ile sonucu değerlendirin.</p>
+</article>
+</div>
+<h3>Hızlı prototip yolu</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-quick-dev</code>
+<button class="copy-text" data-copy="gds-quick-dev" aria-label="Komutu kopyala: gds-quick-dev">Kopyala</button>
+</div>
+<p>“Tek sahnede, yalnızca hareket ve zıplama mekaniğini deneyelim; menü ve kayıt sistemi kapsam dışı” gibi küçük bir hedef verin. Mekanik işe yararsa tasarım ve üretim planını derinleştirin.</p>
+<h3>GDD ile PRD arasındaki fark</h3>
+<p>GDD oyunun nasıl oynandığını ve tasarım kararlarını anlatır. PRD, ürün gereksinimleri ve başka araçlarla çalışma için yararlıdır. Her projede ikisini birden üretmek zorunlu değildir.</p>
+</section>
+<section class="section" id="commands">
+<h2>⌨️ Oyun Geliştirme Komutları</h2>
+<p>Arama yapın veya bir karttan başlayın. Beceri adları AI sohbetinde, terminal olarak belirtilen komutlar terminalde kullanılır.</p>
+<label for="command-search">Bu modülün komutlarında ara</label>
+<input id="command-search" type="search" placeholder="Komut veya kullanım amacı…">
+<p id="result-count" role="status">
+</p>
+<div class="features-grid">
+<article class="workflow-item command">
+<h3>BG · Oyun fikri</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-brainstorm-game</code>
+<button class="copy-text" data-copy="gds-brainstorm-game" aria-label="Komutu kopyala: gds-brainstorm-game">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Oyuna özel fikir üretimi yürütür.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Konsept henüz belirsizken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> 10 dakikalık oturumlara uygun, tek mekanikli bir bulmaca oyunu için fikirler üret.</div>
+<div class="meta">Beklenen çıktı: Oyun fikirleri</div>
+</article>
+<article class="workflow-item command">
+<h3>DR · Alan araştırması</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-domain-research</code>
+<button class="copy-text" data-copy="gds-domain-research" aria-label="Komutu kopyala: gds-domain-research">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Tür ve oyun alanı hakkında araştırma yapar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Pazar veya tür beklentilerini anlamak için.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Kısa oturumlu bulmaca oyunlarının oyuncu beklentilerini araştır.</div>
+<div class="meta">Beklenen çıktı: Araştırma belgesi</div>
+</article>
+<article class="workflow-item command">
+<h3>GB · Oyun özeti</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-create-game-brief</code>
+<button class="copy-text" data-copy="gds-create-game-brief" aria-label="Komutu kopyala: gds-create-game-brief">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Oyun vizyonunu ve ilk kapsamı tanımlar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Bir fikir seçildiğinde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Işık yansıtma bulmacası için hedef oyuncu, platform ve çekirdek döngüyü netleştir.</div>
+<div class="meta">Beklenen çıktı: Game brief</div>
+</article>
+<article class="workflow-item command">
+<h3>GDD · Oyun tasarım belgesi</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-gdd</code>
+<button class="copy-text" data-copy="gds-gdd" aria-label="Komutu kopyala: gds-gdd">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Mekanik, ilerleme ve tasarım kararlarını birleştirir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Tam üretime geçmeden önce.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Game brief’ten GDD oluştur; ilk sürümü 10 bölümle sınırla.</div>
+<div class="meta">Beklenen çıktı: GDD</div>
+</article>
+<article class="workflow-item command">
+<h3>ND · Anlatı tasarımı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-create-narrative</code>
+<button class="copy-text" data-copy="gds-create-narrative" aria-label="Komutu kopyala: gds-create-narrative">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Dünya, karakter ve hikâye yapısını tasarlar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Hikâye odaklı oyunda.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Terk edilmiş istasyonda geçen bulmaca oyununun anlatısını tasarla.</div>
+<div class="meta">Beklenen çıktı: Narrative belgesi</div>
+</article>
+<article class="workflow-item command">
+<h3>CU · Oyun UX</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-ux</code>
+<button class="copy-text" data-copy="gds-ux" aria-label="Komutu kopyala: gds-ux">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> HUD, arayüz, girdi ve oyuncu yolculuğunu planlar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Oyuncunun oyunu nasıl okuyacağını tasarlarken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Dokunmatik kontrolleri, tekrar deneme ve ipucu akışını tasarla.</div>
+<div class="meta">Beklenen çıktı: DESIGN.md ve EXPERIENCE.md</div>
+</article>
+<article class="workflow-item command">
+<h3>PRD · Ürün gereksinimleri</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-prd</code>
+<button class="copy-text" data-copy="gds-prd" aria-label="Komutu kopyala: gds-prd">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Oyunun PRD belgesini oluşturur veya günceller.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> GDD’yi ürün gereksinimlerine veya harici araçlara taşırken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> GDD’den ilk sürüm gereksinimlerini çıkar; kapsam dışını belirt.</div>
+<div class="meta">Beklenen çıktı: PRD</div>
+</article>
+<article class="workflow-item command">
+<h3>GA · Oyun mimarisi</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-game-architecture</code>
+<button class="copy-text" data-copy="gds-game-architecture" aria-label="Komutu kopyala: gds-game-architecture">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Motor, sistem ve teknik kararları kurar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Uygulamadan önce ortak yapı gerektiğinde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Godot projesinde bölüm verisi, ışın hesaplama ve kayıt sistemini tasarla.</div>
+<div class="meta">Beklenen çıktı: Oyun mimarisi</div>
+</article>
+<article class="workflow-item command">
+<h3>PC · Proje bağlamı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-generate-project-context</code>
+<button class="copy-text" data-copy="gds-generate-project-context" aria-label="Komutu kopyala: gds-generate-project-context">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Ajanların ortak teknik kuralları izlemesini sağlar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Tekrarlanan geliştirme oturumları öncesinde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Bu Godot projesinin düğüm, isimlendirme ve kaynak kurallarını kaydet.</div>
+<div class="meta">Beklenen çıktı: Proje bağlamı</div>
+</article>
+<article class="workflow-item command">
+<h3>CE · İşi bölme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-create-epics-and-stories</code>
+<button class="copy-text" data-copy="gds-create-epics-and-stories" aria-label="Komutu kopyala: gds-create-epics-and-stories">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> GDD’den uygulama işleri çıkarır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Mimari ve kapsam yeterince netse.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Işık hesaplama, bölüm yükleme ve kazanma akışını story’lere böl.</div>
+<div class="meta">Beklenen çıktı: Epic ve story listesi</div>
+</article>
+<article class="workflow-item command">
+<h3>IR · Hazırlık</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-check-implementation-readiness</code>
+<button class="copy-text" data-copy="gds-check-implementation-readiness" aria-label="Komutu kopyala: gds-check-implementation-readiness">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> GDD, UX, mimari ve işlerin uyumunu ele alır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Üretime geçerken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Planlarda çelişki ve eksik bağımlılık var mı değerlendir.</div>
+<div class="meta">Beklenen çıktı: Hazırlık raporu</div>
+</article>
+<article class="workflow-item command">
+<h3>SP · Sprint planı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-sprint-planning</code>
+<button class="copy-text" data-copy="gds-sprint-planning" aria-label="Komutu kopyala: gds-sprint-planning">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Epic’lerden sprint durum dosyasını oluşturur.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Üretim takibi başlarken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> İlk oynanabilir prototip epic’i için sprint planı çıkar.</div>
+<div class="meta">Beklenen çıktı: sprint-status.yaml</div>
+</article>
+<article class="workflow-item command">
+<h3>SS · Sprint durumu</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-sprint-status</code>
+<button class="copy-text" data-copy="gds-sprint-status" aria-label="Komutu kopyala: gds-sprint-status">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> İlerleyiş ve sonraki işi önerir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Nerede kaldığınızı görmek için.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Sprint durumunu ve sıradaki önerilen işi göster.</div>
+<div class="meta">Beklenen çıktı: Durum ve risk özeti</div>
+</article>
+<article class="workflow-item command">
+<h3>CS · Story hazırlama</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-create-story</code>
+<button class="copy-text" data-copy="gds-create-story" aria-label="Komutu kopyala: gds-create-story">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Geliştirici için ayrıntılı bağlam oluşturur.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Tek bir işi uygulamaya almadan önce.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Işının aynadan yansıması story’sini kabul ölçütleriyle hazırla.</div>
+<div class="meta">Beklenen çıktı: Story belgesi</div>
+</article>
+<article class="workflow-item command">
+<h3>DS · Story uygulama</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-dev-story</code>
+<button class="copy-text" data-copy="gds-dev-story" aria-label="Komutu kopyala: gds-dev-story">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Story görevlerini ve ilgili testleri uygular.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Hazır story üzerinde çalışırken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Hazırlanan ışın yansıması story’sini uygula.</div>
+<div class="meta">Beklenen çıktı: Oyun kodu ve ilgili doğrulama</div>
+</article>
+<article class="workflow-item command">
+<h3>CR · Kod inceleme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-code-review</code>
+<button class="copy-text" data-copy="gds-code-review" aria-label="Komutu kopyala: gds-code-review">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> İncelemeye hazır story kodunu ele alır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Uygulama tamamlandığında.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Yansıma hesabında sonsuz döngü ve sahne yaşam döngüsünü incele.</div>
+<div class="meta">Beklenen çıktı: İnceleme bulguları</div>
+</article>
+<article class="workflow-item command">
+<h3>ER · Retrospektif</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-retrospective</code>
+<button class="copy-text" data-copy="gds-retrospective" aria-label="Komutu kopyala: gds-retrospective">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Tamamlanan epic’ten öğrenilenleri çıkarır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Epic sonunda.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> İlk oynanabilir prototip epic’ini değerlendir.</div>
+<div class="meta">Beklenen çıktı: Retrospektif belgesi</div>
+</article>
+<article class="workflow-item command">
+<h3>QD · Hızlı prototip</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-quick-dev</code>
+<button class="copy-text" data-copy="gds-quick-dev" aria-label="Komutu kopyala: gds-quick-dev">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> İsteği netleştirip planlama, uygulama ve incelemeyi tek akışta ele alır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Küçük mekanik veya prototipte.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Godot’ta tek sahnede fareyle dönen ayna ve bir ışık kaynağı prototipi yap.</div>
+<div class="meta">Beklenen çıktı: Spec ve uygulama</div>
+</article>
+<article class="workflow-item command">
+<h3>DP · Mevcut oyunu belgele</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-document-project</code>
+<button class="copy-text" data-copy="gds-document-project" aria-label="Komutu kopyala: gds-document-project">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Var olan oyun projesini anlamaya yardımcı belgeler üretir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Mevcut oyuna katılırken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Bu oyunun sahnelerini, veri akışını ve önemli sistemlerini belgele.</div>
+<div class="meta">Beklenen çıktı: Proje dokümantasyonu</div>
+</article>
+<article class="workflow-item command">
+<h3>CC · Yön düzeltme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-correct-course</code>
+<button class="copy-text" data-copy="gds-correct-course" aria-label="Komutu kopyala: gds-correct-course">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Sprintte önemli kapsam değişikliğini ele alır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Plan uygulanamaz hale geldiğinde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Mobil hedefi kaldırıyoruz; kalan story ve tasarım etkilerini çıkar.</div>
+<div class="meta">Beklenen çıktı: Değişiklik önerisi</div>
+</article>
+<article class="workflow-item command">
+<h3>IN · Sorunu araştırma</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-investigate</code>
+<button class="copy-text" data-copy="gds-investigate" aria-label="Komutu kopyala: gds-investigate">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Hata veya olayı kanıtlara dayalı inceler.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Nedeni belirsiz sorunlarda.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Bölüm değişiminde oluşan takılmanın kod ve kayıtlarla nedenini araştır.</div>
+<div class="meta">Beklenen çıktı: Araştırma dosyası</div>
+</article>
+<article class="workflow-item command">
+<h3>TF · Test altyapısı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-test-framework</code>
+<button class="copy-text" data-copy="gds-test-framework" aria-label="Komutu kopyala: gds-test-framework">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Oyun motoruna uygun test altyapısını kurar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Otomasyon temeli gerektiğinde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Godot projesine uygun test altyapısını hazırla.</div>
+<div class="meta">Beklenen çıktı: Test altyapısı</div>
+</article>
+<article class="workflow-item command">
+<h3>TD · Test tasarımı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-test-design</code>
+<button class="copy-text" data-copy="gds-test-design" aria-label="Komutu kopyala: gds-test-design">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Oynanış ve ilerleme senaryolarını planlar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Kapsamı belirlerken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Bölüm geçişleri ve kayıt sistemi için risk odaklı senaryolar çıkar.</div>
+<div class="meta">Beklenen çıktı: Test tasarımı</div>
+</article>
+<article class="workflow-item command">
+<h3>TA · Test otomasyonu</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-test-automate</code>
+<button class="copy-text" data-copy="gds-test-automate" aria-label="Komutu kopyala: gds-test-automate">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Oyun için otomatik testler üretir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Uygulanmış davranışları kapsarken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Ayna yansıması ve kazanma koşulu için otomatik testler üret.</div>
+<div class="meta">Beklenen çıktı: Otomatik testler</div>
+</article>
+<article class="workflow-item command">
+<h3>ES · Uçtan uca altyapı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-e2e-scaffold</code>
+<button class="copy-text" data-copy="gds-e2e-scaffold" aria-label="Komutu kopyala: gds-e2e-scaffold">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Uçtan uca oyun test yapısını hazırlar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Oyuncu akışlarını otomasyona taşırken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Başlat, bölüm tamamla ve sonraki bölüme geç akışı için E2E altyapısı hazırla.</div>
+<div class="meta">Beklenen çıktı: E2E iskeleti</div>
+</article>
+<article class="workflow-item command">
+<h3>PP · Oynanabilirlik planı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-playtest-plan</code>
+<button class="copy-text" data-copy="gds-playtest-plan" aria-label="Komutu kopyala: gds-playtest-plan">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Gerçek oyuncularla değerlendirmeyi yapılandırır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Eğlence ve anlaşılabilirliği görmek için.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Beş oyuncuyla ilk bölümün anlaşılmasını gözlemleyeceğimiz planı hazırla.</div>
+<div class="meta">Beklenen çıktı: Playtest planı</div>
+</article>
+<article class="workflow-item command">
+<h3>PT · Performans stratejisi</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-performance-test</code>
+<button class="copy-text" data-copy="gds-performance-test" aria-label="Komutu kopyala: gds-performance-test">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Performans hedefleri ve ölçüm yaklaşımını planlar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Hedef cihaz kısıtlarında.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Düşük özellikli Android cihaz için kare süresi ve bellek ölçüm stratejisi oluştur.</div>
+<div class="meta">Beklenen çıktı: Performans stratejisi</div>
+</article>
+<article class="workflow-item command">
+<h3>TR · Test inceleme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">gds-test-review</code>
+<button class="copy-text" data-copy="gds-test-review" aria-label="Komutu kopyala: gds-test-review">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Test kalitesini ve kapsamını değerlendirir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Otomasyon oluştuğunda.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Mevcut oyun testlerinin eksik ve kararsız alanlarını incele.</div>
+<div class="meta">Beklenen çıktı: Test inceleme bulguları</div>
+</article>
+</div>
+<p id="no-results" hidden>Sonuç bulunamadı.</p>
+</section>
+<section class="section" id="examples">
+<h2>💡 Örnek: Godot ile Işık Bulmacası</h2>
+<div class="alert alert-info">
+<strong>Senaryo:</strong> Oyuncu aynaları döndürerek ışığı hedefe ulaştırıyor. İlk sürüm tek oyunculu ve 10 bölümden oluşuyor.</div>
+<ol>
+<li>
+<strong>Konsept:</strong> gds-create-game-brief — “Godot için kısa oturumlu ışık bulmacası. Çekirdek döngü, hedef oyuncu ve ilk sürüm sınırlarını belirle.”</li>
+<li>
+<strong>Tasarım:</strong> gds-gdd — “Aynaların dönüş aralığı, ışının davranışı, kazanma/yeniden deneme ve bölüm zorluk artışını yaz.”</li>
+<li>
+<strong>Prototip:</strong> gds-quick-dev — “Tek kaynak, iki ayna ve bir hedef içeren tek sahne hazırla. Görseller yer tutucu olsun.”</li>
+<li>
+<strong>Mimari:</strong> Konsept işe yarıyorsa gds-game-architecture ile bölüm verilerini, ışın hesaplamasını ve sahne geçişlerini ayırın.</li>
+<li>
+<strong>İşler:</strong> gds-create-epics-and-stories ve sprint-planning ile üretimi planlayın. İlk story için create-story, ardından dev-story kullanın.</li>
+<li>
+<strong>Oyuncu değerlendirmesi:</strong> gds-playtest-plan ile ilk bölümün açıklama olmadan anlaşılmasını gözlemleyecek oturumu planlayın.</li>
+<li>
+<strong>Sonraki karar:</strong> Oyuncu bulgularına göre tasarım veya kapsamı güncelleyin; otomasyon başarısını “oyun eğlenceli” sonucuyla karıştırmayın.</li>
+</ol>
+<p>
+<strong>Beklenen çıktı:</strong> Oyun özeti, GDD, teknik kararlar, üretim işleri ve sınırlı bir oynanabilir prototip. Görsel varlık, animasyon, müzik ve ses üretimi ayrı araç veya ekip işi olarak ele alınır.</p>
+</section>
+<section class="section" id="faq">
+<h2>❓ Sık Sorulanlar</h2>
+<details>
+<summary>Game Dev Studio tek başına kullanılabilir mi?</summary>
+<p>Ana Method ürün geliştirme modülünün tamamı zorunlu değildir. Yine de BMAD kurulum altyapısı ve seçilen AI/motor ortamı gerekir.</p>
+</details>
+<details>
+<summary>QA ve Scrum Master neden ayrı ajan değil?</summary>
+<p>Bu kaynak sürümünde Link Freeman geliştirme, QA ve sprint sorumluluklarını birleştiren rol olarak tanımlanır.</p>
+</details>
+<details>
+<summary>Paige, Method sayfasında neden yok?</summary>
+<p>Ajan listeleri modüle göre değişir. Game Dev Studio’nun bu sürümünde teknik yazar becerisi vardır; Method 6.12.4’ün beş temel ajan listesiyle aynı değildir.</p>
+</details>
+<details>
+<summary>Komple oyunu tek komutla üretir mi?</summary>
+<p>Rehber bunu vaat etmez. Kapsam, motor kurulumu, varlıklar, tasarım kararları ve oyuncu geri bildirimi ayrıca yönetilir. Küçük prototip ile tam üretim farklı derinlikler ister.</p>
+</details>
+</section>
+<section class="section" id="shortcuts"><h2>⌨️ · Ajan menüleri ve kısayollar</h2><p><strong>Kullanım sırası:</strong> Ajanın beceri adını AI sohbetinde çağırın → açılan menüden kodu yazın → hedefinizi ve ilgili dosyaları verin → çıktıyı sonraki işe aktarın. Bu kodlar terminal komutu veya her yerde çalışan genel kısayollar değildir.</p><h3>gds-agent-game-architect</h3><div class="cmd-wrapper"><code class="cmd">gds-agent-game-architect</code><button class="copy-text" data-copy="gds-agent-game-architect">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>GA</code></td><td>Motor, sistem ve teknik kararları kurar.</td><td><code>gds-game-architecture</code></td></tr><tr><td><code>PC</code></td><td>Ajanların ortak teknik kuralları izlemesini sağlar.</td><td><code>gds-generate-project-context</code></td></tr><tr><td><code>CC</code></td><td>Sprintte önemli kapsam değişikliğini ele alır.</td><td><code>gds-correct-course</code></td></tr><tr><td><code>IR</code></td><td>GDD, UX, mimari ve işlerin uyumunu ele alır.</td><td><code>gds-check-implementation-readiness</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-architect/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>gds-agent-game-designer</h3><div class="cmd-wrapper"><code class="cmd">gds-agent-game-designer</code><button class="copy-text" data-copy="gds-agent-game-designer">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>BG</code></td><td>Oyuna özel fikir üretimi yürütür.</td><td><code>gds-brainstorm-game</code></td></tr><tr><td><code>GB</code></td><td>Oyun vizyonunu ve ilk kapsamı tanımlar.</td><td><code>gds-create-game-brief</code></td></tr><tr><td><code>GDD</code></td><td>Mekanik, ilerleme ve tasarım kararlarını birleştirir.</td><td><code>gds-gdd</code></td></tr><tr><td><code>ND</code></td><td>Dünya, karakter ve hikâye yapısını tasarlar.</td><td><code>gds-create-narrative</code></td></tr><tr><td><code>CU</code></td><td>HUD, arayüz, girdi ve oyuncu yolculuğunu planlar.</td><td><code>gds-ux</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-designer/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>gds-agent-game-dev</h3><div class="cmd-wrapper"><code class="cmd">gds-agent-game-dev</code><button class="copy-text" data-copy="gds-agent-game-dev">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>DS</code></td><td>Story görevlerini ve ilgili testleri uygular.</td><td><code>gds-dev-story</code></td></tr><tr><td><code>CR</code></td><td>İncelemeye hazır story kodunu ele alır.</td><td><code>gds-code-review</code></td></tr><tr><td><code>QD</code></td><td>İsteği netleştirip planlama, uygulama ve incelemeyi tek akışta ele alır.</td><td><code>gds-quick-dev</code></td></tr><tr><td><code>CS</code></td><td>Geliştirici için ayrıntılı bağlam oluşturur.</td><td><code>gds-create-story</code></td></tr><tr><td><code>SP</code></td><td>Epic’lerden sprint durum dosyasını oluşturur.</td><td><code>gds-sprint-planning</code></td></tr><tr><td><code>SS</code></td><td>İlerleyiş ve sonraki işi önerir.</td><td><code>gds-sprint-status</code></td></tr><tr><td><code>CC</code></td><td>Sprintte önemli kapsam değişikliğini ele alır.</td><td><code>gds-correct-course</code></td></tr><tr><td><code>ER</code></td><td>Tamamlanan epic’ten öğrenilenleri çıkarır.</td><td><code>gds-retrospective</code></td></tr><tr><td><code>TF</code></td><td>Oyun motoruna uygun test altyapısını kurar.</td><td><code>gds-test-framework</code></td></tr><tr><td><code>TD</code></td><td>Oynanış ve ilerleme senaryolarını planlar.</td><td><code>gds-test-design</code></td></tr><tr><td><code>TA</code></td><td>Oyun için otomatik testler üretir.</td><td><code>gds-test-automate</code></td></tr><tr><td><code>ES</code></td><td>Uçtan uca oyun test yapısını hazırlar.</td><td><code>gds-e2e-scaffold</code></td></tr><tr><td><code>PP</code></td><td>Gerçek oyuncularla değerlendirmeyi yapılandırır.</td><td><code>gds-playtest-plan</code></td></tr><tr><td><code>PT</code></td><td>Performans hedefleri ve ölçüm yaklaşımını planlar.</td><td><code>gds-performance-test</code></td></tr><tr><td><code>TR</code></td><td>Test kalitesini ve kapsamını değerlendirir.</td><td><code>gds-test-review</code></td></tr><tr><td><code>IN</code></td><td>Hata veya olayı kanıtlara dayalı inceler.</td><td><code>gds-investigate</code></td></tr><tr><td><code>AE</code></td><td>Çıktıyı farklı düşünme yöntemleriyle derinleştirir.</td><td><code>bmad-advanced-elicitation</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-dev/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>gds-agent-game-solo-dev</h3><div class="cmd-wrapper"><code class="cmd">gds-agent-game-solo-dev</code><button class="copy-text" data-copy="gds-agent-game-solo-dev">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>QD</code></td><td>İsteği netleştirip planlama, uygulama ve incelemeyi tek akışta ele alır.</td><td><code>gds-quick-dev</code></td></tr><tr><td><code>CR</code></td><td>İncelemeye hazır story kodunu ele alır.</td><td><code>gds-code-review</code></td></tr><tr><td><code>TF</code></td><td>Oyun motoruna uygun test altyapısını kurar.</td><td><code>gds-test-framework</code></td></tr><tr><td><code>AE</code></td><td>Çıktıyı farklı düşünme yöntemleriyle derinleştirir.</td><td><code>bmad-advanced-elicitation</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-solo-dev/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>gds-agent-tech-writer</h3><div class="cmd-wrapper"><code class="cmd">gds-agent-tech-writer</code><button class="copy-text" data-copy="gds-agent-tech-writer">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>DP</code></td><td>Var olan oyun projesini anlamaya yardımcı belgeler üretir.</td><td><code>gds-document-project</code></td></tr><tr><td><code>WD</code></td><td>Rehberli konuşmayla yeni belge yazma.</td><td><code>Ajanın kendi iç işlemi</code></td></tr><tr><td><code>US</code></td><td>Dokümantasyon standartlarına kullanıcının kritik kurallarını ekleme.</td><td><code>Ajanın kendi iç işlemi</code></td></tr><tr><td><code>MG</code></td><td>Anlatılan yapıyı Mermaid diyagramına dönüştürme.</td><td><code>Ajanın kendi iç işlemi</code></td></tr><tr><td><code>VD</code></td><td>Belgeyi standartlara göre değerlendirme.</td><td><code>Ajanın kendi iç işlemi</code></td></tr><tr><td><code>EC</code></td><td>Teknik konuyu örnek ve diyagramlarla açıklama.</td><td><code>Ajanın kendi iç işlemi</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-tech-writer/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><p><strong>Önemli ayrım:</strong> Aynı kod farklı ajanda farklı iş başlatabilir. Örneğin Method analistinin CR kodu rakip araştırması, geliştiricinin CR kodu kod incelemesi, CIS sunum uzmanının CR kodu sunum eleştirisidir.</p></section><section class="section" id="menu-examples"><h2>💬 · Oyun ajanı menülerinin kullanım örnekleri</h2><h3>Paige ile dokümantasyon akışı</h3><ol><li><code>gds-agent-tech-writer</code> açın; <code>DP</code> ile mevcut oyun projesinin yapısını belgeleyin.</li><li><code>US</code>: “Belgelerde her sistemin sorumlu sahnesi ve veri kaynağı belirtilsin” kuralını standartlara ekleyin.</li><li><code>WD</code>: “Bölüm yükleme sisteminin bakım rehberini yaz.”</li><li><code>MG</code>: “Menüden bölüme geçişi Mermaid diyagramıyla göster.”</li><li><code>EC</code>: “Godot sinyallerini bu oyundaki örnek üzerinden yeni geliştiriciye açıkla.”</li><li><code>VD</code>: “Bakım rehberini belirlediğimiz standartlara göre değerlendir.”</li></ol><p><strong>Çıktı:</strong> Proje belgeleri, güncellenmiş yazım kuralları, diyagram ve değerlendirme bulguları. WD/US/MG/VD/EC ayrı gds terminal komutları değildir; Paige’in iç menü işlemleridir.</p><h3>Indie ile prototipi derinleştirme</h3><p><code>gds-agent-game-solo-dev</code> → <code>QD</code> → “Tek sahnede ışık yansıması prototipi” → uygulama → <code>AE</code> → “Tasarımın zayıf varsayımlarını sorgula” → gerekiyorsa değişiklik. AE, <code>bmad-advanced-elicitation</code> becerisini çağırır; yeni bir oyun motoru komutu değildir.</p><h3>Üretimde sorun çıktığında</h3><p>Link ile <code>SS</code> durumunu görün. Beklenmeyen hatada <code>IN</code> ile kanıt toplayın; kapsam değişikliği gerekiyorsa <code>CC</code>, plan için <code>SP</code>, sıradaki story için <code>CS → DS → CR</code> yolunu izleyin. Böylece inceleme bulgusu doğrudan yeni ve belirsiz bir geliştirme isteğine dönüşmez.</p></section><section class="section" id="coverage"><h2>📌 · Kapsam ve ayrıntılı kaynaklar</h2><p>Bu rehberdeki kapsam, belirtilen sürümün kullanıcıya açık becerileri, ajan menüleri ve belgelenen çalışma yollarıdır. Kaynak içindeki yardımcı Python betikleri bağımsız kullanıcı becerileri gibi sunulmaz. Yeni sürümler farklı adlar ekleyebilir.</p><p><strong>Üç farklı çağrı biçimi:</strong> Terminal komutu terminale; beceri adı AI aracına; kısa menü kodu yalnız ilgili ajan veya iş akışı açıldıktan sonra yazılır. Örneklerdeki dosya, klasör ve kimlikleri kendi projenizle değiştirin.</p><ul><li><a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/module-help.csv">src/module-help.csv</a></li></ul></section><section class="section" id="version">
+<h2>📌 Sürüm ve Kaynaklar</h2>
+<div class="alert alert-info">
+<strong>Bu rehberin kaynağı:</strong> package.json: 0.7.2; src/module.yaml: 0.7.0 · 21 Ekim 2026<br>Kaynak commit: <code>ff8870955203</code>
+<br>Metehan Soner tarafından hazırlanmıştır.</div>
+<ul>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/package.json">Paket sürümü</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/module.yaml">Modül kayıt sürümü ve kurulum tercihleri</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/module-help.csv">28 iş akışı ve kullanım sırası</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-dev/SKILL.md">Birleşik geliştirici rolü</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/README.md">Genel kapsam ve kurulum</a>
+</li>
+</ul>
+<p>Komutlar yukarıdaki kaynak anlık görüntüsüne dayanır. Kurulum komutları ana dalı izlediğinde daha yeni bir sürüm gelebilir. Paket sürümü ile modül kayıt sürümü farklıysa burada ayrı belirtilmiştir.</p>
+</section>
+</div>
+</main>
+<footer class="footer">
+<p>
+<strong>Metehan Soner tarafından hazırlanmıştır.</strong>
+</p>
+<p>Game Dev Studio · Paket 0.7.2 · modül kaydı 0.7.0 · 21 Ekim 2026</p>
+<p>Bağımsız Türkçe rehber · <a style="color:#ddd6fe" href="#version">Sürüm ve kaynaklar</a>
+</p>
+</footer>
+<div id="copy-status" role="status" aria-live="polite">
+</div>
+</body>
+</html>

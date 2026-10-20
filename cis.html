@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creative Intelligence Suite Kullanım Rehberi | Metehan Soner</title>
+<meta name="author" content="Metehan Soner">
+<meta name="description" content="Fikir üret, kök nedeni bul, kullanıcıyı anla ve ürününü anlat.">
+<link rel="stylesheet" href="assets/ecosystem.css">
+<script src="assets/guide.js" defer>
+</script>
+</head>
+<body>
+<a class="skip" href="#overview">İçeriğe geç</a>
+<nav class="top-nav" aria-label="Ekosistemler">
+<div class="nav-content">
+<a class="logo" href="index.html">BMAD EKOSİSTEMİ</a>
+<button id="menu-toggle" aria-controls="sidebar" aria-expanded="false">Menü ☰</button>
+<ul class="nav-menu ecosystem-menu" id="sidebar">
+<li>
+<a href="index.html">BMAD Method</a>
+</li>
+<li>
+<a href="builder.html">Builder</a>
+</li>
+<li>
+<a href="cis.html" class="current" aria-current="page">Creative Intelligence</a>
+</li>
+<li>
+<a href="tea.html">Test Architect</a>
+</li>
+<li>
+<a href="loop.html">Loop</a>
+</li>
+<li>
+<a href="game-dev.html">Game Dev Studio</a>
+</li>
+</ul>
+</div>
+</nav>
+<section class="hero">
+<h1>Creative Intelligence Suite</h1>
+<p>Fikir üret, kök nedeni bul, kullanıcıyı anla ve ürününü anlat.</p>
+<div class="hero-buttons">
+<a class="btn btn-primary" href="#installation">Kurulumdan Başla</a>
+<a class="btn btn-secondary" href="#examples">Örnekle Öğren</a>
+</div>
+<div class="version-badge module-version">CIS 0.4.0-next · preview · Kaynak tarihi: 21 Ekim 2026</div>
+<p class="credit">Metehan Soner tarafından hazırlanmıştır.</p>
+</section>
+<main class="container">
+<nav class="local-menu" aria-label="Bu rehberin bölümleri">
+<a href="#overview">Genel bakış</a>
+<a href="#installation">Kurulum</a>
+<a href="#agents">Ajanlar / araçlar</a>
+<a href="#workflows">Adım adım kullanım</a>
+<a href="#commands">Komutlar</a>
+<a href="#examples">Proje örneği</a>
+<a href="#faq">Sık sorulanlar</a>
+<a href="#shortcuts">Ajan menüleri ve kısayollar</a>
+<a href="#menu-examples">Menüden başlayarak örnek kullanım</a>
+<a href="#coverage">Kapsam ve ayrıntılı kaynaklar</a>
+<a href="#version">Sürüm ve kaynaklar</a>
+</nav>
+<div class="guide-content">
+<section class="section" id="overview">
+<h2>💡 CIS Nedir?</h2>
+<p>CIS, geliştirmeden önceki belirsizliği azaltmak ve yaratıcı çalışmayı yapılandırmak için kullanılır. Sadece yazılım için değildir: bir hizmeti tasarlamak, iş modelini tartışmak veya sunumun hikâyesini kurmak için de kullanılabilir.</p>
+<div class="alert alert-info">
+<strong>Önce hangi çıktıyı istediğinizi seçin:</strong> Kullanıcıyı anlamak → Maya. Bir neden ve çözüm bulmak → Dr. Quinn. Stratejik yön seçmek → Victor. Bir mesaj anlatmak → Sophia. Daha fazla fikir → Carson.</div>
+</section>
+<section class="section" id="installation">
+<h2>🚀 Kurulum</h2>
+<p>Bu rehber CIS’in <strong>0.4.0-next</strong> beceri tabanlı kaynağını anlatır. Modül kaydı <code>bmad</code> merkezinin 6.13.0 hattını ister; Method rehberindeki 6.12.4 kurulumuyla aynı yapı değildir. Node.js/npm, Git, Python 3.11+ ve uv hazırlayın.</p>
+<div class="cmd-wrapper">
+<code class="cmd">npx skills add bmad-code-org/BMAD-METHOD --skill bmad bmod-core-tools</code>
+<button class="copy-text" data-copy="npx skills add bmad-code-org/BMAD-METHOD --skill bmad bmod-core-tools" aria-label="Komutu kopyala: npx skills add bmad-code-org/BMAD-METHOD --skill bmad bmod-core-tools">Kopyala</button>
+</div>
+<div class="cmd-wrapper">
+<code class="cmd">npx skills add bmad-code-org/bmad-module-creative-intelligence-suite</code>
+<button class="copy-text" data-copy="npx skills add bmad-code-org/bmad-module-creative-intelligence-suite" aria-label="Komutu kopyala: npx skills add bmad-code-org/bmad-module-creative-intelligence-suite">Kopyala</button>
+</div>
+<p>Ardından AI sohbetinde:</p>
+<div class="cmd-wrapper">
+<code class="cmd">bmad setup cis</code>
+<button class="copy-text" data-copy="bmad setup cis" aria-label="Komutu kopyala: bmad setup cis">Kopyala</button>
+</div>
+<div class="cmd-wrapper">
+<code class="cmd">bmad status</code>
+<button class="copy-text" data-copy="bmad status" aria-label="Komutu kopyala: bmad status">Kopyala</button>
+</div>
+<p>Tüm CIS becerilerini ve <code>bmod-cis</code> modül kaydını dahil edin. Eksik önerilen core-tools becerilerini durum çıktısına göre ekleyin. Özellikle Carson oturumu için <code>bmad-brainstorming</code>, grup tartışmaları için <code>bmad-party-mode</code> gerekir.</p>
+</section>
+<section class="section" id="agents">
+<h2>👥 Altı Yaratıcı Çalışma Ortağı</h2>
+<div class="agents-grid">
+<article class="agent-card">
+<h3>Carson · Beyin fırtınası</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-agent-brainstorming-coach</code>
+<button class="copy-text" data-copy="bmad-cis-agent-brainstorming-coach" aria-label="Komutu kopyala: bmad-cis-agent-brainstorming-coach">Kopyala</button>
+</div>
+<p>Alışılmış çözümlerin dışına çıkarak seçenek üretir. Oturum için core-tools içindeki bmad-brainstorming kullanılır.</p>
+</article>
+<article class="agent-card">
+<h3>Maya · Tasarım odaklı düşünme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-agent-design-thinking-coach</code>
+<button class="copy-text" data-copy="bmad-cis-agent-design-thinking-coach" aria-label="Komutu kopyala: bmad-cis-agent-design-thinking-coach">Kopyala</button>
+</div>
+<p>Önce kullanıcıyı anlar; problemi tanımlayıp prototip adaylarına geçer.</p>
+</article>
+<article class="agent-card">
+<h3>Dr. Quinn · Problem çözme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-agent-creative-problem-solver</code>
+<button class="copy-text" data-copy="bmad-cis-agent-creative-problem-solver" aria-label="Komutu kopyala: bmad-cis-agent-creative-problem-solver">Kopyala</button>
+</div>
+<p>Belirti yerine kök nedeni arar, kısıtları ve çözüm seçeneklerini ele alır.</p>
+</article>
+<article class="agent-card">
+<h3>Victor · İnovasyon stratejisi</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-agent-innovation-strategist</code>
+<button class="copy-text" data-copy="bmad-cis-agent-innovation-strategist" aria-label="Komutu kopyala: bmad-cis-agent-innovation-strategist">Kopyala</button>
+</div>
+<p>Pazar boşluklarını, iş modelini ve stratejik seçenekleri tartışır.</p>
+</article>
+<article class="agent-card">
+<h3>Sophia · Hikâye anlatımı</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-agent-storyteller</code>
+<button class="copy-text" data-copy="bmad-cis-agent-storyteller" aria-label="Komutu kopyala: bmad-cis-agent-storyteller">Kopyala</button>
+</div>
+<p>Bir mesajı hedef kitlesine uygun anlatıya dönüştürür.</p>
+</article>
+<article class="agent-card">
+<h3>Caravaggio · Sunum</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-agent-presentation-master</code>
+<button class="copy-text" data-copy="bmad-cis-agent-presentation-master" aria-label="Komutu kopyala: bmad-cis-agent-presentation-master">Kopyala</button>
+</div>
+<p>Sunum, konuşma, görsel anlatım ve mevcut sunum eleştirisi için çalışır. Ayrı bir workflow yerine kendi menüsü vardır.</p>
+</article>
+</div>
+</section>
+<section class="section" id="workflows">
+<h2>📋 Bir CIS Oturumu Nasıl Yürütülür?</h2>
+<div class="features-grid">
+<article class="feature-card">
+<h3>1. Malzemeyi getir</h3>
+<p>Hedef kitle, sorun, mevcut veriler, kısıtlar ve neye karar vermek istediğinizi paylaşın. Varsayımları gerçek gözlemlerden ayırın.</p>
+</article>
+<article class="feature-card">
+<h3>2. Ajan veya doğrudan beceri seç</h3>
+<p>Bir kişiyle düşünmek için ajanı, belirli bir belge üretmek için doğrudan workflow becerisini açın.</p>
+</article>
+<article class="feature-card">
+<h3>3. Sorularla çerçeveyi netleştir</h3>
+<p>Ajanın sorularını kendi durumunuza göre yanıtlayın. Problem çözmede öneriye atlamadan önce teşhise zaman ayırın.</p>
+</article>
+<article class="feature-card">
+<h3>4. Bölüm bölüm ilerle</h3>
+<p>Oturum belgeyi parça parça geliştirir. Devam edebilir, uygun kurulum varsa farklı bakış açılarını çağırabilir veya mevcut bölümü derinleştirebilirsiniz.</p>
+</article>
+<article class="feature-card">
+<h3>5. Çıktıyı bir sonraki işe taşı</h3>
+<p>Fikir ve kullanıcı bulgularını ürün özetine; stratejiyi PRD kararlarına; hikâyeyi sunum veya lansman metnine girdi yapın.</p>
+</article>
+</div>
+<h3>Grup tartışması</h3>
+<p>
+<code>bmad-party-mode</code> kuruluysa CIS, <code>creative-studio</code> ve <code>midnight-salon</code> gruplarını sağlar. İlk grup altı uzmanı birleştirir; ikincisi daha serbest fikirler ve karşı görüşler içindir. Grup adını belirterek oturumu isteyin.</p>
+</section>
+<section class="section" id="commands">
+<h2>⌨️ CIS Komutları</h2>
+<p>Arama yapın veya bir karttan başlayın. Beceri adları AI sohbetinde, terminal olarak belirtilen komutlar terminalde kullanılır.</p>
+<label for="command-search">Bu modülün komutlarında ara</label>
+<input id="command-search" type="search" placeholder="Komut veya kullanım amacı…">
+<p id="result-count" role="status">
+</p>
+<div class="features-grid">
+<article class="workflow-item command">
+<h3>Tasarım odaklı düşünme</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-design-thinking</code>
+<button class="copy-text" data-copy="bmad-cis-design-thinking" aria-label="Komutu kopyala: bmad-cis-design-thinking">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Empati, problem tanımı, fikir, prototip ve kullanıcıyla değerlendirme planını kurar.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Kullanıcının neye ihtiyaç duyduğundan emin değilken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Yeni kullanıcılar ilk görevini tamamlayamıyor. Görüşme notlarından başlayarak onboarding deneyimini yeniden ele alalım.</div>
+<div class="meta">Beklenen çıktı: Kullanıcı bakış açısı, prototip adayları ve değerlendirme planı</div>
+</article>
+<article class="workflow-item command">
+<h3>Kök neden analizi</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-problem-solving</code>
+<button class="copy-text" data-copy="bmad-cis-problem-solving" aria-label="Komutu kopyala: bmad-cis-problem-solving">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Sorunu sınırlar, nedenleri sorgular ve uygulanabilir çözüm planı oluşturur.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Aynı problem çözülmüş görünmesine rağmen tekrarlıyorsa.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Bildirimleri artırmamıza rağmen kullanıcılar randevularını kaçırıyor. Nedenleri ve kısıtları birlikte inceleyelim.</div>
+<div class="meta">Beklenen çıktı: Kök neden değerlendirmesi, çözüm planı ve ölçütler</div>
+</article>
+<article class="workflow-item command">
+<h3>İnovasyon stratejisi</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-innovation-strategy</code>
+<button class="copy-text" data-copy="bmad-cis-innovation-strategy" aria-label="Komutu kopyala: bmad-cis-innovation-strategy">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> İş modelini ve pazarı ele alıp stratejik seçenekleri karşılaştırır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Hangi farklılaşmaya yatırım yapacağınıza karar verirken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Küçük kliniklere yönelik rezervasyon ürününü rakiplerinden nasıl ayırabiliriz? Mevcut müşteri notlarını kullan.</div>
+<div class="meta">Beklenen çıktı: Stratejik seçenekler, öneri, yol haritası ve karar eşikleri</div>
+</article>
+<article class="workflow-item command">
+<h3>Hikâye oluşturma</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-storytelling</code>
+<button class="copy-text" data-copy="bmad-cis-storytelling" aria-label="Komutu kopyala: bmad-cis-storytelling">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Hedef kitleye uygun anlatı yapısı, açılış ve farklı uzunluklarda metin üretir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Ürünü, değişimi veya markanın hikâyesini anlatırken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Rezervasyon ürünümüzü klinik yöneticilerine anlatan, sorundan çözüme ilerleyen kısa hikâye yaz.</div>
+<div class="meta">Beklenen çıktı: Kısa, orta ve uzun anlatı sürümleri</div>
+</article>
+<article class="workflow-item command">
+<h3>Yeni fikirler</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-brainstorming</code>
+<button class="copy-text" data-copy="bmad-brainstorming" aria-label="Komutu kopyala: bmad-brainstorming">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Core-tools üzerinden yaratıcı seçenekler üretir.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Birden fazla çözüm yönü gerektiğinde.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> İlk rezervasyonunu tamamlayan kullanıcı sayısını artıracak farklı fikirler üret.</div>
+<div class="meta">Beklenen çıktı: Fikir havuzu ve gruplanmış seçenekler</div>
+</article>
+<article class="workflow-item command">
+<h3>Sunum planı ve eleştiri</h3>
+<div class="cmd-wrapper">
+<code class="cmd">bmad-cis-agent-presentation-master</code>
+<button class="copy-text" data-copy="bmad-cis-agent-presentation-master" aria-label="Komutu kopyala: bmad-cis-agent-presentation-master">Kopyala</button>
+</div>
+<div class="usage-row">
+<strong>Ne yapar:</strong> Sunumun yapısını, mesajını ve görsel anlatımını ele alır.</div>
+<div class="usage-row">
+<strong>Ne zaman:</strong> Pitch veya eğitim sunumu hazırlarken.</div>
+<div class="usage-row">
+<strong>Örnek istem / kullanım:</strong> Klinik yöneticilerine 5 dakikalık ürün tanıtımı için slayt akışı ve konuşma notları planla.</div>
+<div class="meta">Beklenen çıktı: Sunum planı veya mevcut sunuma yönelik eleştiri</div>
+</article>
+</div>
+<p id="no-results" hidden>Sonuç bulunamadı.</p>
+</section>
+<section class="section" id="examples">
+<h2>💡 Örnek: İlk Kullanımda Terk Edilen Uygulama</h2>
+<div class="alert alert-info">
+<strong>Senaryo:</strong> Kullanıcı kayıt oluyor ama ilk rezervasyonunu oluşturmadan ayrılıyor. “Butonu büyütelim” demeden önce problemi anlayacağız.</div>
+<ol>
+<li>
+<strong>Maya:</strong> “Şu görüşme notlarını ve ekran akışını kullan. İlk rezervasyona kadar kullanıcıların ne anlamadığını belirlememe yardım et.”</li>
+<li>
+<strong>Dr. Quinn:</strong> “Sorunun form uzunluğu mu, güven eksikliği mi, yoksa oda bilgisi mi olduğunu ayırmak için kök neden analizi yap.”</li>
+<li>
+<strong>Carson:</strong> “Belirlediğimiz kök nedene karşı bütçemize uygun farklı çözüm seçenekleri üret.”</li>
+<li>
+<strong>Maya:</strong> “Seçilen iki fikir için prototip ve kullanıcı değerlendirme planı çıkar.”</li>
+<li>
+<strong>Method’a aktar:</strong> Doğrulanan çözüm ve kısıtları bmad-spec veya ürün gereksinimi çalışmasına girdi olarak verin.</li>
+</ol>
+<p>
+<strong>Beklenen çıktı:</strong> Belirsiz bir “onboarding daha iyi olsun” isteği yerine, dayanağı ve değerlendirme planı bulunan bir çözüm önerisi. Kullanıcı görüşmelerini ve prototip uygulamasını sizin yürütmeniz gerekir.</p>
+</section>
+<section class="section" id="faq">
+<h2>❓ Sık Sorulanlar</h2>
+<details>
+<summary>CIS uygulamamı kodlar mı?</summary>
+<p>Ana çıktıları yaratıcı çalışma ve karar belgeleridir. Uygulamaya geçmek için çıktıları geliştirme iş akışına taşıyın.</p>
+</details>
+<details>
+<summary>Bütün ajanları sırayla çalıştırmalı mıyım?</summary>
+<p>Hayır. Eksik olan bakış açısını seçin. Bir hikâye yazmak için önce pazar stratejisi oturumu yapmak zorunda değilsiniz.</p>
+</details>
+<details>
+<summary>Caravaggio otomatik slayt dosyası mı verir?</summary>
+<p>Kaynakta rolü sunumu planlamak ve eleştirmektir. Dosya üretimi, kullandığınız aracın yeteneklerine bağlıdır; hazır bir sunum dosyası garantisi değildir.</p>
+</details>
+</section>
+<section class="section" id="shortcuts"><h2>⌨️ · Ajan menüleri ve kısayollar</h2><p><strong>Kullanım sırası:</strong> Ajanın beceri adını AI sohbetinde çağırın → açılan menüden kodu yazın → hedefinizi ve ilgili dosyaları verin → çıktıyı sonraki işe aktarın. Bu kodlar terminal komutu veya her yerde çalışan genel kısayollar değildir.</p><h3>bmad-cis-agent-brainstorming-coach</h3><div class="cmd-wrapper"><code class="cmd">bmad-cis-agent-brainstorming-coach</code><button class="copy-text" data-copy="bmad-cis-agent-brainstorming-coach">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>BS</code></td><td>Yapılandırılmış fikir üretimi yürütür.</td><td><code>bmad-brainstorming</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmad-cis-agent-brainstorming-coach/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>bmad-cis-agent-creative-problem-solver</h3><div class="cmd-wrapper"><code class="cmd">bmad-cis-agent-creative-problem-solver</code><button class="copy-text" data-copy="bmad-cis-agent-creative-problem-solver">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>PS</code></td><td>Sorunu sınırlar, nedenleri sorgular ve uygulanabilir çözüm planı oluşturur.</td><td><code>bmad-cis-problem-solving</code></td></tr><tr><td><code>BS</code></td><td>Yapılandırılmış fikir üretimi yürütür.</td><td><code>bmad-brainstorming</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmad-cis-agent-creative-problem-solver/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>bmad-cis-agent-design-thinking-coach</h3><div class="cmd-wrapper"><code class="cmd">bmad-cis-agent-design-thinking-coach</code><button class="copy-text" data-copy="bmad-cis-agent-design-thinking-coach">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>DT</code></td><td>Empati, problem tanımı, fikir, prototip ve kullanıcıyla değerlendirme planını kurar.</td><td><code>bmad-cis-design-thinking</code></td></tr><tr><td><code>BS</code></td><td>Yapılandırılmış fikir üretimi yürütür.</td><td><code>bmad-brainstorming</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmad-cis-agent-design-thinking-coach/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>bmad-cis-agent-innovation-strategist</h3><div class="cmd-wrapper"><code class="cmd">bmad-cis-agent-innovation-strategist</code><button class="copy-text" data-copy="bmad-cis-agent-innovation-strategist">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>IS</code></td><td>İş modelini ve pazarı ele alıp stratejik seçenekleri karşılaştırır.</td><td><code>bmad-cis-innovation-strategy</code></td></tr><tr><td><code>BS</code></td><td>Yapılandırılmış fikir üretimi yürütür.</td><td><code>bmad-brainstorming</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmad-cis-agent-innovation-strategist/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>bmad-cis-agent-presentation-master</h3><div class="cmd-wrapper"><code class="cmd">bmad-cis-agent-presentation-master</code><button class="copy-text" data-copy="bmad-cis-agent-presentation-master">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>PL</code></td><td>Sunum akışını ve slaytları konuşma notlarıyla planlama.</td><td><code>Ajanın kendi iç işlemi</code></td></tr><tr><td><code>CR</code></td><td>Mevcut sunum veya görsel için öncelikli düzeltmeler önerme.</td><td><code>Ajanın kendi iç işlemi</code></td></tr><tr><td><code>EX</code></td><td>Açıklayıcı video için görsel akış ve anlatım senaryosu yazma.</td><td><code>Ajanın kendi iç işlemi</code></td></tr><tr><td><code>VM</code></td><td>Fikri açıklayan grafik, diyagram veya görsel yaklaşımı seçme.</td><td><code>Ajanın kendi iç işlemi</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmad-cis-agent-presentation-master/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><h3>bmad-cis-agent-storyteller</h3><div class="cmd-wrapper"><code class="cmd">bmad-cis-agent-storyteller</code><button class="copy-text" data-copy="bmad-cis-agent-storyteller">Kopyala</button></div><div class="reference-table"><table><thead><tr><th>Menü kodu</th><th>Ne yapar?</th><th>Çalıştırdığı beceri / işlem</th></tr></thead><tbody><tr><td><code>ST</code></td><td>Hedef kitleye uygun anlatı yapısı, açılış ve farklı uzunluklarda metin üretir.</td><td><code>bmad-cis-storytelling</code></td></tr></tbody></table></div><p class="source-note"><a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmad-cis-agent-storyteller/customize.toml">Bu ajan menüsünün sabit kaynak kaydı</a></p><p><strong>Önemli ayrım:</strong> Aynı kod farklı ajanda farklı iş başlatabilir. Örneğin Method analistinin CR kodu rakip araştırması, geliştiricinin CR kodu kod incelemesi, CIS sunum uzmanının CR kodu sunum eleştirisidir.</p></section><section class="section" id="menu-examples"><h2>💬 · Menüden başlayarak örnek kullanım</h2><h3>Caravaggio ile ürün anlatımı</h3><ol><li><code>bmad-cis-agent-presentation-master</code> çağırın.</li><li><code>PL</code> yazın: “Klinik yöneticilerine 5 dakikalık rezervasyon ürünü sunumu; her slaytta tek mesaj, görsel fikri ve konuşma notu olsun.”</li><li>Mevcut taslağı paylaşın ve <code>CR</code> ile anlatım ve görsel hiyerarşi eleştirisi isteyin.</li><li><code>VM</code>: “Çakışan rezervasyon sorununu tek görselle nasıl açıklayalım?”</li><li><code>EX</code>: “Aynı fikri 60 saniyelik video senaryosuna dönüştür; sahne ve ekrandaki metni belirt.”</li></ol><p><strong>Çıktı:</strong> Sunum planı, düzeltme listesi, görsel yaklaşım ve video senaryosu. Gerçek slayt veya video dosyası üretimi ortamın araçlarına bağlıdır.</p><h3>Dr. Quinn’den Carson’a geçiş</h3><p><code>bmad-cis-agent-creative-problem-solver</code> → <code>PS</code> → “Kullanıcılar neden rezervasyonu yarıda bırakıyor?” → problem tanımı ve nedenler → <code>BS</code> → “Bu nedenleri giderecek seçenekler üret.” BS, ayrı bir CIS brainstorming becerisi değil, core-tools içindeki <code>bmad-brainstorming</code> çağrısıdır.</p><h3>Ortak araçlar</h3><p><code>bmad-advanced-elicitation</code> mevcut bölümü derinleştirir; <code>bmad-party-mode</code> farklı uzmanları tartışmaya getirir; <code>bmad-customize</code> davranışı uyarlamak; <code>bmad-forge-idea</code> fikri sorgulamak için önerilen core-tools becerileridir. Kurulu olmaları gerekir. <code>bmod-cis</code> çalıştırılan bir ajan değil, modül kaydıdır.</p></section><section class="section" id="coverage"><h2>📌 · Kapsam ve ayrıntılı kaynaklar</h2><p>Bu rehberdeki kapsam, belirtilen sürümün kullanıcıya açık becerileri, ajan menüleri ve belgelenen çalışma yollarıdır. Kaynak içindeki yardımcı Python betikleri bağımsız kullanıcı becerileri gibi sunulmaz. Yeni sürümler farklı adlar ekleyebilir.</p><p><strong>Üç farklı çağrı biçimi:</strong> Terminal komutu terminale; beceri adı AI aracına; kısa menü kodu yalnız ilgili ajan veya iş akışı açıldıktan sonra yazılır. Örneklerdeki dosya, klasör ve kimlikleri kendi projenizle değiştirin.</p><ul><li><a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmod-cis/help/help.md">skills/bmod-cis/help/help.md</a></li></ul></section><section class="section" id="version">
+<h2>📌 Sürüm ve Kaynaklar</h2>
+<div class="alert alert-info">
+<strong>Bu rehberin kaynağı:</strong> bmod.toml: 0.4.0-next · 21 Ekim 2026<br>Kaynak commit: <code>658e71030be8</code>
+<br>Metehan Soner tarafından hazırlanmıştır.</div>
+<ul>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmod-cis/bmod.toml">Modül sürümü ve bağımlılıklar</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/skills/bmod-cis/help/help.md">Güncel ajanlar, oturumlar ve çıktılar</a>
+</li>
+<li>
+<a href="https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite/blob/658e71030be808181c1031f5461ee3613e7ff530/README.md">Beceri tabanlı kurulum</a>
+</li>
+</ul>
+<p>Komutlar yukarıdaki kaynak anlık görüntüsüne dayanır. Kurulum komutları ana dalı izlediğinde daha yeni bir sürüm gelebilir. Paket sürümü ile modül kayıt sürümü farklıysa burada ayrı belirtilmiştir.</p>
+</section>
+</div>
+</main>
+<footer class="footer">
+<p>
+<strong>Metehan Soner tarafından hazırlanmıştır.</strong>
+</p>
+<p>Creative Intelligence Suite · CIS 0.4.0-next · preview · 21 Ekim 2026</p>
+<p>Bağımsız Türkçe rehber · <a style="color:#ddd6fe" href="#version">Sürüm ve kaynaklar</a>
+</p>
+</footer>
+<div id="copy-status" role="status" aria-live="polite">
+</div>
+</body>
+</html>
