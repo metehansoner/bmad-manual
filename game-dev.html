@@ -53,7 +53,7 @@
 <a href="#overview">Genel bakış</a>
 <a href="#installation">Kurulum</a>
 <a href="#agents">Ajanlar / araçlar</a>
-<a href="#workflows">Adım adım kullanım</a>
+<a href="#phase-board">Akış haritası</a><a href="#workflows">Adım adım kullanım</a>
 <a href="#commands">Komutlar</a>
 <a href="#examples">Proje örneği</a>
 <a href="#faq">Sık sorulanlar</a>
@@ -61,7 +61,7 @@
 <a href="#menu-examples">Oyun ajanı menülerinin kullanım örnekleri</a>
 <a href="#coverage">Kapsam ve ayrıntılı kaynaklar</a>
 <a href="#version">Sürüm ve kaynaklar</a>
-</nav>
+<a href="#chat-guide">Sohbet ve devam</a><a href="#best-practices">En iyi uygulamalar</a></nav>
 <div class="guide-content">
 <section class="section" id="overview">
 <h2>🎮 Game Dev Studio Nedir?</h2>
@@ -134,7 +134,7 @@
 </article>
 </div>
 </section>
-<section class="section" id="workflows">
+<section class="section" id="phase-board"><h2>🗺️ Akış haritası</h2><div class="flow-legend"><strong>Bu modülün akışı</strong><p>Kırmızı: seçilen örnek yolunda gerekli. Yeşil: önerilen. Açık mor: opsiyonel. Bu gruplama rehber düzenidir; her kullanımda bütün kartlar çalıştırılmaz. Sohbet önerileri kaynakta evrensel zorunluluk olarak sunulmaz. Çıktı adları modülün kendi sürümüne aittir.</p></div><div class="phase-board"><div class="board-column"><h3 class="phase-header phase-1">1. Ön üretim</h3><div class="board-stack"><article class="board-item"><div class="board-item-title"><h4>Çekirdek mekaniği bul</h4><span class="flow-badge flow-optional">OPSİYONEL</span></div><div class="cmd-wrapper"><code class="cmd">gds-brainstorm-game</code><button class="copy-text" data-copy="gds-brainstorm-game">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>Oyun fikirleri</code></div><p>Godot için aynaları döndürerek ışığı hedefe ulaştırma mekaniğini keşfet. İlk sürümü tek oyunculu ve on bölümle sınırla.</p></article><article class="board-item"><div class="board-item-title"><h4>Oyun vizyonunu yaz</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">gds-create-game-brief</code><button class="copy-text" data-copy="gds-create-game-brief">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>Game brief</code></div><p>Seçilen mekanikten hedef oyuncu, platform, temel oyun döngüsü ve kapsam dışını içeren oyun özeti oluştur.</p></article></div></div><div class="board-column"><h3 class="phase-header phase-2">2. Oyun tasarımı</h3><div class="board-stack"><article class="board-item"><div class="board-item-title"><h4>Tasarımı detaylandır</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">gds-gdd</code><button class="copy-text" data-copy="gds-gdd">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>GDD</code></div><p>Oluşturma niyeti: ayna etkileşimi, ışık kuralları, bölüm ilerlemesi, öğretici akış ve başarısızlık durumlarını GDD’ye yaz.</p></article><article class="board-item"><div class="board-item-title"><h4>Oyuncu deneyimini tasarla</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">gds-ux</code><button class="copy-text" data-copy="gds-ux">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>DESIGN.md ve EXPERIENCE.md</code></div><p>Fare ve klavye kontrolü, seçili ayna göstergesi, yeniden başlatma ve erişilebilir renk/işaret kullanımını planla.</p></article></div></div><div class="board-column"><h3 class="phase-header phase-3">3. Teknik plan</h3><div class="board-stack"><article class="board-item"><div class="board-item-title"><h4>Teknik kararları ver</h4><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span></div><div class="cmd-wrapper"><code class="cmd">gds-game-architecture</code><button class="copy-text" data-copy="gds-game-architecture">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>Oyun mimarisi</code></div><p>Godot sahne yapısı, ışın izleme mantığı, bölüm verisi ve kayıt sistemini tasarla. GDD ile tutarlılığı koru.</p></article><article class="board-item"><div class="board-item-title"><h4>İşleri böl</h4><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span></div><div class="cmd-wrapper"><code class="cmd">gds-create-epics-and-stories</code><button class="copy-text" data-copy="gds-create-epics-and-stories">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>Epic ve story listesi</code></div><p>GDD ve mimariden çekirdek mekanik, bölüm sistemi ve oyuncu geri bildirimi epic’lerini kabul ölçütleriyle böl.</p></article><article class="board-item"><div class="board-item-title"><h4>Hazırlığı kontrol et</h4><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span></div><div class="cmd-wrapper"><code class="cmd">gds-check-implementation-readiness</code><button class="copy-text" data-copy="gds-check-implementation-readiness">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>Hazırlık raporu</code></div><p>GDD, UX, mimari ve story’lerin tutarlılığını değerlendir; üretim öncesi engelleri belirle.</p></article></div></div><div class="board-column"><h3 class="phase-header phase-4">4. Üretim ve kalite</h3><div class="board-stack"><article class="board-item"><div class="board-item-title"><h4>Sprinti hazırla</h4><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span></div><div class="cmd-wrapper"><code class="cmd">gds-sprint-planning</code><button class="copy-text" data-copy="gds-sprint-planning">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>sprint-status.yaml</code></div><p>İlk oynanabilir bölüm için işleri bağımlılık sırasına koy ve sprint takibini oluştur.</p></article><article class="board-item"><div class="board-item-title"><h4>Story’yi hazırla</h4><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span></div><div class="cmd-wrapper"><code class="cmd">gds-create-story</code><button class="copy-text" data-copy="gds-create-story">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>{implementation_artifacts}/{{story_key}}.md</code></div><p>İlk ayna döndürme story’sini GDD ve mimari bağlamıyla geliştirilmeye hazırla.</p></article><article class="board-item"><div class="board-item-title"><h4>Story’yi uygula</h4><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span></div><div class="cmd-wrapper"><code class="cmd">gds-dev-story</code><button class="copy-text" data-copy="gds-dev-story">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>Oyun kodu ve ilgili doğrulama</code></div><p>Hazırlanmış ayna döndürme story’sini uygula; kabul ölçütlerini ve test sonuçlarını kaydet.</p></article><article class="board-item"><div class="board-item-title"><h4>Oynanışı gözlemle</h4><span class="flow-badge flow-optional">OPSİYONEL</span></div><div class="cmd-wrapper"><code class="cmd">gds-playtest-plan</code><button class="copy-text" data-copy="gds-playtest-plan">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>Playtest planı</code></div><p>İlk bölümde oyuncunun mekaniği anlayıp anlamadığını ölçen playtest görevleri ve gözlem soruları hazırla.</p></article><article class="board-item"><div class="board-item-title"><h4>Kodu incele</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">gds-code-review</code><button class="copy-text" data-copy="gds-code-review">Kopyala</button></div><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><div class="board-output">→ <code>İnceleme bulguları</code></div><p>Değişikliği mimari uyum, giriş davranışı, ışık hesaplama ve sınır durumları açısından incele.</p></article></div></div></div></section><section class="section" id="workflows">
 <h2>📋 Konseptten Üretime</h2>
 <div class="features-grid">
 <article class="feature-card">
@@ -192,7 +192,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> 10 dakikalık oturumlara uygun, tek mekanikli bir bulmaca oyunu için fikirler üret.</div>
 <div class="meta">Beklenen çıktı: Oyun fikirleri</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Oyun fikirleri</code></div></article>
 <article class="workflow-item command">
 <h3>DR · Alan araştırması</h3>
 <div class="cmd-wrapper">
@@ -206,7 +206,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Kısa oturumlu bulmaca oyunlarının oyuncu beklentilerini araştır.</div>
 <div class="meta">Beklenen çıktı: Araştırma belgesi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Araştırma belgesi</code></div></article>
 <article class="workflow-item command">
 <h3>GB · Oyun özeti</h3>
 <div class="cmd-wrapper">
@@ -220,7 +220,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Işık yansıtma bulmacası için hedef oyuncu, platform ve çekirdek döngüyü netleştir.</div>
 <div class="meta">Beklenen çıktı: Game brief</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Game brief</code></div></article>
 <article class="workflow-item command">
 <h3>GDD · Oyun tasarım belgesi</h3>
 <div class="cmd-wrapper">
@@ -234,7 +234,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Game brief’ten GDD oluştur; ilk sürümü 10 bölümle sınırla.</div>
 <div class="meta">Beklenen çıktı: GDD</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>GDD</code></div></article>
 <article class="workflow-item command">
 <h3>ND · Anlatı tasarımı</h3>
 <div class="cmd-wrapper">
@@ -248,7 +248,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Terk edilmiş istasyonda geçen bulmaca oyununun anlatısını tasarla.</div>
 <div class="meta">Beklenen çıktı: Narrative belgesi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Narrative belgesi</code></div></article>
 <article class="workflow-item command">
 <h3>CU · Oyun UX</h3>
 <div class="cmd-wrapper">
@@ -262,7 +262,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Dokunmatik kontrolleri, tekrar deneme ve ipucu akışını tasarla.</div>
 <div class="meta">Beklenen çıktı: DESIGN.md ve EXPERIENCE.md</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>DESIGN.md ve EXPERIENCE.md</code></div></article>
 <article class="workflow-item command">
 <h3>PRD · Ürün gereksinimleri</h3>
 <div class="cmd-wrapper">
@@ -276,7 +276,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> GDD’den ilk sürüm gereksinimlerini çıkar; kapsam dışını belirt.</div>
 <div class="meta">Beklenen çıktı: PRD</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>PRD</code></div></article>
 <article class="workflow-item command">
 <h3>GA · Oyun mimarisi</h3>
 <div class="cmd-wrapper">
@@ -290,7 +290,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Godot projesinde bölüm verisi, ışın hesaplama ve kayıt sistemini tasarla.</div>
 <div class="meta">Beklenen çıktı: Oyun mimarisi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Oyun mimarisi</code></div></article>
 <article class="workflow-item command">
 <h3>PC · Proje bağlamı</h3>
 <div class="cmd-wrapper">
@@ -304,7 +304,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Bu Godot projesinin düğüm, isimlendirme ve kaynak kurallarını kaydet.</div>
 <div class="meta">Beklenen çıktı: Proje bağlamı</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Proje bağlamı</code></div></article>
 <article class="workflow-item command">
 <h3>CE · İşi bölme</h3>
 <div class="cmd-wrapper">
@@ -318,7 +318,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Işık hesaplama, bölüm yükleme ve kazanma akışını story’lere böl.</div>
 <div class="meta">Beklenen çıktı: Epic ve story listesi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Epic ve story listesi</code></div></article>
 <article class="workflow-item command">
 <h3>IR · Hazırlık</h3>
 <div class="cmd-wrapper">
@@ -332,7 +332,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Planlarda çelişki ve eksik bağımlılık var mı değerlendir.</div>
 <div class="meta">Beklenen çıktı: Hazırlık raporu</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Hazırlık raporu</code></div></article>
 <article class="workflow-item command">
 <h3>SP · Sprint planı</h3>
 <div class="cmd-wrapper">
@@ -346,7 +346,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> İlk oynanabilir prototip epic’i için sprint planı çıkar.</div>
 <div class="meta">Beklenen çıktı: sprint-status.yaml</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>sprint-status.yaml</code></div></article>
 <article class="workflow-item command">
 <h3>SS · Sprint durumu</h3>
 <div class="cmd-wrapper">
@@ -360,7 +360,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Sprint durumunu ve sıradaki önerilen işi göster.</div>
 <div class="meta">Beklenen çıktı: Durum ve risk özeti</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Durum ve risk özeti</code></div></article>
 <article class="workflow-item command">
 <h3>CS · Story hazırlama</h3>
 <div class="cmd-wrapper">
@@ -374,7 +374,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Işının aynadan yansıması story’sini kabul ölçütleriyle hazırla.</div>
 <div class="meta">Beklenen çıktı: Story belgesi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>{implementation_artifacts}/{{story_key}}.md</code></div></article>
 <article class="workflow-item command">
 <h3>DS · Story uygulama</h3>
 <div class="cmd-wrapper">
@@ -388,7 +388,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Hazırlanan ışın yansıması story’sini uygula.</div>
 <div class="meta">Beklenen çıktı: Oyun kodu ve ilgili doğrulama</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Oyun kodu ve ilgili doğrulama</code></div></article>
 <article class="workflow-item command">
 <h3>CR · Kod inceleme</h3>
 <div class="cmd-wrapper">
@@ -402,7 +402,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Yansıma hesabında sonsuz döngü ve sahne yaşam döngüsünü incele.</div>
 <div class="meta">Beklenen çıktı: İnceleme bulguları</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>İnceleme bulguları</code></div></article>
 <article class="workflow-item command">
 <h3>ER · Retrospektif</h3>
 <div class="cmd-wrapper">
@@ -416,7 +416,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> İlk oynanabilir prototip epic’ini değerlendir.</div>
 <div class="meta">Beklenen çıktı: Retrospektif belgesi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Retrospektif belgesi</code></div></article>
 <article class="workflow-item command">
 <h3>QD · Hızlı prototip</h3>
 <div class="cmd-wrapper">
@@ -430,7 +430,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Godot’ta tek sahnede fareyle dönen ayna ve bir ışık kaynağı prototipi yap.</div>
 <div class="meta">Beklenen çıktı: Spec ve uygulama</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Spec ve uygulama</code></div></article>
 <article class="workflow-item command">
 <h3>DP · Mevcut oyunu belgele</h3>
 <div class="cmd-wrapper">
@@ -444,7 +444,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Bu oyunun sahnelerini, veri akışını ve önemli sistemlerini belgele.</div>
 <div class="meta">Beklenen çıktı: Proje dokümantasyonu</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Proje dokümantasyonu</code></div></article>
 <article class="workflow-item command">
 <h3>CC · Yön düzeltme</h3>
 <div class="cmd-wrapper">
@@ -458,7 +458,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Mobil hedefi kaldırıyoruz; kalan story ve tasarım etkilerini çıkar.</div>
 <div class="meta">Beklenen çıktı: Değişiklik önerisi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>{planning_artifacts}/sprint-change-proposal-{date}.md</code></div></article>
 <article class="workflow-item command">
 <h3>IN · Sorunu araştırma</h3>
 <div class="cmd-wrapper">
@@ -472,7 +472,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Bölüm değişiminde oluşan takılmanın kod ve kayıtlarla nedenini araştır.</div>
 <div class="meta">Beklenen çıktı: Araştırma dosyası</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Araştırma dosyası</code></div></article>
 <article class="workflow-item command">
 <h3>TF · Test altyapısı</h3>
 <div class="cmd-wrapper">
@@ -486,7 +486,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Godot projesine uygun test altyapısını hazırla.</div>
 <div class="meta">Beklenen çıktı: Test altyapısı</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Test altyapısı</code></div></article>
 <article class="workflow-item command">
 <h3>TD · Test tasarımı</h3>
 <div class="cmd-wrapper">
@@ -500,7 +500,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Bölüm geçişleri ve kayıt sistemi için risk odaklı senaryolar çıkar.</div>
 <div class="meta">Beklenen çıktı: Test tasarımı</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Test tasarımı</code></div></article>
 <article class="workflow-item command">
 <h3>TA · Test otomasyonu</h3>
 <div class="cmd-wrapper">
@@ -514,7 +514,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Ayna yansıması ve kazanma koşulu için otomatik testler üret.</div>
 <div class="meta">Beklenen çıktı: Otomatik testler</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>{output_folder}/automation-summary.md</code></div></article>
 <article class="workflow-item command">
 <h3>ES · Uçtan uca altyapı</h3>
 <div class="cmd-wrapper">
@@ -528,7 +528,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Başlat, bölüm tamamla ve sonraki bölüme geç akışı için E2E altyapısı hazırla.</div>
 <div class="meta">Beklenen çıktı: E2E iskeleti</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>E2E iskeleti</code></div></article>
 <article class="workflow-item command">
 <h3>PP · Oynanabilirlik planı</h3>
 <div class="cmd-wrapper">
@@ -542,7 +542,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Beş oyuncuyla ilk bölümün anlaşılmasını gözlemleyeceğimiz planı hazırla.</div>
 <div class="meta">Beklenen çıktı: Playtest planı</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Playtest planı</code></div></article>
 <article class="workflow-item command">
 <h3>PT · Performans stratejisi</h3>
 <div class="cmd-wrapper">
@@ -556,7 +556,7 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Düşük özellikli Android cihaz için kare süresi ve bellek ölçüm stratejisi oluştur.</div>
 <div class="meta">Beklenen çıktı: Performans stratejisi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>{output_folder}/performance-test-plan.md</code></div></article>
 <article class="workflow-item command">
 <h3>TR · Test inceleme</h3>
 <div class="cmd-wrapper">
@@ -570,11 +570,11 @@
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> Mevcut oyun testlerinin eksik ve kararsız alanlarını incele.</div>
 <div class="meta">Beklenen çıktı: Test inceleme bulguları</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Test inceleme bulguları</code></div></article>
 </div>
 <p id="no-results" hidden>Sonuç bulunamadı.</p>
 </section>
-<section class="section" id="examples">
+<section class="section" id="examples"><h2>💡 Adım adım örnek</h2><div class="scenario-block"><h3 class="scenario-title"><span class="scenario-label">ÖRNEK 1</span>Godot ile ışık bulmacası</h3><div class="alert alert-info">Oyuncunun aynaları döndürerek ışığı hedefe ulaştırdığı tek oyunculu oyun. Bu modüldeki Create Story / Dev Story akışı kendi sürümünde vardır; Method ile aynı isim değişiklikleri varsayılmaz.</div><h4 class="scenario-stage stage-1"><span>AŞAMA 1</span>Ön üretim</h4><div class="phases-container"><article class="phase-card"><div class="phase-header phase-1">Çekirdek mekaniği bul</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-optional">OPSİYONEL</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-brainstorm-game</code><button class="copy-text" data-copy="gds-brainstorm-game">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Godot için aynaları döndürerek ışığı hedefe ulaştırma mekaniğini keşfet. İlk sürümü tek oyunculu ve on bölümle sınırla.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Oyun fikirleri</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-1">Oyun vizyonunu yaz</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-create-game-brief</code><button class="copy-text" data-copy="gds-create-game-brief">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Seçilen mekanikten hedef oyuncu, platform, temel oyun döngüsü ve kapsam dışını içeren oyun özeti oluştur.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Game brief</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article></div><h4 class="scenario-stage stage-2"><span>AŞAMA 2</span>Oyun tasarımı</h4><div class="phases-container"><article class="phase-card"><div class="phase-header phase-2">Tasarımı detaylandır</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-gdd</code><button class="copy-text" data-copy="gds-gdd">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Oluşturma niyeti: ayna etkileşimi, ışık kuralları, bölüm ilerlemesi, öğretici akış ve başarısızlık durumlarını GDD’ye yaz.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>GDD</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-2">Oyuncu deneyimini tasarla</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-ux</code><button class="copy-text" data-copy="gds-ux">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Fare ve klavye kontrolü, seçili ayna göstergesi, yeniden başlatma ve erişilebilir renk/işaret kullanımını planla.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>DESIGN.md ve EXPERIENCE.md</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article></div><h4 class="scenario-stage stage-3"><span>AŞAMA 3</span>Teknik plan</h4><div class="phases-container"><article class="phase-card"><div class="phase-header phase-3">Teknik kararları ver</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-game-architecture</code><button class="copy-text" data-copy="gds-game-architecture">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Godot sahne yapısı, ışın izleme mantığı, bölüm verisi ve kayıt sistemini tasarla. GDD ile tutarlılığı koru.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Oyun mimarisi</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-3">İşleri böl</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-create-epics-and-stories</code><button class="copy-text" data-copy="gds-create-epics-and-stories">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> GDD ve mimariden çekirdek mekanik, bölüm sistemi ve oyuncu geri bildirimi epic’lerini kabul ölçütleriyle böl.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Epic ve story listesi</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-3">Hazırlığı kontrol et</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-check-implementation-readiness</code><button class="copy-text" data-copy="gds-check-implementation-readiness">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> GDD, UX, mimari ve story’lerin tutarlılığını değerlendir; üretim öncesi engelleri belirle.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Hazırlık raporu</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article></div><h4 class="scenario-stage stage-4"><span>AŞAMA 4</span>Üretim ve kalite</h4><div class="phases-container"><article class="phase-card"><div class="phase-header phase-4">Sprinti hazırla</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-sprint-planning</code><button class="copy-text" data-copy="gds-sprint-planning">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> İlk oynanabilir bölüm için işleri bağımlılık sırasına koy ve sprint takibini oluştur.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>sprint-status.yaml</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-4">Story’yi hazırla</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-create-story</code><button class="copy-text" data-copy="gds-create-story">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> İlk ayna döndürme story’sini GDD ve mimari bağlamıyla geliştirilmeye hazırla.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>{implementation_artifacts}/{{story_key}}.md</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-4">Story’yi uygula</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-dev-story</code><button class="copy-text" data-copy="gds-dev-story">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Hazırlanmış ayna döndürme story’sini uygula; kabul ölçütlerini ve test sonuçlarını kaydet.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Oyun kodu ve ilgili doğrulama</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-4">Oynanışı gözlemle</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-optional">OPSİYONEL</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-playtest-plan</code><button class="copy-text" data-copy="gds-playtest-plan">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> İlk bölümde oyuncunun mekaniği anlayıp anlamadığını ölçen playtest görevleri ve gözlem soruları hazırla.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Playtest planı</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-4">Kodu incele</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-fresh">YENİ SOHBET ÖNERİLİR</span><p>Bu rehberin önerisi: yeni iş akışına dosyalarla başlayın; aynı taslağın düzeltmesini aynı sohbette sürdürün. Kayıtlı işe dönüyorsanız mevcut dosya yolunu verin.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">gds-code-review</code><button class="copy-text" data-copy="gds-code-review">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Değişikliği mimari uyum, giriş davranışı, ışık hesaplama ve sınır durumları açısından incele.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>İnceleme bulguları</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article></div></div></section><section class="section" id="example-reference">
 <h2>💡 Örnek: Godot ile Işık Bulmacası</h2>
 <div class="alert alert-info">
 <strong>Senaryo:</strong> Oyuncu aynaları döndürerek ışığı hedefe ulaştırıyor. İlk sürüm tek oyunculu ve 10 bölümden oluşuyor.</div>
@@ -597,7 +597,7 @@
 <p>
 <strong>Beklenen çıktı:</strong> Oyun özeti, GDD, teknik kararlar, üretim işleri ve sınırlı bir oynanabilir prototip. Görsel varlık, animasyon, müzik ve ses üretimi ayrı araç veya ekip işi olarak ele alınır.</p>
 </section>
-<section class="section" id="faq">
+<section class="section" id="chat-guide"><h2>💬 Sohbet ve devam yönetimi</h2><div class="features-grid"><article class="feature-card"><h3>Yeni iş</h3><p>AI becerisinde farklı bir çalışma başlatırken temiz sohbet önerilir. Hedef, kısıt, kabul ölçütü ve gerçek girdi dosyalarını aktarın.</p></article><article class="feature-card"><h3>Aynı taslağı düzeltme</h3><p>Aynı sohbetten devam edin; hangi belgenin hangi kısmının değişeceğini belirtin. Kabul edilen değişiklikleri kalıcı çıktıya işletin.</p></article><article class="feature-card"><h3>Yarım kalan çalışma</h3><p>Mevcut çalışma dosyasını ve son durumu verin; becerinin devam talimatlarını izleyin. Terminal tabanlı Loop için sohbet değil run kimliği ve resume komutu kullanılır.</p></article></div></section><section class="section" id="best-practices"><h2>✅ En İyi Uygulamalar</h2><div class="features-grid"><article class="feature-card"><h3>Girdiyi açık verin</h3><p>Varsayımları kanıtlardan ayırın. Önceki çıktıları yalnız adlarıyla anmak yerine gerçek yollarıyla referans verin.</p></article><article class="feature-card"><h3>Her kapıda değerlendirin</h3><p>Çıktının hedefe uygunluğunu değerlendirin. Eksik belge, ölçüm veya karar varsa tamamlanmış gibi ilerlemeyin.</p></article><article class="feature-card"><h3>Sürümü koruyun</h3><p>Bu sayfanın sürüm ve kaynak bölümünü esas alın. Method’daki bir komut değişikliği diğer modüllerde aynı işlemin kaldırıldığı anlamına gelmez.</p></article></div></section><section class="section" id="faq">
 <h2>❓ Sık Sorulanlar</h2>
 <details>
 <summary>Game Dev Studio tek başına kullanılabilir mi?</summary>
@@ -652,5 +652,5 @@
 </footer>
 <div id="copy-status" role="status" aria-live="polite">
 </div>
-</body>
+<dialog id="workflow-dialog" aria-labelledby="workflow-dialog-title"><button type="button" class="dialog-close" autofocus>Kapat ×</button><h2 id="workflow-dialog-title"></h2><p class="dialog-note"></p><ol class="dialog-steps"></ol><a class="dialog-source" target="_blank" rel="noopener">Bu modülün kaynak tanımı ↗</a></dialog><script id="workflow-details" type="application/json">{"gds-agent-game-architect": {"steps": ["Overview", "Conventions", "On Activation"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-architect/SKILL.md", "sourceOutline": true}, "gds-agent-game-designer": {"steps": ["Overview", "Conventions", "On Activation"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-designer/SKILL.md", "sourceOutline": true}, "gds-agent-tech-writer": {"steps": ["Overview", "Conventions", "On Activation"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-tech-writer/SKILL.md", "sourceOutline": true}, "gds-agent-game-solo-dev": {"steps": ["Overview", "Conventions", "On Activation"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-solo-dev/SKILL.md", "sourceOutline": true}, "gds-agent-game-dev": {"steps": ["Overview", "Conventions", "On Activation", "Skill-Specific Notes"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/agents/gds-agent-game-dev/SKILL.md", "sourceOutline": true}, "gds-document-project": {"steps": ["Paths", "Conventions", "On Activation", "EXECUTION"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gds-document-project/SKILL.md", "sourceOutline": true}, "gds-quick-dev": {"steps": ["Conventions", "On Activation", "READY FOR DEVELOPMENT STANDARD", "SCOPE STANDARD", "WORKFLOW ARCHITECTURE", "INITIALIZATION SEQUENCE"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gds-quick-flow/gds-quick-dev/SKILL.md", "sourceOutline": true}, "gds-brainstorm-game": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "INITIALIZATION SEQUENCE"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/1-preproduction/gds-brainstorm-game/SKILL.md", "sourceOutline": true}, "gds-create-game-brief": {"steps": ["On Activation", "Intent Operating Modes", "Headless Mode", "Discovery", "Constraints", "Finalize"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/1-preproduction/gds-create-game-brief/SKILL.md", "sourceOutline": true}, "gds-domain-research": {"steps": ["Conventions", "On Activation", "PREREQUISITE", "CONFIGURATION", "QUICK TOPIC DISCOVERY", "ROUTE TO DOMAIN RESEARCH STEPS"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/1-preproduction/research/gds-domain-research/SKILL.md", "sourceOutline": true}, "gds-playtest-plan": {"steps": ["Conventions", "On Activation", "Goal", "Role", "WORKFLOW ARCHITECTURE", "EXECUTION", "Overview", "Participant Criteria", "Session Structure", "Observation Guide", "Data Collection", "Team Roles", "Post-Playtest Analysis", "Playtest Report: {Session}", "Deliverables", "Validation", "On Complete"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gametest/gds-playtest-plan/SKILL.md", "sourceOutline": true}, "gds-e2e-scaffold": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "EXECUTION", "E2E Infrastructure Scaffold Complete"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gametest/gds-e2e-scaffold/SKILL.md", "sourceOutline": true}, "gds-performance-test": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "EXECUTION", "Performance Targets", "Test Scenarios", "Methodology", "Benchmark Suite", "Platform Matrix", "Regression Criteria", "Schedule"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gametest/gds-performance-test/SKILL.md", "sourceOutline": true}, "gds-test-design": {"steps": ["Conventions", "On Activation", "Goal", "Role", "WORKFLOW ARCHITECTURE", "EXECUTION", "Overview", "Risk Assessment", "Test Categories", "Coverage Matrix", "Automation Strategy", "Next Steps", "Deliverables", "Output Summary", "Test Design Complete", "Validation", "On Complete"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gametest/gds-test-design/SKILL.md", "sourceOutline": true}, "gds-test-framework": {"steps": ["Conventions", "On Activation", "Goal", "Role", "WORKFLOW ARCHITECTURE", "EXECUTION", "Output Summary", "Game Test Framework Scaffold Complete", "Validation", "On Complete"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gametest/gds-test-framework/SKILL.md", "sourceOutline": true}, "gds-test-review": {"steps": ["Conventions", "On Activation", "Goal", "Role", "WORKFLOW ARCHITECTURE", "EXECUTION", "Executive Summary", "Metrics", "Quality Assessment", "Coverage Analysis", "Recommendations", "Appendix", "Review Frequency", "Deliverables", "Validation", "On Complete"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gametest/gds-test-review/SKILL.md", "sourceOutline": true}, "gds-test-automate": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "EXECUTION", "Automation Summary"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/gametest/gds-test-automate/SKILL.md", "sourceOutline": true}, "gds-prd": {"steps": ["Overview", "Session Posture", "Conventions", "On Activation", "Intent Operating Modes", "Discovery", "PRD Discipline", "Constraints", "Finalize"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/2-design/gds-prd/SKILL.md", "sourceOutline": true}, "gds-gdd": {"steps": ["Overview", "Conventions", "On Activation", "Intent Operating Modes", "Discovery", "GDD Discipline", "Constraints", "Finalize"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/2-design/gds-gdd/SKILL.md", "sourceOutline": true}, "gds-ux": {"steps": ["Overview", "The DESIGN.md spine", "The EXPERIENCE.md spine", "Sources", "On Activation", "Modes", "Discovery", "Reviewer Gate", "Finalize"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/2-design/gds-ux/SKILL.md", "sourceOutline": true}, "gds-create-narrative": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "INITIALIZATION SEQUENCE"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/2-design/gds-create-narrative/SKILL.md", "sourceOutline": true}, "gds-correct-course": {"steps": ["Conventions", "On Activation", "Paths", "Input Files", "Execution"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/4-production/gds-correct-course/SKILL.md", "sourceOutline": true}, "gds-retrospective": {"steps": ["Paths", "Input Files", "Required Inputs", "Context", "Conventions", "On Activation", "EXECUTION"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/4-production/gds-retrospective/SKILL.md", "sourceOutline": true}, "gds-sprint-planning": {"steps": ["Paths", "Input Files", "Context", "Conventions", "On Activation", "EXECUTION", "Additional Documentation"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/4-production/gds-sprint-planning/SKILL.md", "sourceOutline": true}, "gds-dev-story": {"steps": ["Paths", "Context", "Conventions", "On Activation", "EXECUTION"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/4-production/gds-dev-story/SKILL.md", "sourceOutline": true}, "gds-sprint-status": {"steps": ["Paths", "Input Files", "Context", "Conventions", "On Activation", "EXECUTION", "📊 Sprint Status"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/4-production/gds-sprint-status/SKILL.md", "sourceOutline": true}, "gds-create-story": {"steps": ["Paths", "Input Files", "Conventions", "On Activation", "EXECUTION"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/4-production/gds-create-story/SKILL.md", "sourceOutline": true}, "gds-investigate": {"steps": ["Overview", "Principles", "On Activation", "Procedure", "Follow-up Iterations"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/4-production/gds-investigate/SKILL.md", "sourceOutline": true}, "gds-code-review": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "INITIALIZATION SEQUENCE"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/4-production/gds-code-review/SKILL.md", "sourceOutline": true}, "gds-generate-project-context": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "EXECUTION"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/3-technical/gds-generate-project-context/SKILL.md", "sourceOutline": true}, "gds-create-epics-and-stories": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "INITIALIZATION SEQUENCE"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/3-technical/gds-create-epics-and-stories/SKILL.md", "sourceOutline": true}, "gds-check-implementation-readiness": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "INITIALIZATION SEQUENCE"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/3-technical/gds-check-implementation-readiness/SKILL.md", "sourceOutline": true}, "gds-game-architecture": {"steps": ["Conventions", "On Activation", "WORKFLOW ARCHITECTURE", "EXECUTION"], "source": "https://github.com/bmad-code-org/bmad-module-game-dev-studio/blob/ff8870955203e1665f4bf75a64049078e6d4080c/src/workflows/3-technical/gds-game-architecture/SKILL.md", "sourceOutline": true}}</script></body>
 </html>

@@ -70,3 +70,37 @@ function filterCommands(){const query=normalize(search.value.trim());let visible
 if(search){search.addEventListener('input',filterCommands);filterCommands()}
 let messageTimer;
 document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{const status=document.querySelector('#copy-status');try{await navigator.clipboard.writeText(button.dataset.copy);status.textContent='Kopyalandı: '+button.dataset.copy}catch{status.textContent='Kopyalanamadı. Komutu seçip elle kopyalayabilirsiniz.'}clearTimeout(messageTimer);messageTimer=setTimeout(()=>status.textContent='',3500)}));
+
+// Per-skill details from the pinned version, shared by the overview and examples.
+const detailsPayload=document.querySelector('#workflow-details');
+const workflowDialog=document.querySelector('#workflow-dialog');
+if(detailsPayload&&workflowDialog){
+    const workflowDetails=JSON.parse(detailsPayload.textContent);
+    let workflowOpener=null;
+    document.querySelectorAll('article').forEach(card=>{
+        const command=card.querySelector('code.cmd')?.textContent.trim();
+        const entry=workflowDetails[command];
+        if(!entry)return;
+        const button=document.createElement('button');
+        button.type='button';button.className='workflow-details-button';
+        button.textContent=entry.sourceOutline?'Kaynak ayrıntıları ↗':'Akış adımları ↗';
+        button.setAttribute('aria-haspopup','dialog');
+        button.setAttribute('aria-label',command+' akış ayrıntıları');
+        const heading=card.querySelector('.board-item-title,.phase-header,h4,h3');
+        if(heading)heading.insertAdjacentElement('afterend',button);else card.append(button);
+        button.addEventListener('click',()=>{
+            workflowOpener=button;
+            workflowDialog.querySelector('h2').textContent=command;
+            workflowDialog.querySelector('.dialog-note').textContent=entry.sourceOutline
+                ?'Bu sayfada belirtilen sürümün kaynak tanımındaki bölüm başlıklarıdır; her başlık zorunlu ve sıralı bir çalışma adımı değildir. Uygulama talimatları için kaynak bağlantısını açın.'
+                :'Bu sayfada belirtilen sürümün akış özeti. Seçilen niyet, devam durumu ve kısa yollar nedeniyle her çalıştırma bütün adımlardan geçmeyebilir.';
+            const list=workflowDialog.querySelector('.dialog-steps');list.replaceChildren();
+            entry.steps.forEach(step=>{const li=document.createElement('li');li.textContent=step;list.append(li)});
+            workflowDialog.querySelector('.dialog-source').href=entry.source;
+            workflowDialog.showModal();
+        });
+    });
+    workflowDialog.querySelector('.dialog-close').addEventListener('click',()=>workflowDialog.close());
+    workflowDialog.addEventListener('click',event=>{if(event.target===workflowDialog){const r=workflowDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)workflowDialog.close()}});
+    workflowDialog.addEventListener('close',()=>workflowOpener?.focus());
+}

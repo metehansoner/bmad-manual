@@ -168,3 +168,63 @@ summary { cursor: pointer; font-weight: 650; color: #2a3b55; overflow-wrap: anyw
 .phase-card:has(.phase-2) { border-color: #c4b5fd; background: #f5f3ff; }
 .phase-card:has(.phase-3) { border-color: #fdba74; background: #fff7ed; }
 .phase-card:has(.phase-4) { border-color: #86efac; background: #f0fdf4; }
+
+.chat-note { padding: 7px 9px; border-left: 3px solid #2563eb; border-radius: 3px; background: #eff6ff; color: #1e40af !important; font-size: 11px !important; font-weight: 650; line-height: 1.6 !important; }
+
+/* Scenario titles and their nested stages have distinct hierarchy. */
+.scenario-block { margin: 26px 0; padding: 20px; border: 1px solid #cbd5e1; border-radius: 10px; background: #fbfcfe; }
+.scenario-title { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; margin: 0 0 18px; padding-bottom: 14px; border-bottom: 2px solid #cbd5e1; font-size: 22px; }
+.scenario-label { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; color: #64748b; }
+.scenario-stage { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 26px 0 12px; padding: 10px 12px; border-left: 4px solid var(--stage-color); border-radius: 4px; background: var(--stage-bg); color: var(--stage-color); font-size: 15px; }
+.scenario-stage span { font-size: 10px; letter-spacing: .6px; font-weight: 800; padding-right: 10px; border-right: 1px solid currentColor; }
+.stage-1 { --stage-color: #1d4ed8; --stage-bg: #eff6ff; }
+.stage-2 { --stage-color: #6d28d9; --stage-bg: #f5f3ff; }
+.stage-3 { --stage-color: #c2410c; --stage-bg: #fff7ed; }
+.stage-4 { --stage-color: #15803d; --stage-bg: #f0fdf4; }
+@media (max-width: 600px) { .scenario-block { padding: 12px; margin: 20px 0; } .scenario-title { font-size: 19px; } }
+
+.flow-guidance { display: grid; gap: 9px; padding: 10px; border: 1px solid #dbe2eb; border-radius: 6px; background: #fff; }
+.flow-guidance-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; font-size: 11px; line-height: 1.55; color: #475569; }
+.flow-badge { display: inline-block; padding: 3px 7px; border-radius: 4px; font-size: 10px; line-height: 1.5; font-weight: 800; letter-spacing: .2px; vertical-align: middle; }
+.flow-required { background: #b91c1c; color: #fff; }
+.flow-recommended { background: #15803d; color: #fff; }
+.flow-optional { background: #e0e7ff; color: #3730a3; border: 1px solid #a5b4fc; }
+.chat-fresh { background: #1d4ed8; color: #fff; }
+.chat-same { background: #0f766e; color: #fff; }
+.chat-resume { background: #6d28d9; color: #fff; }
+.flow-legend { padding: 12px 14px; margin: 16px 0 22px; border: 1px solid #cbd5e1; border-radius: 6px; background: #f8fafc; font-size: 12px; }
+.flow-legend p { margin: 7px 0; }
+
+.artifact-output { margin: 10px; padding: 10px; border: 1px solid #86efac; border-left: 4px solid #15803d; border-radius: 5px; background: #f0fdf4; min-width: 0; font-size: 11px; }
+.artifact-output > strong { display: block; color: #166534; margin-bottom: 5px; }
+.artifact-output > code { display: block; color: #14532d; background: #dcfce7; font-size: 11px; white-space: normal; overflow-wrap: anywhere; }
+.artifact-output p { color: #365344; font-size: 11px; line-height: 1.65; margin: 7px 0 0; }
+
+.phase-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: stretch; margin-top: 20px; }
+.board-column { min-width: 0; border: 1px solid #dce2ec; border-radius: 7px; background: #fff; }
+.board-column > h3 { margin: 0; font-size: 13px; }
+.board-stack { display: grid; align-content: start; gap: 10px; padding: 8px; }
+.board-item { min-width: 0; padding: 10px; border: 1px solid #dce2ec; border-radius: 6px; background: #f8fafc; }
+.board-item:has(.flow-required) { border-left: 3px solid #dc2626; }
+.board-item-title { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px; }
+.board-item-title h4 { flex: 1 1 100px; margin: 0; font-size: 12px; }
+.board-item .cmd-wrapper { flex-wrap: nowrap; gap: 5px; margin: 10px 0 7px; }
+.board-item .cmd { flex: 1 1 0; padding: 5px 6px; font-size: 10px; background: #1e293b; color: #e0f2fe; }
+.board-item .copy-text { padding: 5px 7px; min-height: 30px; }
+.board-role { font-size: 10px; color: #526178; }
+.board-output { margin: 6px 0; color: #15803d; font-size: 11px; }
+.board-output code { font-size: 10px; color: #166534; background: #dcfce7; }
+.board-chat { margin: 7px 0; }
+.board-item p { font-size: 11px; line-height: 1.55; margin: 6px 0 0; }
+@container (max-width: 850px) { .phase-board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (max-width: 460px) { .phase-board { grid-template-columns: 1fr; } }
+.workflow-details-button { display: inline-block; margin: 7px 10px; padding: 4px 7px; border: 1px solid #93c5fd; border-radius: 4px; background: #dbeafe; color: #1e40af; font-size: 10px; font-weight: 700; }
+.board-item .workflow-details-button { margin: 7px 0 0; }
+#workflow-dialog { width: min(640px, calc(100% - 28px)); max-height: 85dvh; overflow: auto; padding: 24px; border: 1px solid #c4b5fd; border-radius: 12px; color: #17243b; background: white; box-shadow: 0 20px 70px #0f172a33; }
+#workflow-dialog::backdrop { background: #0f172a99; }
+#workflow-dialog h2 { font-size: 20px; margin-top: 14px; }
+.dialog-close { display: block; margin-left: auto; border: 1px solid #cbd5e1; border-radius: 5px; padding: 6px 10px; background: #f8fafc; color: #334155; }
+.dialog-note { font-size: 13px; color: #526178; }
+.dialog-steps li { padding: 8px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+
+.chat-terminal { background: #334155; color: #fff; }

@@ -53,7 +53,7 @@
 <a href="#overview">Genel bakış</a>
 <a href="#installation">Kurulum</a>
 <a href="#agents">Ajanlar / araçlar</a>
-<a href="#workflows">Adım adım kullanım</a>
+<a href="#phase-board">Akış haritası</a><a href="#workflows">Adım adım kullanım</a>
 <a href="#commands">Komutlar</a>
 <a href="#examples">Proje örneği</a>
 <a href="#faq">Sık sorulanlar</a>
@@ -62,7 +62,7 @@
 <a href="#recovery">Duraklama, karar ve devam örnekleri</a>
 <a href="#coverage">Kapsam ve ayrıntılı kaynaklar</a>
 <a href="#version">Sürüm ve kaynaklar</a>
-</nav>
+<a href="#chat-guide">Sohbet ve devam</a><a href="#best-practices">En iyi uygulamalar</a></nav>
 <div class="guide-content">
 <section class="section" id="overview">
 <h2>🔁 Loop Nedir?</h2>
@@ -128,7 +128,7 @@
 </div>
 <p>Geliştirme ve inceleme farklı CLI profilleriyle yürütülebilir. Hangi aracın kullanılacağı politika dosyasındaki adapter ayarına bağlıdır; bir profil adını seçmek o aracın kurulu veya oturum açmış olduğu anlamına gelmez.</p>
 </section>
-<section class="section" id="workflows">
+<section class="section" id="phase-board"><h2>🗺️ Akış haritası</h2><div class="flow-legend"><strong>Bu modülün akışı</strong><p>Kırmızı: seçilen örnek yolunda gerekli. Yeşil: önerilen. Açık mor: opsiyonel. Bu gruplama rehber düzenidir; her kullanımda bütün kartlar çalıştırılmaz. Sohbet önerileri kaynakta evrensel zorunluluk olarak sunulmaz. Çıktı adları modülün kendi sürümüne aittir.</p></div><div class="phase-board"><div class="board-column"><h3 class="phase-header phase-1">1. Hazırla</h3><div class="board-stack"><article class="board-item"><div class="board-item-title"><h4>Projeyi hazırla</h4><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span></div><div class="cmd-wrapper"><code class="cmd">bmad-loop init</code><button class="copy-text" data-copy="bmad-loop init">Kopyala</button></div><span class="flow-badge chat-terminal">TERMINAL</span><div class="board-output">→ <code>Projedeki Loop yapılandırması</code></div><p>Hazır story kaynağı olan proje kökünde çalıştırın; kullanılan iş kaynağı ve yürütücü ayarlarını seçin.</p></article><article class="board-item"><div class="board-item-title"><h4>Yapılandırmayı doğrula</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">bmad-loop validate</code><button class="copy-text" data-copy="bmad-loop validate">Kopyala</button></div><span class="flow-badge chat-terminal">TERMINAL</span><div class="board-output">→ <code>Sorun ve uyarı listesi</code></div><p>Yapılandırma ve iş kaynağı sorunlarını giderin; bu komut uygulamanın ürün testleri yerine geçmez.</p></article></div></div><div class="board-column"><h3 class="phase-header phase-2">2. Başlat</h3><div class="board-stack"><article class="board-item"><div class="board-item-title"><h4>Planlanan çalışmayı gör</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">bmad-loop run --dry-run</code><button class="copy-text" data-copy="bmad-loop run --dry-run">Kopyala</button></div><span class="flow-badge chat-terminal">TERMINAL</span><div class="board-output">→ <code>Yürütme planı</code></div><p>Çalıştırılacak iş ve ayarları uygulama başlatmadan inceleyin.</p></article><article class="board-item"><div class="board-item-title"><h4>Tek işle başlat</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">bmad-loop run --max-stories 1</code><button class="copy-text" data-copy="bmad-loop run --max-stories 1">Kopyala</button></div><span class="flow-badge chat-terminal">TERMINAL</span><div class="board-output">→ <code>Kod, kanıtlar, çalışma kaydı ve başarılıysa commit</code></div><p>İlk çalışmayı bir story ile sınırlandırın; sonuç ve değişiklikleri değerlendirin.</p></article></div></div><div class="board-column"><h3 class="phase-header phase-3">3. İzle ve çöz</h3><div class="board-stack"><article class="board-item"><div class="board-item-title"><h4>Durumu izle</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">bmad-loop status</code><button class="copy-text" data-copy="bmad-loop status">Kopyala</button></div><span class="flow-badge chat-terminal">TERMINAL</span><div class="board-output">→ <code>Çalışma durumu</code></div><p>Terminalde mevcut ilerlemeyi ve engelleri görün. Aynı çalışma için yeni bir run başlatmayın.</p></article><article class="board-item"><div class="board-item-title"><h4>Kontrollü durdur</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">bmad-loop stop --graceful &lt;run-id&gt;</code><button class="copy-text" data-copy="bmad-loop stop --graceful &lt;run-id&gt;">Kopyala</button></div><span class="flow-badge chat-terminal">TERMINAL</span><div class="board-output">→ <code>Kayıtlı çalışma sonucu; gerçek çıktı yolunu oturum sonunda alın.</code></div><p>Gerçek run kimliğini kullanarak kontrollü durdurma isteyin; durumu tekrar kontrol edin.</p></article></div></div><div class="board-column"><h3 class="phase-header phase-4">4. Devam ve kabul</h3><div class="board-stack"><article class="board-item"><div class="board-item-title"><h4>Kayıttan devam et</h4><span class="flow-badge flow-recommended">ÖNERİLEN</span></div><div class="cmd-wrapper"><code class="cmd">bmad-loop resume &lt;run-id&gt;</code><button class="copy-text" data-copy="bmad-loop resume &lt;run-id&gt;">Kopyala</button></div><span class="flow-badge chat-terminal">TERMINAL</span><div class="board-output">→ <code>Devam eden çalışma</code></div><p>Aynı run kimliğiyle kayıtlı çalışmaya devam edin; yeni sohbet açmak terminal çalışmasını sürdürmez.</p></article><article class="board-item"><div class="board-item-title"><h4>Bekleyen onayları gör</h4><span class="flow-badge flow-optional">OPSİYONEL</span></div><div class="cmd-wrapper"><code class="cmd">bmad-loop confirm --list</code><button class="copy-text" data-copy="bmad-loop confirm --list">Kopyala</button></div><span class="flow-badge chat-terminal">TERMINAL</span><div class="board-output">→ <code>Kayıtlı çalışma sonucu; gerçek çıktı yolunu oturum sonunda alın.</code></div><p>Bekleyen kayıtları listeleyin. Sonuçları incelemeden yalnız listeden düşürmek için onay vermeyin.</p></article></div></div></div></section><section class="section" id="workflows">
 <h2>📋 Bir Loop Çalışmasının Akışı</h2>
 <div class="features-grid">
 <article class="feature-card">
@@ -189,7 +189,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop init</div>
 <div class="meta">Beklenen çıktı: Projedeki Loop yapılandırması</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Projedeki Loop yapılandırması</code></div></article>
 <article class="workflow-item command">
 <h3>Ön koşulları inceleme · terminal</h3>
 <div class="cmd-wrapper">
@@ -203,7 +203,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop validate</div>
 <div class="meta">Beklenen çıktı: Sorun ve uyarı listesi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Sorun ve uyarı listesi</code></div></article>
 <article class="workflow-item command">
 <h3>Planı gösterme · terminal</h3>
 <div class="cmd-wrapper">
@@ -217,7 +217,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop run --dry-run</div>
 <div class="meta">Beklenen çıktı: Yürütme planı</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Yürütme planı</code></div></article>
 <article class="workflow-item command">
 <h3>Sınırlı çalışma · terminal</h3>
 <div class="cmd-wrapper">
@@ -231,7 +231,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop run --max-stories 1</div>
 <div class="meta">Beklenen çıktı: Kod, kanıtlar, çalışma kaydı ve başarılıysa commit</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Kod, kanıtlar, çalışma kaydı ve başarılıysa commit</code></div></article>
 <article class="workflow-item command">
 <h3>Görsel terminal paneli</h3>
 <div class="cmd-wrapper">
@@ -245,7 +245,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop tui</div>
 <div class="meta">Beklenen çıktı: Canlı terminal arayüzü</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Canlı terminal arayüzü</code></div></article>
 <article class="workflow-item command">
 <h3>Durumu öğrenme · terminal</h3>
 <div class="cmd-wrapper">
@@ -259,7 +259,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop status</div>
 <div class="meta">Beklenen çıktı: Çalışma durumu</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Çalışma durumu</code></div></article>
 <article class="workflow-item command">
 <h3>Çalışmaları listeleme · terminal</h3>
 <div class="cmd-wrapper">
@@ -273,7 +273,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop list</div>
 <div class="meta">Beklenen çıktı: Run ID listesi</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Run ID listesi</code></div></article>
 <article class="workflow-item command">
 <h3>Çalışmayı durdurma · terminal</h3>
 <div class="cmd-wrapper">
@@ -287,7 +287,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop stop &lt;run-id&gt; — yer tutucuyu list çıktısındaki kimlikle değiştirin.</div>
 <div class="meta">Beklenen çıktı: Durdurulan çalışmanın kaydı</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Durdurulan çalışmanın kaydı</code></div></article>
 <article class="workflow-item command">
 <h3>Devam etme · terminal</h3>
 <div class="cmd-wrapper">
@@ -301,7 +301,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop resume &lt;run-id&gt;</div>
 <div class="meta">Beklenen çıktı: Devam eden çalışma</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Devam eden çalışma</code></div></article>
 <article class="workflow-item command">
 <h3>Engeli ele alma · terminal</h3>
 <div class="cmd-wrapper">
@@ -315,7 +315,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop resolve &lt;run-id&gt;</div>
 <div class="meta">Beklenen çıktı: Güncellenen karar veya tanım ve yeniden ele alınan iş</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Güncellenen karar veya tanım ve yeniden ele alınan iş</code></div></article>
 <article class="workflow-item command">
 <h3>Ertelenen işleri ele alma · terminal</h3>
 <div class="cmd-wrapper">
@@ -329,7 +329,7 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop sweep</div>
 <div class="meta">Beklenen çıktı: Sınıflandırılmış ertelenen işler ve uygulanan paketler</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Sınıflandırılmış ertelenen işler ve uygulanan paketler</code></div></article>
 <article class="workflow-item command">
 <h3>Tanılama raporu · terminal</h3>
 <div class="cmd-wrapper">
@@ -343,11 +343,11 @@ mode = "per-epic"</pre>
 <div class="usage-row">
 <strong>Örnek istem / kullanım:</strong> bmad-loop diagnose</div>
 <div class="meta">Beklenen çıktı: Tanılama özeti</div>
-</article>
+<div class="flow-guidance"><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Tanılama özeti</code></div></article>
 </div>
 <p id="no-results" hidden>Sonuç bulunamadı.</p>
 </section>
-<section class="section" id="examples">
+<section class="section" id="examples"><h2>💡 Adım adım örnek</h2><div class="scenario-block"><h3 class="scenario-title"><span class="scenario-label">ÖRNEK 1</span>Hazır story listesini kontrollü işleme</h3><div class="alert alert-info">Önceden hazırlanmış oda listesi, rezervasyon ve iptal story’leri. Loop terminalde çalışır; AI sohbetine terminal komutları yazılmaz.</div><h4 class="scenario-stage stage-1"><span>AŞAMA 1</span>Hazırla</h4><div class="phases-container"><article class="phase-card"><div class="phase-header phase-1">Projeyi hazırla</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-required">BU AKIŞTA ZORUNLU</span><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">bmad-loop init</code><button class="copy-text" data-copy="bmad-loop init">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Hazır story kaynağı olan proje kökünde çalıştırın; kullanılan iş kaynağı ve yürütücü ayarlarını seçin.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Projedeki Loop yapılandırması</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-1">Yapılandırmayı doğrula</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">bmad-loop validate</code><button class="copy-text" data-copy="bmad-loop validate">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Yapılandırma ve iş kaynağı sorunlarını giderin; bu komut uygulamanın ürün testleri yerine geçmez.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Sorun ve uyarı listesi</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article></div><h4 class="scenario-stage stage-2"><span>AŞAMA 2</span>Başlat</h4><div class="phases-container"><article class="phase-card"><div class="phase-header phase-2">Planlanan çalışmayı gör</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">bmad-loop run --dry-run</code><button class="copy-text" data-copy="bmad-loop run --dry-run">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Çalıştırılacak iş ve ayarları uygulama başlatmadan inceleyin.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Yürütme planı</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-2">Tek işle başlat</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">bmad-loop run --max-stories 1</code><button class="copy-text" data-copy="bmad-loop run --max-stories 1">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> İlk çalışmayı bir story ile sınırlandırın; sonuç ve değişiklikleri değerlendirin.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Kod, kanıtlar, çalışma kaydı ve başarılıysa commit</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article></div><h4 class="scenario-stage stage-3"><span>AŞAMA 3</span>İzle ve çöz</h4><div class="phases-container"><article class="phase-card"><div class="phase-header phase-3">Durumu izle</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">bmad-loop status</code><button class="copy-text" data-copy="bmad-loop status">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Terminalde mevcut ilerlemeyi ve engelleri görün. Aynı çalışma için yeni bir run başlatmayın.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Çalışma durumu</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-3">Kontrollü durdur</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">bmad-loop stop --graceful &lt;run-id&gt;</code><button class="copy-text" data-copy="bmad-loop stop --graceful &lt;run-id&gt;">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Gerçek run kimliğini kullanarak kontrollü durdurma isteyin; durumu tekrar kontrol edin.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Kayıtlı çalışma sonucu; gerçek çıktı yolunu oturum sonunda alın.</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article></div><h4 class="scenario-stage stage-4"><span>AŞAMA 4</span>Devam ve kabul</h4><div class="phases-container"><article class="phase-card"><div class="phase-header phase-4">Kayıttan devam et</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-recommended">ÖNERİLEN</span><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">bmad-loop resume &lt;run-id&gt;</code><button class="copy-text" data-copy="bmad-loop resume &lt;run-id&gt;">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Aynı run kimliğiyle kayıtlı çalışmaya devam edin; yeni sohbet açmak terminal çalışmasını sürdürmez.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Devam eden çalışma</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article><article class="phase-card"><div class="phase-header phase-4">Bekleyen onayları gör</div><div class="phase-content"><div class="flow-guidance"><span class="flow-badge flow-optional">OPSİYONEL</span><span class="flow-badge chat-terminal">TERMINAL</span><p>Terminalde çalıştırın. Devam işlemlerinde aynı proje ve gerçek run kimliğini kullanın.</p></div><div class="workflow-item"><div class="cmd-wrapper"><code class="cmd">bmad-loop confirm --list</code><button class="copy-text" data-copy="bmad-loop confirm --list">Kopyala</button></div><div class="usage-row"><strong>İstem / işlem:</strong> Bekleyen kayıtları listeleyin. Sonuçları incelemeden yalnız listeden düşürmek için onay vermeyin.</div><p><strong>Sonraki adım:</strong> Sonucu değerlendirin; kabul edilen kararları ve gerçek dosya yollarını sonraki karta aktarın.</p></div></div><div class="artifact-output"><strong>İşlem sonunda →</strong><code>Kayıtlı çalışma sonucu; gerçek çıktı yolunu oturum sonunda alın.</code><p>Mevcut belgeyi güncelleyen işlemler yeni dosya oluşturmayabilir. Sabit isim belirtilmiyorsa sonuçta bildirilen yolu kullanın.</p></div></article></div></div></section><section class="section" id="example-reference">
 <h2>💡 Örnek: Hazır Rezervasyon Story’lerini İşleme</h2>
 <div class="alert alert-info">
 <strong>Senaryo:</strong> Oda listesi, rezervasyon oluşturma ve iptal story’leri önceden planlandı. Şimdi sıralı uygulamayı otomatikleştirmek istiyorsunuz.</div>
@@ -368,7 +368,7 @@ mode = "per-epic"</pre>
 <p>
 <strong>Beklenen sonuç:</strong> İş bazında kayıt, uygulama değişiklikleri, doğrulama sonuçları ve başarılı işlerde commit. Çözülemeyen işler ertelenebilir veya insan müdahalesi için duraklayabilir.</p>
 </section>
-<section class="section" id="faq">
+<section class="section" id="chat-guide"><h2>💬 Sohbet ve devam yönetimi</h2><div class="features-grid"><article class="feature-card"><h3>Yeni iş</h3><p>AI becerisinde farklı bir çalışma başlatırken temiz sohbet önerilir. Hedef, kısıt, kabul ölçütü ve gerçek girdi dosyalarını aktarın.</p></article><article class="feature-card"><h3>Aynı taslağı düzeltme</h3><p>Aynı sohbetten devam edin; hangi belgenin hangi kısmının değişeceğini belirtin. Kabul edilen değişiklikleri kalıcı çıktıya işletin.</p></article><article class="feature-card"><h3>Yarım kalan çalışma</h3><p>Mevcut çalışma dosyasını ve son durumu verin; becerinin devam talimatlarını izleyin. Terminal tabanlı Loop için sohbet değil run kimliği ve resume komutu kullanılır.</p></article></div></section><section class="section" id="best-practices"><h2>✅ En İyi Uygulamalar</h2><div class="features-grid"><article class="feature-card"><h3>Girdiyi açık verin</h3><p>Varsayımları kanıtlardan ayırın. Önceki çıktıları yalnız adlarıyla anmak yerine gerçek yollarıyla referans verin.</p></article><article class="feature-card"><h3>Her kapıda değerlendirin</h3><p>Çıktının hedefe uygunluğunu değerlendirin. Eksik belge, ölçüm veya karar varsa tamamlanmış gibi ilerlemeyin.</p></article><article class="feature-card"><h3>Sürümü koruyun</h3><p>Bu sayfanın sürüm ve kaynak bölümünü esas alın. Method’daki bir komut değişikliği diğer modüllerde aynı işlemin kaldırıldığı anlamına gelmez.</p></article></div></section><section class="section" id="faq">
 <h2>❓ Sık Sorulanlar</h2>
 <details>
 <summary>TUI penceresini kapatınca iş durur mu?</summary>
@@ -427,5 +427,5 @@ mode = "per-epic"</pre>
 </footer>
 <div id="copy-status" role="status" aria-live="polite">
 </div>
-</body>
+<dialog id="workflow-dialog" aria-labelledby="workflow-dialog-title"><button type="button" class="dialog-close" autofocus>Kapat ×</button><h2 id="workflow-dialog-title"></h2><p class="dialog-note"></p><ol class="dialog-steps"></ol><a class="dialog-source" target="_blank" rel="noopener">Bu modülün kaynak tanımı ↗</a></dialog><script id="workflow-details" type="application/json">{"bmad-loop-sweep": {"steps": ["On Activation"], "source": "https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/skills/bmad-loop-sweep/SKILL.md", "sourceOutline": true}, "bmad-loop-setup": {"steps": ["Overview", "On Activation", "Register Help Entries", "Install the Orchestrator Tool", "Confirm", "Outcome"], "source": "https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/skills/bmad-loop-setup/SKILL.md", "sourceOutline": true}, "bmad-loop-resolve": {"steps": ["Identity & I/O contract", "What you MUST do", "Special case: a review-stage `intent gap` with a saved patch", "Special case: an environment-fault escalation", "What you MUST NOT do", "Stories mode: sentinels and the preserved copy", "If you cannot resolve it"], "source": "https://github.com/bmad-code-org/bmad-loop/blob/40f0de625d85337e12c8b014c22d8a18b3b776bd/skills/bmad-loop-resolve/SKILL.md", "sourceOutline": true}}</script></body>
 </html>
