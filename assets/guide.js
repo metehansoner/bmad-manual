@@ -104,3 +104,10 @@ if(detailsPayload&&workflowDialog){
     workflowDialog.addEventListener('click',event=>{if(event.target===workflowDialog){const r=workflowDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)workflowDialog.close()}});
     workflowDialog.addEventListener('close',()=>workflowOpener?.focus());
 }
+
+const backToTop=document.querySelector('.back-to-top');
+if(backToTop){
+    const updateBackToTop=()=>{backToTop.hidden=window.scrollY<240;};
+    window.addEventListener('scroll',updateBackToTop,{passive:true});
+    updateBackToTop();
+}

@@ -228,3 +228,47 @@ summary { cursor: pointer; font-weight: 650; color: #2a3b55; overflow-wrap: anyw
 .dialog-steps li { padding: 8px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
 
 .chat-terminal { background: #334155; color: #fff; }
+
+/* Compact documentation masthead and quieter page chrome. */
+.top-nav { padding-block: 10px; background: #172238; }
+.nav-content { max-width: 1880px; }
+.logo { font-size: 14px; letter-spacing: .7px; }
+.nav-menu a { font-size: 12px; padding: 9px 12px; }
+.hero { padding: 0; background: #fff; text-align: left; border-bottom: 1px solid #dce2ec; }
+.hero-inner { max-width: 1920px; margin: 0 auto; padding: 34px 32px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; align-items: center; gap: 48px; }
+.hero-copy { min-width: 0; }
+.hero-eyebrow { display: block; color: #6d28d9; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 10px; }
+.hero h1 { font-size: clamp(28px, 3vw, 40px); letter-spacing: -1.2px; margin-bottom: 10px; }
+.hero-copy > p { margin: 0; max-width: 780px; font-size: 15px; line-height: 1.7; color: #526178; }
+.hero-buttons { justify-content: flex-start; margin: 18px 0 0; gap: 8px; }
+.hero-buttons .btn { padding: 8px 14px; font-size: 12px; }
+.hero-meta { padding: 20px; border: 1px solid #e2deed; border-radius: 10px; background: #faf9fd; border-top: 3px solid #7c3aed; }
+.hero-meta-label { font-size: 10px; letter-spacing: 1.2px; font-weight: 750; color: #786990; }
+.hero-meta .version-badge { display: block; padding: 0; border: 0; background: none; margin: 9px 0 12px; color: #302342; font-size: 13px; font-weight: 650; line-height: 1.7; }
+.hero-meta .credit { margin: 0; font-size: 11px; line-height: 1.65; }
+.hero-source { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 650; }
+main.container { padding-top: 22px; }
+.local-menu { border-color: transparent; background: transparent; padding: 4px 0; }
+.section-nav-heading { padding-left: 12px; font-size: 10px; }
+.local-menu a { padding: 8px 10px; font-size: 12px; }
+.local-menu a.active { background: #eae4f8; color: #5b21b6; }
+.section { box-shadow: 0 2px 5px #17243b03; }
+.section > h2 { border-bottom: 1px solid #e2e8f0; position: relative; padding-bottom: 14px; }
+.section > h2::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 44px; height: 3px; background: #7c3aed; border-radius: 3px; }
+#overview > p { max-width: 1050px; }
+#overview .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#overview .feature-card { background: #fafbfe; padding: 16px; }
+@media (max-width: 1100px) { .hero-inner { padding: 28px 24px; gap: 24px; grid-template-columns: minmax(0, 1fr) 250px; } }
+@media (max-width: 900px) { .local-menu { background: #fff; border-color: #dce2ec; padding: 0; } }
+@media (max-width: 650px) {
+ .hero-inner { grid-template-columns: 1fr; padding: 24px 16px; gap: 20px; }
+ .hero-meta { padding: 14px; }
+ .hero-buttons .btn { flex: 0 1 auto; }
+ .hero-eyebrow { font-size: 9px; letter-spacing: 1px; }
+ #overview .features-grid { grid-template-columns: 1fr; }
+}
+
+.back-to-top { position: fixed; right: 20px; bottom: 20px; z-index: 950; display: inline-flex; align-items: center; gap: 7px; padding: 10px 14px; border: 1px solid #8b5cf6; border-radius: 999px; background: #6d28d9; color: #fff; box-shadow: 0 4px 14px #312e8133; font-size: 12px; font-weight: 700; }
+.back-to-top:hover { background: #5b21b6; color: #fff; text-decoration: none; }
+#copy-status { bottom: 76px; }
+@media (max-width: 600px) { .back-to-top { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); padding: 10px 12px; } }
